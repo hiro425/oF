@@ -24,18 +24,18 @@ void testApp::draw(){
     vidGrabber.draw(20,20);
     
     unsigned char * pixels = vidGrabber.getPixels();
-    for (int i = 0; i < camWidth; i +=10) {
-        for (int j = 0; j < camHeight; j+=10) {
+    for (int i = 0; i < camWidth; i +=8) {
+        for (int j = 0; j < camHeight; j+=8) {
             unsigned char r = pixels[(j*camWidth+i) * 3];
             unsigned char g = pixels[(j*camWidth+i) * 3+1];
             unsigned char b = pixels[(j*camWidth+i) * 3+2];
             
             ofSetColor(255,0,0,100);
-            ofCircle(camWidth+ 40 + i, 20+j, 20*(float)r/255.0);
+            ofCircle(camWidth+ 40 + i, 20+j, 10*(float)r/255.0);
             ofSetColor(0,255,0,100);
-            ofCircle(camWidth+ 40 + i, 20+j, 20*(float)g/255.0);
+            ofCircle(camWidth+ 40 + i, 20+j, 10*(float)g/255.0);
             ofSetColor(0,0,255,100);
-            ofCircle(camWidth+ 40 + i, 20+j, 20*(float)b/255.0);
+            ofCircle(camWidth+ 40 + i, 20+j, 10*(float)b/255.0);
 
         }
     }
