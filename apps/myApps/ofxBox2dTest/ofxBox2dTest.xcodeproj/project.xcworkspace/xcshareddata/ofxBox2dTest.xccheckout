@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C405306A-3A72-4B72-A3FF-5BDB87516A99</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ofxBox2dTest</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8DEDA3C0-FBFE-4CC7-9066-A13787049173</key>
+		<string>https://github.com/hikwgc/oF</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>apps/myApps/ofxBox2dTest/ofxBox2dTest.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8DEDA3C0-FBFE-4CC7-9066-A13787049173</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/hikwgc/oF</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8DEDA3C0-FBFE-4CC7-9066-A13787049173</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8DEDA3C0-FBFE-4CC7-9066-A13787049173</string>
+			<key>IDESourceControlWCCName</key>
+			<string>oF</string>
+		</dict>
+	</array>
+</dict>
+</plist>
