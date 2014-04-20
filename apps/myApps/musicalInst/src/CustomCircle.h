@@ -14,6 +14,7 @@
 class CustomCircle: public ofxBox2dCircle {
 public:
     CustomCircle(int num);
+    //void setup(b2World * b2dworld, float x, float y, float radius);
     void update();
     void draw();
     int num;

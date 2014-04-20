@@ -22,21 +22,18 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
+    ofxBox2d box2d;
+    vector < ofPtr<CustomCircle> > circles;
+    vector < ofPtr<ofxBox2dCircle> > contourCircles;
+    
     ofVideoGrabber vidGrabber;
     ofxCvColorImage colorImg;
     ofxCvGrayscaleImage grayImage;
     ofxCvGrayscaleImage grayBg;
     ofxCvGrayscaleImage grayDiff;
     ofxCvContourFinder contourFinder;
-    vector <ofPoint> simpleContour;
-    
     bool bLearnBackground;
     int threshold;
-    float simpleAmount;
-    bool bReversePoints;
     
-    ofxBox2d box2d;
-    ofxBox2dLine lineStrip;
-    vector <CustomCircle> circles;
     
 };

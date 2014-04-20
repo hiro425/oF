@@ -9,11 +9,13 @@
 #ifndef __ofxOpenCvBox2d__CustomCircle__
 #define __ofxOpenCvBox2d__CustomCircle__
 
+#include "ofMain.h"
 #include "ofxBox2d.h"
 
 class CustomCircle: public ofxBox2dCircle {
 public:
     void draw();
+
 };
 
 #endif /* defined(__ofxOpenCvBox2d__CustomCircle__) */

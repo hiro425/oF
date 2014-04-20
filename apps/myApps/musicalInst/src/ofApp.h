@@ -1,6 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxBox2d.h"
+//#include "CustomCircle.h"
+//#include "CustomJoint.h"
+#include "CustomRect.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -19,4 +24,12 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
+    ofxBox2d box2d;
+    vector < ofPtr< CustomRect > > particles;
+    ofxBox2dRect dac;
+    ofImage particleImage;
+    ofImage dacImage;
+ //   vector < CustomCircle * > circles;
+   // vector < CustomJoint * > joints;
+    
 };
