@@ -18,6 +18,7 @@ public:
     void newTree();
     void update(float ex, float why);
     void draw();
+    void init(int numChildren, int maxLevel);
     
     float level;
     float index;
@@ -25,6 +26,8 @@ public:
     float y;
     float endx;
     float endy;
+    int numChildren;
+    int maxLevel;
 };
 
 #endif /* defined(__fractalSound__branch__) */

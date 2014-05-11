@@ -14,15 +14,15 @@ branch::branch(float lev, float ind, float ex, float why) {
     update(ex, why);
 }
 
-void init(int numChildren, int maxLevel) {
+void branch::init(int numChildren, int maxLevel) {
     
 }
-
+/*
 void branch::newTree() {
     branch _trunk = new branch(1, 0, ofGetWidth()/2, 50);
     _trunk.draw();
 }
-
+*/
 void branch::update(float ex, float why) {
     x = ex;
     y = why;
@@ -30,7 +30,7 @@ void branch::update(float ex, float why) {
     endy = y + 15;
 }
 
-void draw() {
+void branch::draw() {
     ofLine(x, y, endx, endy);
     ofCircle(x, y, 5);
 }

@@ -5,7 +5,7 @@ void ofApp::setup(){
     ofBackground(255);
     ofEnableSmoothing();
     
-    brnch.init();
+    brnch.init(3, 3);
 }
 
 //--------------------------------------------------------------
