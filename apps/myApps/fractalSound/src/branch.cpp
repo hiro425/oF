@@ -12,17 +12,26 @@ branch::branch(float lev, float ind, float ex, float why) {
     level = lev;
     index = ind;
     update(ex, why);
+    
+    if (level < 3) {
+        
+    }
+    
 }
 
 void branch::init(int numChildren, int maxLevel) {
     
 }
+<<<<<<< Updated upstream
 /*
 void branch::newTree() {
     branch _trunk = new branch(1, 0, ofGetWidth()/2, 50);
     _trunk.draw();
 }
 */
+=======
+
+>>>>>>> Stashed changes
 void branch::update(float ex, float why) {
     x = ex;
     y = why;
