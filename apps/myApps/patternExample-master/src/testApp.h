@@ -55,6 +55,7 @@ class testApp : public ofBaseApp{
         ofxToggle bFillTog;
         ofxToggle bBackgroundChange;
         slide globalRotate;
+        dash  cameraRotate;
     
         ofPoint bFill;
         bool bReverse;
@@ -62,19 +63,40 @@ class testApp : public ofBaseApp{
         int rotAxisMode;
     
     
-    //hikwgc:
+    //hikwgc: cameras
     void reset();
     
     ofNode testNodes[kNumTestNodes];
+    ofLight light[kNumLights];
     ofCamera cam[kNumCameras];
-    int lookatIndex[kNumCameras];
+    int lookatIndex[kNumCameras]; // which test node to lookat (one for each camera)
+    int parentIndex[kNumCameras]; // which test node to link (parent) to (one for each camera)
+    bool doMouseOrbit[kNumCameras]; // whether camera is in mouseOrbit mode or not
     float orbitRadius;
     
     ofParameter<ofVec3f> camInitPos;
     ofParameter<ofVec3f> camMovedPos;
+    float camAngle;
+    float camSpeed;
     
     int camToView; // which camera index are we looking through
     int camToConfigure;
     
+    float orientPosRatio;
+    int cameraMode;
+    
+    void updateCamera();
+    void camRotationXZ();
+    void camRotationYZ();
+    void camRotationXYZ();
+    void drawCamera();
+    
+    
+    // hikwgc: patterns
+    int makeMode;
+    void makePrims();
+    void makePrimsDynamic();
+    void makeOnePrim();
+    void makePrimsSimply();
     
 };
