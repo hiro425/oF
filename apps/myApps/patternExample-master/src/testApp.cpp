@@ -19,10 +19,11 @@ void testApp::setup(){
     
     thresh = 0.1; //ランダマイズのための音量の閾値
     
-    bang = false;
-    bHide = false;
+    bang    = false;
+    bHide   = true;
+    bOrbits = false;
     
-    reset(); // hikwgc: setup camera
+    camReset(); // hikwgc: setup camera
     orientPosRatio = 0.5; // hikwgc
     cameraMode = 0;
     camAngle = 0;
@@ -41,32 +42,16 @@ void testApp::setup(){
 }
 
 //--------------------------------------------------------------
-void testApp::reset() {
-	camToView = 0;
-	camToConfigure = 1;
-	
-	orbitRadius = 200;
-    
-	for(int i=0; i<kNumCameras; i++) {  // necessary
-		cam[i].resetTransform();
-		cam[i].setFov(60);
-		cam[i].clearParent();
-		lookatIndex[i] = -1; // don't lookat at any node
-		//parentIndex[i] = -1; // don't parent to any node
-		//doMouseOrbit[i] = false;
-	}
+void testApp::camReset() {
+	   
+    cam[0].resetTransform();
+	cam[0].setFov(60);
+	cam[0].clearParent();
 
     camInitPos.set(ofVec3f(ofGetWidth()/2, ofGetHeight()/2, 750));
-    camMovedPos.set(ofVec3f(0,0,0));
-
 	cam[0].setPosition(camInitPos->x, camInitPos->y, camInitPos->z);
-    //cam[0].lookAt(ofVec3f(0,0,0));
-	//doMouseOrbit[0] = true;
-	
-	//cam[1].setPosition(camInitPos->x, camInitPos->y, camInitPos->z);// necessary
-    //cam[1].lookAt(ofVec3f(0,0,0));
-	//lookatIndex[1] = kNumTestNodes-1; // look at smallest node  // necessary
     
+    camMovedPos.set(ofVec3f(0,0,0));
 }
 
 //--------------------------------------------------------------
@@ -75,35 +60,22 @@ void testApp::update(){
     //ここから音量がthreshを超えた時に色々ランダムする処理
     
     if(bang == false && smoothedVol > thresh){
-      
-            bang = true; //音量がthreshold超えたらthreshold以下になるまでは処理しないよ！
+        bang = true; //音量がthreshold超えたらthreshold以下になるまでは処理しないよ！
         
-            if(isRand)randomiseAll();
+        if(isRand)randomiseAll();
         
         if((int)ofRandom(0,1))rotAxisMode = !rotAxisMode;
         
-        if(bFillTog){
-            bFill.x = !bFill.x;
-        }
+        if(bFillTog) bFill.x = !bFill.x;
         
-        if(bReverseTog){
-            bReverse = !bReverse;
-        }
+        if(bReverseTog) bReverse = !bReverse;
             
         if(bGlobalRotate){
-            globalRotate.set(ofRandom(0,720),
-                             ofRandom(0,720),
-                             ofRandom(0,720));
-            
+            globalRotate.set(ofRandom(0,360),
+                             ofRandom(0,360),
+                             ofRandom(0,360));
             // rotate.set(ofVec3f(ofRandom(0,100),ofRandom(0,100),ofRandom(0,100)));
         }
-        /*
-        if( cameraMode ) {
-            cameraRotate.set(1,
-                             1,
-                             90);
-        }
-        */
     }
     
     if(bFill.x && ofGetFrameNum() % 5 == 0){
@@ -113,15 +85,9 @@ void testApp::update(){
     if(bGlobalRotate == false){
         globalRotate.set(0,0,0);
     }
-    /*
-    if(!cameraMode) {
-        cameraRotate.set(1,1,1);
-    }
-     */
     
     rotate.set(ofVec3f(rotate->x,rotate->y,rotate->z));
     globalRotate.update();
-    cameraRotate.update();
     
     if(smoothedVol < thresh){
         bang = false;
@@ -134,8 +100,9 @@ void testApp::update(){
     
     color.set(ofColor(color->r,color->g,color->b,(int)(smoothedVol * aVal)));
     
-    ofColor currentColor = color;
+    currentColor = color;
     if(bReverse)currentColor.set(0,0,0,(int)(smoothedVol * aVal));
+    else currentColor.set(color->r,color->g,color->b,(int)(smoothedVol * aVal));
     
     makePrims();
     updateCamera();
@@ -171,24 +138,53 @@ void testApp::makePrimsSimply() {
         prims[i].pos.y = (i - prims.size() * 0.5) * cVol * pos->y + ofGetHeight() * orientPosRatio;
         prims[i].pos.z = (i - prims.size() * 0.5) * cVol * pos->z;
         
+        // make orbit
+        
+        if (bOrbits) {
+            /*
+            if (i%3 == 0) {
+                if (prims[i].pos.x > 0) prims[i].pos.x = abs(prims[i].pos.x)*3;
+                else prims[i].pos.x = abs(prims[i].pos.x)*-3;
+            }
+             */
+            
+            if (i%8 == 1) {
+                if (prims[i].pos.x > 0) prims[i].pos.x = abs(prims[i].pos.x)*3;
+                else prims[i].pos.x = abs(prims[i].pos.x)*-3;
+            }
+            else if (i%4 == 1) {
+                if (prims[i].pos.y > 0) prims[i].pos.y = abs(prims[i].pos.y)*3;
+                else prims[i].pos.y = abs(prims[i].pos.y)*-3;
+            }
+            else if (i%2 == 1) {
+                if (prims[i].pos.z > 0) prims[i].pos.z = abs(prims[i].pos.z)*3;
+                else prims[i].pos.z = abs(prims[i].pos.z)*-3;
+            }
+            /*
+            else if (i%9 == 0)  prims[i].pos.x *= -1;
+            else if (i%6 == 0) prims[i].pos.y *= -1;
+            else if (i%3 == 0) prims[i].pos.z *= -1;
+             */
+        }
         
         prims[i].rotate.x = i * cVol * rotate->x;
         prims[i].rotate.y = i * cVol * rotate->y;
         prims[i].rotate.z = i * cVol * rotate->z;
         
-        prims[i].size.x = i * cVol * size->x + 40;
-        prims[i].size.y = i * cVol * size->y + 40;
-        prims[i].size.z = i * cVol * size->z + 40;
+        prims[i].size.x = i * cVol * size->x + 20;
+        prims[i].size.y = i * cVol * size->y + 20;
+        prims[i].size.z = i * cVol * size->z + 20;
         
-        //prims[i].color = currentColor;
-        //hikwgc: add
+        prims[i].color = currentColor;
+        //hikwgc
+        /*
         prims[i].color = ofColor(
                                  color->r - color->r/prims.size()*i,
                                  color->g - color->g/prims.size()*i,
                                  color->b - color->b/prims.size()*i,
                                  color->a
                                  );
-        
+        */
         prims[i].bFill = bFill.y;
         prims[i].rotAxisMode = rotAxisMode;
         prims[i].update();
@@ -209,9 +205,9 @@ void testApp::makeOnePrim() {
     prims[0].rotate.y = cVol * rotate->y * 2.0;
     prims[0].rotate.z = cVol * rotate->z * 2.0;
     
-    prims[0].size.x = cVol * size->x * 10 + 40;
-    prims[0].size.y = cVol * size->y * 10 + 40;
-    prims[0].size.z = cVol * size->z * 10 + 40;
+    prims[0].size.x = cVol * size->x * 10 + 10;
+    prims[0].size.y = cVol * size->y * 10 + 10;
+    prims[0].size.z = cVol * size->z * 10 + 10;
     
     prims[0].color = color;
     prims[0].bFill = bFill.x;
@@ -240,16 +236,16 @@ void testApp::makePrimsDynamic() {
         prims[i].size.y = i * cVol * size->y * 10 + 40;
         prims[i].size.z = i * cVol * size->z * 10 + 40;
         prims[i].drawMode = 0;
-        //prims[i].color = color;
-        //hikwgc: add
-        
+        prims[i].color = currentColor;
+        //hikwgc
+        /*
         prims[i].color = ofColor(
                                  color->r + (255 - color->r)/prims.size()*i,
                                  color->g + (255 - color->g)/prims.size()*i,
                                  color->b + (255 - color->b)/prims.size()*i,
                                  color->a
                                  );
-        
+        */
         prims[i].bFill = bFill.x;
         prims[i].update();
     }
@@ -355,21 +351,84 @@ void testApp::draw(){
         panel.draw();
     }
     
-    
 }
 
-// draw camera -----------------------------------------
-void testApp::drawCamera() {
-    cam[0].begin();
+//--------------------------------------------------------------
+void testApp::randomiseAll(){
     
-	ofDrawAxis(100);
-
-	cam[0].end();
+    int baseNum = 25;
     
+    int rand = (int)ofRandom(0,5);
+    //pos.set(ofVec3f(100,0,0));
+    //rotate.set(ofVec3f(0,100,0));
+    //size.set(ofVec3f(ofRandom(0,300),ofRandom(0,300),ofRandom(0,300)));
+    
+    if(rand == 0)pos.set(ofVec3f(baseNum*2,0,0));
+    else if(rand == 1)pos.set(ofVec3f(0,baseNum*2,0));
+    else if(rand == 2)pos.set(ofVec3f(0,0,baseNum*2));
+    else if(rand == 3)pos.set(ofVec3f(ofRandom(baseNum,baseNum*4),ofRandom(baseNum,baseNum*4),ofRandom(baseNum,baseNum*4)));
+    else if(rand == 4)pos.set(ofVec3f(0,0,0));
+    
+    rand = (int)ofRandom(0,5);
+    if(rand == 0)rotate.set(ofVec3f(baseNum*2,0,0));
+    else if(rand == 1)rotate.set(ofVec3f(0,baseNum*2,0));
+    else if(rand == 2)rotate.set(ofVec3f(0,0,baseNum*2));
+    else if(rand == 3)rotate.set(ofVec3f(ofRandom(0,baseNum*2),ofRandom(0,baseNum*2),ofRandom(0,baseNum*2)));
+    else if(rand == 4)rotate.set(ofVec3f(0,0,0));
+    
+    rand = (int)ofRandom(0,4);
+    if(rand == 0)size.set(ofVec3f(ofRandom(baseNum*2,baseNum*6),0,0));
+    else if(rand == 1)size.set(ofVec3f(0,ofRandom(baseNum*2,baseNum*6),0));
+    else if(rand == 2)size.set(ofVec3f(0,0,ofRandom(baseNum*2,baseNum*6)));
+    else if(rand == 3)size.set(ofVec3f(ofRandom(0,baseNum*6),ofRandom(0,baseNum*6),ofRandom(0,baseNum*6)));
+    
+    // hikwgc: color
+    rand = (int)ofRandom(0,4);
+    if(rand == 0)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
+    else if(rand == 1)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
+    else if(rand == 2)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
+    else if(rand == 3)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
+    
+    // hikwgc: camera
+    camSpeed = ofRandom(5, 10);
+    rand = (int)ofRandom(0,6);
+    if      (rand == 1) cameraMode = 1;
+    else if (rand == 2) cameraMode = 2;
+    else if (rand == 3) cameraMode = 3;
+    else                cameraMode = 0;
 }
+
 
 
 //--------------------------------------------------------------
+void testApp::audioIn(float * input, int bufferSize, int nChannels){
+	
+	float curVol = 0.0;
+	
+	// samples are "interleaved"
+	int numCounted = 0;
+    
+	//lets go through each sample and calculate the root mean square which is a rough way to calculate volume
+	for (int i = 0; i < bufferSize; i++){
+		left[i]		= input[i] * 5;//*0.5;
+        
+		curVol += left[i] * left[i];
+		numCounted++;
+	}
+	
+	//this is how we get the mean of rms :)
+	curVol /= (float)numCounted;
+	
+	// this is how we get the root of rms :)
+	curVol = sqrt( curVol );
+	
+	smoothedVol *= 0.93;
+	smoothedVol += 0.07 * curVol;
+	
+	bufferCounter++;
+	
+}
+
 void testApp::keyPressed(int key){
     cout << "key " << key << "\n";
     
@@ -395,6 +454,10 @@ void testApp::keyPressed(int key){
 	}
     
     if( key == 'o' ){
+		bOrbits = !bOrbits;
+	}
+    
+    if( key == 'p' ){
 		orientPosRatio += 0.25;
         if (orientPosRatio == 1) {
             orientPosRatio = 0.25;
@@ -409,7 +472,7 @@ void testApp::keyPressed(int key){
     if( key == ' ' ){
 		//ofSetWindowPosition(0, 1280);
         makeMode++;
-        if (makeMode > 2) makeMode = 0;
+        if (makeMode > 1) makeMode = 0;
 	}
     
 }
@@ -454,75 +517,3 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 
 }
 
-void testApp::randomiseAll(){
-    // らんだむをもとに、pos, size, rotateの配列に初期値を入れている？
-    //
-    
-    
-    int rand = (int)ofRandom(0,5);
-    //pos.set(ofVec3f(100,0,0));
-    //rotate.set(ofVec3f(0,100,0));
-    //size.set(ofVec3f(ofRandom(0,300),ofRandom(0,300),ofRandom(0,300)));
-    
-    if(rand == 0)pos.set(ofVec3f(100,0,0));
-    else if(rand == 1)pos.set(ofVec3f(0,100,0));
-    else if(rand == 2)pos.set(ofVec3f(0,0,100));
-    else if(rand == 3)pos.set(ofVec3f(ofRandom(50,200),ofRandom(50,200),ofRandom(50,200)));
-    else if(rand == 4)pos.set(ofVec3f(0,0,0));
-    
-    rand = (int)ofRandom(0,5);
-    if(rand == 0)rotate.set(ofVec3f(100,0,0));
-    else if(rand == 1)rotate.set(ofVec3f(0,100,0));
-    else if(rand == 2)rotate.set(ofVec3f(0,0,100));
-    else if(rand == 3)rotate.set(ofVec3f(ofRandom(0,100),ofRandom(0,100),ofRandom(0,100)));
-    else if(rand == 4)rotate.set(ofVec3f(0,0,0));
-    
-    rand = (int)ofRandom(0,4);
-    if(rand == 0)size.set(ofVec3f(ofRandom(100,300),0,0));
-    else if(rand == 1)size.set(ofVec3f(0,ofRandom(100,300),0));
-    else if(rand == 2)size.set(ofVec3f(0,0,ofRandom(100,300)));
-    else if(rand == 3)size.set(ofVec3f(ofRandom(0,300),ofRandom(0,300),ofRandom(0,300)));
-    
-    // hikwgc: color
-    rand = (int)ofRandom(0,4);
-    if(rand == 0)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
-    else if(rand == 1)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
-    else if(rand == 2)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
-    else if(rand == 3)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
-    
-    // hikwgc: camera
-    camSpeed = ofRandom(5, 20);
-    rand = (int)ofRandom(0,6);
-    if      (rand == 1) cameraMode = 1;
-    else if (rand == 2) cameraMode = 2;
-    else if (rand == 3) cameraMode = 3;
-    else                cameraMode = 0;
-}
-
-void testApp::audioIn(float * input, int bufferSize, int nChannels){
-	
-	float curVol = 0.0;
-	
-	// samples are "interleaved"
-	int numCounted = 0;
-    
-	//lets go through each sample and calculate the root mean square which is a rough way to calculate volume
-	for (int i = 0; i < bufferSize; i++){
-		left[i]		= input[i] * 5;//*0.5;
-        
-		curVol += left[i] * left[i];
-		numCounted++;
-	}
-	
-	//this is how we get the mean of rms :)
-	curVol /= (float)numCounted;
-	
-	// this is how we get the root of rms :)
-	curVol = sqrt( curVol );
-	
-	smoothedVol *= 0.93;
-	smoothedVol += 0.07 * curVol;
-	
-	bufferCounter++;
-	
-}

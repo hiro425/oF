@@ -4,9 +4,8 @@
 #include "Primitive.h"
 #include "ofxGui.h"
 
-#define kNumTestNodes 4
 #define kNumCameras 2
-#define kNumLights 3
+
 
 class testApp : public ofBaseApp{
 
@@ -39,15 +38,15 @@ class testApp : public ofBaseApp{
     
         vector<Primitive>prims;
     
-        static const int objectNum = 200; //何個描画するか。
+        static const int objectNum = 300; //何個描画するか。
     
-    //hikwgc: UI???? -> いや違う
+
         bool bang;
         bool bHide;
-        ofxPanel panel; //hikwgc: これはUIパーツ
-        ofParameter<ofVec3f> pos; //hikwgc:この３つで、描画してるっぽ
-        ofParameter<ofVec3f> size; //hikwgc:
-        ofParameter<ofVec3f> rotate; //hikwgc:
+        ofxPanel panel;
+        ofParameter<ofVec3f> pos;
+        ofParameter<ofVec3f> size;
+        ofParameter<ofVec3f> rotate;
         ofParameter<float> thresh;
         ofParameter<int> repeat;
         ofParameter<ofColor> color;
@@ -56,6 +55,7 @@ class testApp : public ofBaseApp{
         ofxToggle bBackgroundChange;
         slide globalRotate;
         dash  cameraRotate;
+        ofColor currentColor;
     
         ofPoint bFill;
         bool bReverse;
@@ -64,24 +64,12 @@ class testApp : public ofBaseApp{
     
     
     //hikwgc: cameras
-    void reset();
-    
-    ofNode testNodes[kNumTestNodes];
-    ofLight light[kNumLights];
+    void camReset();
     ofCamera cam[kNumCameras];
-    int lookatIndex[kNumCameras]; // which test node to lookat (one for each camera)
-    int parentIndex[kNumCameras]; // which test node to link (parent) to (one for each camera)
-    bool doMouseOrbit[kNumCameras]; // whether camera is in mouseOrbit mode or not
-    float orbitRadius;
-    
     ofParameter<ofVec3f> camInitPos;
     ofParameter<ofVec3f> camMovedPos;
     float camAngle;
     float camSpeed;
-    
-    int camToView; // which camera index are we looking through
-    int camToConfigure;
-    
     float orientPosRatio;
     int cameraMode;
     
@@ -89,8 +77,6 @@ class testApp : public ofBaseApp{
     void camRotationXZ();
     void camRotationYZ();
     void camRotationXYZ();
-    void drawCamera();
-    
     
     // hikwgc: patterns
     int makeMode;
@@ -98,5 +84,5 @@ class testApp : public ofBaseApp{
     void makePrimsDynamic();
     void makeOnePrim();
     void makePrimsSimply();
-    
+    ofxToggle bOrbits;
 };
