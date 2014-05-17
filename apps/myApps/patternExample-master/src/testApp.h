@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Primitive.h"
 #include "ofxGui.h"
+#include "time.h"
 
 #define kNumCameras 2
 
@@ -26,6 +27,7 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     //------------ここまでテンプレ
+    void setupPanel();
         void randomiseAll();  //モード別の初期値？を設定
     
         ofSoundStream soundStream;
@@ -39,8 +41,6 @@ class testApp : public ofBaseApp{
         vector<Primitive>prims;
     
         static const int objectNum = 300; //何個描画するか。
-    
-
         bool bang;
         bool bHide;
         ofxPanel panel;
@@ -54,17 +54,18 @@ class testApp : public ofBaseApp{
         ofxToggle bFillTog;
         ofxToggle bBackgroundChange;
         slide globalRotate;
-        dash  cameraRotate;
         ofColor currentColor;
     
         ofPoint bFill;
         bool bReverse;
         ofxToggle bReverseTog;
         int rotAxisMode;
+    ofxToggle bPrims;
+    ofxToggle bPrimsTog;
     
     
     //hikwgc: cameras
-    void camReset();
+    void setupCam();
     ofCamera cam[kNumCameras];
     ofParameter<ofVec3f> camInitPos;
     ofParameter<ofVec3f> camMovedPos;
@@ -73,6 +74,9 @@ class testApp : public ofBaseApp{
     float orientPosRatio;
     int cameraMode;
     
+    //update method
+    void updateWhenOverThreshold();
+    void updateValue();
     void updateCamera();
     void camRotationXZ();
     void camRotationYZ();
@@ -85,4 +89,18 @@ class testApp : public ofBaseApp{
     void makeOnePrim();
     void makePrimsSimply();
     ofxToggle bOrbits;
+    
+    // shader
+    ofShader shader1;
+    string preFragName;
+    string postFragName;
+    int fragIndex;
+    char charIndex[20];
+    string fragFile;
+    void setupShader();
+    void loadShader();
+    void drawShader();
+    ofxToggle bShaderTog;
+    ofxToggle bShader;
+    
 };

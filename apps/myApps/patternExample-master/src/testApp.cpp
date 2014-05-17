@@ -18,18 +18,23 @@ void testApp::setup(){
     ofSetSphereResolution(2);
     
     thresh = 0.1; //ランダマイズのための音量の閾値
+    bang           = false;
+    bHide          = true;
+    bOrbits        = false;
+    orientPosRatio = 0.5;
+    makeMode       = 0;
+    bShader        = false;
+    bShaderTog     = false;
+    bPrims         = true;
+    bPrimsTog      = true;
     
-    bang    = false;
-    bHide   = true;
-    bOrbits = false;
+    setupCam();
+    setupPanel();
+    setupShader();
     
-    camReset(); // hikwgc: setup camera
-    orientPosRatio = 0.5; // hikwgc
-    cameraMode = 0;
-    camAngle = 0;
-    camSpeed = 10;
-    makeMode = 0;
-    
+}
+
+void testApp::setupPanel() {
     panel.setup("panel");
     panel.add(pos.set("pos",ofVec3f(0,0,0),ofVec3f(0,0,0),ofVec3f(300,300,300)));
     panel.add(size.set("scale",ofVec3f(50,60,80),ofVec3f(0,0,0),ofVec3f(1000,1000,1000)));
@@ -41,9 +46,12 @@ void testApp::setup(){
     panel.add(bReverseTog.setup("bReverseTog",false));
 }
 
-//--------------------------------------------------------------
-void testApp::camReset() {
+void testApp::setupCam() {
+    cameraMode = 0;
+    camAngle = 0;
+    camSpeed = 10;
 	   
+    // そのうち、カメラの連続きりかえとかやりたい・・・ので、配列で管理してる
     cam[0].resetTransform();
 	cam[0].setFov(60);
 	cam[0].clearParent();
@@ -54,30 +62,65 @@ void testApp::camReset() {
     camMovedPos.set(ofVec3f(0,0,0));
 }
 
+void testApp::setupShader() {
+    preFragName = "";
+    fragIndex = 14;
+    postFragName = ".frag";
+    loadShader();
+}
+
 //--------------------------------------------------------------
 void testApp::update(){
-    
-    //ここから音量がthreshを超えた時に色々ランダムする処理
-    
+    updateWhenOverThreshold();
+    updateValue();
+    makePrims();
+    updateCamera();
+}
+
+void testApp::updateWhenOverThreshold() {
     if(bang == false && smoothedVol > thresh){
         bang = true; //音量がthreshold超えたらthreshold以下になるまでは処理しないよ！
         
-        if(isRand)randomiseAll();
-        
-        if((int)ofRandom(0,1))rotAxisMode = !rotAxisMode;
-        
-        if(bFillTog) bFill.x = !bFill.x;
-        
-        if(bReverseTog) bReverse = !bReverse;
+        if (bPrimsTog && !bShaderTog) {
+            if (!prims.size()) {
+                for(int i = 0; i < objectNum; i++){
+                    Primitive drawObject;
+                    drawObject.drawMode = i % 2;
+                    prims.push_back(drawObject);
+                }
+            }
+            bShader = false;
+            bPrims = true;
             
-        if(bGlobalRotate){
-            globalRotate.set(ofRandom(0,360),
-                             ofRandom(0,360),
-                             ofRandom(0,360));
-            // rotate.set(ofVec3f(ofRandom(0,100),ofRandom(0,100),ofRandom(0,100)));
+            
+            if(isRand)randomiseAll();
+            
+            if((int)ofRandom(0,1))rotAxisMode = !rotAxisMode;
+            
+            if(bFillTog) bFill.x = !bFill.x;
+            
+            if(bReverseTog) bReverse = !bReverse;
+            
+            if(bGlobalRotate){
+                globalRotate.set(ofRandom(0,360),
+                                 ofRandom(0,360),
+                                 ofRandom(0,360));
+            }
         }
+        else if (!bPrimsTog && bShaderTog) {
+            if (prims.size()) {
+                prims.clear();
+            }
+            bShader = true;
+            bPrims = false;
+            fragIndex++;
+            loadShader();
+        }
+        
     }
-    
+}
+
+void testApp::updateValue() {
     if(bFill.x && ofGetFrameNum() % 5 == 0){
         bFill.y = !bFill.y;
     }
@@ -92,9 +135,7 @@ void testApp::update(){
     if(smoothedVol < thresh){
         bang = false;
     }
-    
-    //ここからはランダマイズされた値をインスタンスに突っ込んだりするよ！
-    
+
     float aVal = 1000;
     if(bFill.y == 1)aVal = 30; //ofFillかましてると明る過ぎるので適当にアルファ下げるよ
     
@@ -103,14 +144,8 @@ void testApp::update(){
     currentColor = color;
     if(bReverse)currentColor.set(0,0,0,(int)(smoothedVol * aVal));
     else currentColor.set(color->r,color->g,color->b,(int)(smoothedVol * aVal));
-    
-    makePrims();
-    updateCamera();
-    
 }
 
-
-// pattern -----------------------------------
 void testApp::makePrims(){
     switch (makeMode) {
         case 0:
@@ -139,7 +174,6 @@ void testApp::makePrimsSimply() {
         prims[i].pos.z = (i - prims.size() * 0.5) * cVol * pos->z;
         
         // make orbit
-        
         if (bOrbits) {
             /*
             if (i%3 == 0) {
@@ -176,15 +210,7 @@ void testApp::makePrimsSimply() {
         prims[i].size.z = i * cVol * size->z + 20;
         
         prims[i].color = currentColor;
-        //hikwgc
-        /*
-        prims[i].color = ofColor(
-                                 color->r - color->r/prims.size()*i,
-                                 color->g - color->g/prims.size()*i,
-                                 color->b - color->b/prims.size()*i,
-                                 color->a
-                                 );
-        */
+        
         prims[i].bFill = bFill.y;
         prims[i].rotAxisMode = rotAxisMode;
         prims[i].update();
@@ -237,86 +263,98 @@ void testApp::makePrimsDynamic() {
         prims[i].size.z = i * cVol * size->z * 10 + 40;
         prims[i].drawMode = 0;
         prims[i].color = currentColor;
-        //hikwgc
-        /*
-        prims[i].color = ofColor(
-                                 color->r + (255 - color->r)/prims.size()*i,
-                                 color->g + (255 - color->g)/prims.size()*i,
-                                 color->b + (255 - color->b)/prims.size()*i,
-                                 color->a
-                                 );
-        */
         prims[i].bFill = bFill.x;
         prims[i].update();
     }
 }
 
-// camera -----------------------------------
 void testApp::updateCamera() {
-    float cVol = smoothedVol * 0.06;
-    float freqMult = 1;
-	float amp = 30;
-    
-    //if (cVol > 0.001) {
-    //    cout << "cVol: " << cVol << "\n";
-    //}
-    
     if (cameraMode) {
-        camAngle = camAngle + (camSpeed * cVol);
-        
         if      (cameraMode == 1) camRotationXZ();
         else if (cameraMode == 2) camRotationYZ();
         else                      camRotationXYZ();
-        
-        
-        
-        cam[0].setPosition(ofVec3f(
-                                   camMovedPos->x,
-                                   camMovedPos->y,
-                                   camMovedPos->z
-                                   )
-                           );
     }
     else {
         cam[0].setPosition(camInitPos->x, camInitPos->y, camInitPos->z);
     }
     cam[0].lookAt(ofVec3f(camInitPos->x, camInitPos->y, 0));
-    //cam[1].lookAt(prims[0].pos);
-    
 }
 
 void testApp::camRotationXZ() {
+    float cVol = smoothedVol * 0.06;
+    camAngle = camAngle + (camSpeed * cVol);
+
     camMovedPos.set(ofVec3f(
                             camInitPos->x + (camInitPos->z * cos(camAngle)),
                             camInitPos->y,
                             camInitPos->z * sin(camAngle)
                             ));
+    cam[0].setPosition(ofVec3f(
+                               camMovedPos->x,
+                               camMovedPos->y,
+                               camMovedPos->z
+                               )
+                       );
+
 }
 
 void testApp::camRotationYZ() {
+    float cVol = smoothedVol * 0.06;
+    camAngle = camAngle + (camSpeed * cVol);
     camMovedPos.set(ofVec3f(
                             camInitPos->x,
                             camInitPos->y + (camInitPos->z * cos(camAngle)),
                             camInitPos->z * sin(camAngle)
                             ));
+    cam[0].setPosition(ofVec3f(
+                               camMovedPos->x,
+                               camMovedPos->y,
+                               camMovedPos->z
+                               )
+                       );
+
 }
 
 void testApp::camRotationXYZ() {
+    float cVol = smoothedVol * 0.06;
+    camAngle = camAngle + (camSpeed * cVol);
     camMovedPos.set(ofVec3f(
                             camInitPos->x + (camInitPos->z * cos(camAngle)),
                             camInitPos->y + (camInitPos->z * cos(camAngle)),
                             camInitPos->z * sin(camAngle)
                             ));
+    cam[0].setPosition(ofVec3f(
+                               camMovedPos->x,
+                               camMovedPos->y,
+                               camMovedPos->z
+                               )
+                       );
+
 }
+
+void testApp::loadShader() {
+    sprintf(charIndex, "%d", fragIndex);
+    fragFile = preFragName + charIndex + postFragName;
+    
+    ofFile file(fragFile);
+    if(!file.exists()){
+        ofLogError("The file " + fragFile + " is missing");
+        fragIndex = 1;
+        sprintf(charIndex, "%d", fragIndex);
+        fragFile = preFragName + charIndex + postFragName;
+    }
+    cout << "frag index :" << fragFile << "\n";
+    shader1.load("test.vert", fragFile);
+}
+
 
 //--------------------------------------------------------------
 void testApp::draw(){
     cam[0].begin();
     
-    //hikwgc 細かい設定して、
-    //primsの配列をがーーーーーーーーーとかいている
-
-    //ofBackgroundGradient(ofFloatColor(1,1,1,1), ofFloatColor(0,0,0,0));
+    //細かい設定して、
+    //primsの配列をがーーーーーーーーーとかく
+    //ofBackgroundGradient(ofFloatColor(1,1,1,1), ofFloatColor(127,127,127,127));
     ofEnableAlphaBlending();
     if(bReverse == false){
         ofBackground(0,0,0,0);
@@ -332,25 +370,52 @@ void testApp::draw(){
     ofRotateX(globalRotate.x);
     ofRotateY(globalRotate.y);
     ofRotateZ(globalRotate.z);
-    
     if(!bHide)ofDrawAxis(750);
-
     ofTranslate(-ofGetWidth()*0.5, -ofGetHeight()*0.5);
     
-    for(int i = 0; i <prims.size(); i++){
-        prims[i].draw();
+    if (bPrims) {
+        for(int i = 0; i <prims.size(); i++){
+            prims[i].draw();
+        }
     }
 
-    
     ofPopMatrix();
     
     cam[0].end();
-
+    
+    if (bShader) {
+        drawShader();
+    }
     
     if(bHide == false){
         panel.draw();
     }
     
+}
+
+void testApp::drawShader() {
+    float resolution[2];
+    resolution[0] = ofGetWindowWidth();
+    resolution[1] = ofGetWindowHeight();
+    
+    float time = ofGetElapsedTimef();
+    float mousePoint[2];
+    mousePoint[0] = mouseX;
+    mousePoint[1] = mouseY;
+    
+    shader1.begin();
+    shader1.setUniform1f("time", time);
+    shader1.setUniform2fv("resolution", resolution);
+    
+    glEnable(GL_DEPTH_TEST);
+    glBegin(GL_QUADS);
+    glVertex2f(0, 0);
+    glVertex2f(ofGetWidth(), 0);
+    glVertex2f(ofGetWidth(), ofGetHeight());
+    glVertex2f(0, ofGetHeight());
+    glEnd();
+    
+    shader1.end();
 }
 
 //--------------------------------------------------------------
@@ -382,14 +447,12 @@ void testApp::randomiseAll(){
     else if(rand == 2)size.set(ofVec3f(0,0,ofRandom(baseNum*2,baseNum*6)));
     else if(rand == 3)size.set(ofVec3f(ofRandom(0,baseNum*6),ofRandom(0,baseNum*6),ofRandom(0,baseNum*6)));
     
-    // hikwgc: color
     rand = (int)ofRandom(0,4);
     if(rand == 0)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
     else if(rand == 1)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
     else if(rand == 2)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
     else if(rand == 3)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
     
-    // hikwgc: camera
     camSpeed = ofRandom(5, 10);
     rand = (int)ofRandom(0,6);
     if      (rand == 1) cameraMode = 1;
@@ -397,7 +460,6 @@ void testApp::randomiseAll(){
     else if (rand == 3) cameraMode = 3;
     else                cameraMode = 0;
 }
-
 
 
 //--------------------------------------------------------------
@@ -429,6 +491,7 @@ void testApp::audioIn(float * input, int bufferSize, int nChannels){
 	
 }
 
+//--------------------------------------------------------------
 void testApp::keyPressed(int key){
     cout << "key " << key << "\n";
     
@@ -439,6 +502,11 @@ void testApp::keyPressed(int key){
     
     if( key == 'h' ){
 		bHide = !bHide;
+	}
+
+    if( key == 'i' ){
+        fragIndex++;
+        loadShader();
 	}
     
     if( key == 'z' ){
@@ -462,6 +530,11 @@ void testApp::keyPressed(int key){
         if (orientPosRatio == 1) {
             orientPosRatio = 0.25;
         }
+	}
+
+    if( key == 's' ){
+		bPrimsTog  = !bPrimsTog;
+        bShaderTog = !bShaderTog;
 	}
     
     if( key == 't' ){

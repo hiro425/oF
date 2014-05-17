@@ -143,7 +143,7 @@ public:
         
         ofSetColor(color.r,color.g,color.b,color.a);
         
-        if(rotAxisMode == 1)ofTranslate(pos.x,pos.y,pos.z);
+        if(rotAxisMode == 1 )ofTranslate(pos.x,pos.y,pos.z);
         else if(rotAxisMode == 0)ofTranslate(ofGetWidth()*0.5, ofGetHeight()*0.5);
         
         ofRotateX(rotate.x);

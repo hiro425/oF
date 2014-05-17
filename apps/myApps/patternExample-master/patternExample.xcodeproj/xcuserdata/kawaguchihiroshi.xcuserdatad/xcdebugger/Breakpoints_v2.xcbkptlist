@@ -9,12 +9,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/testApp.cpp"
-            timestampString = "421672306.508838"
+            filePath = "practiceOpenGL/c1-1.c"
+            timestampString = "421844705.333096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44">
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "myInit()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
