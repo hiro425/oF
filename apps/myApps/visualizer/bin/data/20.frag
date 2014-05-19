@@ -7,6 +7,7 @@ precision mediump float;
 uniform float time;
 uniform vec2 mouse;
 uniform vec2 resolution;
+uniform float vol;
 
 #define PI 3.14159
 #define TWO_PI (PI*2.0)
@@ -26,10 +27,11 @@ void main(void)
     for(float i = 0.0; i < N; i++) 
     {
         float a = i * (TWO_PI/N) * 61.95;
-        col += cos(TWO_PI*(v.y * cos(a) + v.x * sin(a) /*+ mouse.y +i*mouse.x*/ + sin(time*0.004)*100.0 ));
+        //col += cos(TWO_PI*(v.y * cos(a) + v.x * sin(a) /*+ mouse.y +i*mouse.x*/ + sin(time*0.004)*100.0 ));
+        col += cos(TWO_PI*(v.y * cos(a) + v.x * sin(a) + sin(time*0.004)*100.0 ));
     }
     
     col /= 3.0;
 
-    gl_FragColor = vec4(col*1.0, -col*1.0,-col*4.0, 1.0);
+    gl_FragColor = vec4(col*1.0, -col*1.0,-col*1.0, 1.0);
 }

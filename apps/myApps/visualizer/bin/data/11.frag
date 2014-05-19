@@ -17,14 +17,15 @@ vec4 distance2Color(float d) {
 
 void main(void)
 {
-    float theta2 = radians(10.) * time;
+    float theta2 = radians(10.) * time/2.;
     vec2 p = -1.0 + 2.0 * gl_FragCoord.xy / resolution.xy;
     p.x *= resolution.x / resolution.y;
     p = mat2(cos(theta2), -sin(theta2), sin(theta2), cos(theta2)) * p;
-    p.x += .3 * sin(p.y * 3. + time * 5.);
+    p.x += .3 * sin(p.y * 3. + time * 2.);
     float theta = time * radians(20. + p.x * .2);
-    p *= 4. + 3. * smoothstep(0., 4.5, mod(time * 5., 5.));
-    p += vec2(sin(time * 7.), cos(time * 13.));
+    //p *= 4. + 3. * smoothstep(0., 4.5, mod(time * 5., 5.));
+    p *= 4.;
+    p += vec2(sin(2.*3.141592 + time * 1.), cos(2.*3.141592 + time * 1.));
     float f_wand = p.y;
     float c = 3.;
     p.xy = mod(p.xy, c) - .5 * c;

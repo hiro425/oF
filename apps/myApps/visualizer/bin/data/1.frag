@@ -10,14 +10,14 @@ precision mediump float;
 uniform float time;
 uniform vec2 mouse;
 uniform vec2 resolution;
-
+uniform float vol;
 void main( void ) {
     vec2 PixelCoord = (gl_FragCoord.xy/resolution.xy);
     vec3 PixelColor = vec3(0.0, 0.0, 0.0);
     for (int i = 0; i < N; i++)
     {
         vec2 ParticlePos = vec2(0.5, 0.5);
-        ParticlePos.x += 0.25*sin(time + float(i) / NF);
+        ParticlePos.x += 0.25*sin(time+(vol*5.) + float(i) / NF);
         ParticlePos.y += 0.25*cos(time + float(i) / NF);
         float ParticleSize = 0.0001 * float(i);
         PixelColor.r += ParticleSize * (1.0/length(ParticlePos-PixelCoord));

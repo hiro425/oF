@@ -1,0 +1,90 @@
+これを、iPad用ビジュアライザーにしよう
+おれが、どんどん絵素材を追加していく
+
+
+
+
+5/19 am 分類----------------------------------------------------------
+nouse
+28
+30
+12
+8  sabi
+
+
+fix
+1  intro
+2  intro
+3  end
+????
+4  intro ->amero
+5 intro ->amero
+???
+9 -sabi
+10 - intro -< Amero
+
+11 sabi
+12 ?
+13 bmero
+14 sabi
+15 amero
+16 sabi
+18 ?
+19 sabi
+20 sabi
+21 sabi
+22 amero
+24 bmero (maybe this is sun?)
+27 sabi
+
+top
+6 bmero
+7 bmero
+17 bmero
+23 bmero begin
+25 bmero
+26 bmero
+
+===================================================
+5/19 pm sort
+===================================================
+1  intro
+2  intro
+
+4  intro ->amero
+5 intro ->amero
+10 - intro -< Amero
+15 amero
+22 amero
+
+--------------------------------
+8  sabi
+9 -sabi
+11 sabi
+14 sabi
+16 sabi
+19 sabi
+20 sabi
+21 sabi
+27 sabi
+
+---------------------------------
+6 bmero
+7 bmero
+17 bmero
+23 bmero begin
+25 bmero
+26 bmero
+13 bmero
+24 bmero (maybe this is sun?)
+
+
+3  end
+
+
+
+top
+
+
+12 ?
+18 ?

@@ -5,6 +5,7 @@ precision mediump float;
 uniform vec2  resolution;
 uniform float time;
 uniform sampler2D backbuffer;
+uniform float vol;
 
 const int num_x = 5;
 const int num_y = 5;
@@ -18,7 +19,7 @@ vec4 draw_ball(int i, int j) {
     float size = 3.0 - 2.0 * sin(t);
     vec2 pos = vec2(x, y);
     float dist = length(gl_FragCoord.xy - pos);
-    float intensity = pow(size/dist, 2.0);
+    float intensity = pow(size/dist*20.0*vol, 2.0);
     vec4 color = vec4(0.0);
     color.r = 0.5 + cos(t*float(i));
     color.g = 0.5 + sin(t*float(j));

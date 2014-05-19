@@ -8,16 +8,27 @@ precision highp float;
 uniform vec2 resolution;
 uniform float time;
 uniform vec2 mouse;
+uniform float vol;
 float PI=3.14159265;
 #define Power 8.0
 #define Bailout 4.0
 
 void powN1(inout vec3 z, float r, inout float dr) {
     // extract polar coordinates
+    float tv = time * vol;
+
     float theta = acos(z.z/r);
     float phi = atan(z.y,z.x);
-    float power = Power+cos(time);
-    dr =  pow( r, power-1.0)*power*dr + 1.0 + pow((1.-cos(time*.3)*cos(time*.2)), -2.5);
+    //float power = Power+cos(time);
+    float power = Power+cos(0.0);
+    //dr =  pow( r, power-1.0)*power*dr + 1.0 + pow((1.-cos(time*.3)*cos(time*.2)), -2.5);
+    dr =  pow( r, power-1.0)*power*dr 
+          + 1.0 
+          + pow(
+                (1.0 - cos(2.0*PI * time * 0.41)*cos(2.0 * PI *time*0.41)), 
+                -2.5
+                );
+    //dr =  pow( r, power-1.0)*power*dr + 1.0 + pow((1.-cos(tv*.3)*cos(tv*.2)), -2.5);
     
     // scale and rotate the point
     float zr = pow( r,power);
@@ -69,8 +80,10 @@ void main(void){
   //Camera animation
   vec3 vuv=vec3(0,1,0);//Change camere up vector here
   vec3 vrp=vec3(0,0,0); //Change camere view here
-  float mx=mouse.x*PI*4.0;
-  float my=mouse.y*PI*2.01;
+  //float mx=mouse.x*PI*4.0;
+  //float my=mouse.y*PI*2.01;
+  float mx=0.0;
+  float my=0.0;
   vec3 prp=vec3(cos(my)*cos(mx),sin(my),cos(my)*sin(mx))*2.0; //Trackball style camera pos
   
 

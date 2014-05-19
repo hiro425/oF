@@ -11,7 +11,8 @@ void main( void ) {
     vec2 aspect = vec2( resolution.x / resolution.y, 1.0 );
     vec2 p = ( uv * 2.0 - 1.0 ) * aspect;
     p*=1.0;
-    vec2 mt = (mouse * 2.0 - 1.0) * aspect; 
+    vec2 mt = (0.5 * 2.0 - 1.0) * aspect; 
+    //vec2 mt = (mouse * 2.0 - 1.0) * aspect; 
     vec3 c;
     float t2 = time*0.1+200.0;
     

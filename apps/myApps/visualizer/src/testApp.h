@@ -6,7 +6,7 @@
 #include "time.h"
 
 #define kNumCameras 2
-
+using namespace std;
 
 class testApp : public ofBaseApp{
 
@@ -102,5 +102,10 @@ class testApp : public ofBaseApp{
     void drawShader();
     ofxToggle bShaderTog;
     ofxToggle bShader;
+    void shaderContents(char *s);
     
+    vector<int> fragContentList;
+    char *shaderMode;
+    string prevMode;
+    int listIndex;
 };

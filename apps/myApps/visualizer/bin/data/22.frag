@@ -5,6 +5,7 @@ precision mediump float;
 uniform float time;
 uniform vec2 mouse;
 uniform vec2 resolution;
+uniform float vol;
 
 #define pi 3.1415926536
 #define N 8
@@ -14,7 +15,7 @@ void main( void ) {
     vec2 center=position*2.-1.;
     center.x*=resolution.x/resolution.y;
     float c=0.;
-    float r=0.3;
+    float r=0.5;
     float o;
     for(int i=0;i<N;i++)
     {
@@ -23,9 +24,11 @@ void main( void ) {
         xy.x=r*cos(o);
         xy.y=r*sin(o);
         xy+=center;
-        c+=pow(200000.,(1.-length(xy)*1.9)*(0.99+0.1*fract(float(-i)/float(N)-time*1.5)))/20000.0;
+        //c+=pow(200000.,(1.-length(xy)*1.9)*(0.99+0.1*fract(float(-i)/float(N)-time*1.5)))/20000.0;
+        c+=pow(50000.+1000000.*vol,(1.-length(xy)*1.9)*(0.99+0.1*fract(float(-i)/float(N)-time*0.205)))/20000.0;
     }
-    gl_FragColor = vec4( c*vec3(0.1,.15,.2),1.0 );
+    //gl_FragColor = vec4( c*vec3(0.1,.15,.2),1.0 );
+    gl_FragColor = vec4( c*vec3(0.1,0.1,0.1),1.0 );
 
 }
 

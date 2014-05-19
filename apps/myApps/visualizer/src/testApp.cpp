@@ -17,16 +17,16 @@ void testApp::setup(){
     
     ofSetSphereResolution(2);
     
-    thresh = 0.1; //ランダマイズのための音量の閾値
+    thresh = 0.2; //ランダマイズのための音量の閾値
     bang           = false;
     bHide          = true;
     bOrbits        = false;
     orientPosRatio = 0.5;
     makeMode       = 0;
-    bShader        = false;
-    bShaderTog     = false;
-    bPrims         = true;
-    bPrimsTog      = true;
+    bShader        = true;
+    bShaderTog     = true;
+    bPrims         = false;
+    bPrimsTog      = false;
     
     setupCam();
     setupPanel();
@@ -40,7 +40,7 @@ void testApp::setupPanel() {
     panel.add(size.set("scale",ofVec3f(50,60,80),ofVec3f(0,0,0),ofVec3f(1000,1000,1000)));
     panel.add(rotate.set("rotate",ofVec3f(0,0,100),ofVec3f(0,0,0),ofVec3f(360.0,360.0,360.0)));
     panel.add(bGlobalRotate.setup("bGlobalRotate",false));
-    panel.add(thresh.set("thresh", 0.25, 0.0, 1.0));
+    panel.add(thresh.set("thresh", 0.2, 0.0, 1.0));
     panel.add(color.set("color",ofColor(255,255,255,255),ofColor(0,0,0,0),ofColor(255,255,255,255)));
     panel.add(bFillTog.setup("bFIll",false));
     panel.add(bReverseTog.setup("bReverseTog",false));
@@ -64,7 +64,14 @@ void testApp::setupCam() {
 
 void testApp::setupShader() {
     preFragName = "";
-    fragIndex = 14;
+    shaderMode  = "Intro";
+    prevMode    = "";
+    //listIndex   = 0;
+    
+    //shaderContents(shaderMode);
+    //int rand = int(ofRandom(0, fragContentList.size()));
+    //fragIndex = fragContentList[rand];
+    //fragIndex = 2;
     postFragName = ".frag";
     loadShader();
 }
@@ -113,7 +120,7 @@ void testApp::updateWhenOverThreshold() {
             }
             bShader = true;
             bPrims = false;
-            fragIndex++;
+            //fragIndex++;
             loadShader();
         }
         
@@ -333,6 +340,20 @@ void testApp::camRotationXYZ() {
 }
 
 void testApp::loadShader() {
+    
+    
+    if (prevMode != shaderMode) {
+        shaderContents(shaderMode);
+        listIndex = 0;
+    }
+    else {
+        listIndex++;
+        if (listIndex > fragContentList.size()-1) listIndex = 0;
+    }
+    prevMode = shaderMode;
+    
+    fragIndex = fragContentList[listIndex];
+    
     sprintf(charIndex, "%d", fragIndex);
     fragFile = preFragName + charIndex + postFragName;
     
@@ -406,7 +427,9 @@ void testApp::drawShader() {
     shader1.begin();
     shader1.setUniform1f("time", time);
     shader1.setUniform2fv("resolution", resolution);
-    
+    shader1.setUniform1f("vol", smoothedVol);
+    shader1.setUniform2fv("mouse", mousePoint);
+
     glEnable(GL_DEPTH_TEST);
     glBegin(GL_QUADS);
     glVertex2f(0, 0);
@@ -447,11 +470,14 @@ void testApp::randomiseAll(){
     else if(rand == 2)size.set(ofVec3f(0,0,ofRandom(baseNum*2,baseNum*6)));
     else if(rand == 3)size.set(ofVec3f(ofRandom(0,baseNum*6),ofRandom(0,baseNum*6),ofRandom(0,baseNum*6)));
     
+    /*
     rand = (int)ofRandom(0,4);
-    if(rand == 0)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
+    if(rand == 0)color.set(ofColor(ofRandom(0,127),ofRandom(0,255),ofRandom(127,255),ofRandom(127,255)));
     else if(rand == 1)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
     else if(rand == 2)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
     else if(rand == 3)color.set(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
+    */
+    color.set(ofColor(ofRandom(0,127),ofRandom(0,255),ofRandom(127,255),ofRandom(127,255)));
     
     camSpeed = ofRandom(5, 10);
     rand = (int)ofRandom(0,6);
@@ -505,7 +531,6 @@ void testApp::keyPressed(int key){
 	}
 
     if( key == 'i' ){
-        fragIndex++;
         loadShader();
 	}
     
@@ -536,10 +561,16 @@ void testApp::keyPressed(int key){
 		bPrimsTog  = !bPrimsTog;
         bShaderTog = !bShaderTog;
 	}
+
+    if( key == '1' ) shaderMode  = "Intro";
+	if( key == '2' ) shaderMode  = "Amero";
+    if( key == '3' ) shaderMode  = "Sabi1";
+    if( key == '4' ) shaderMode  = "Sabi2";
+    if( key == '5' ) shaderMode  = "Bmero";
+    if( key == '6' ) shaderMode  = "End";
     
     if( key == 't' ){
-		cameraMode = 1 - cameraMode;
-        cout << "cameraMode: " << cameraMode << "\n";
+        
 	}
     
     if( key == ' ' ){
@@ -548,6 +579,80 @@ void testApp::keyPressed(int key){
         if (makeMode > 1) makeMode = 0;
 	}
     
+}
+
+void testApp::shaderContents(char *s) {
+    
+    map<string, int> mapShaderType;
+    mapShaderType.insert(make_pair(
+                                   "Intro", 1
+                                   ));
+    mapShaderType.insert(make_pair(
+                                   "Amero", 2
+                                   ));
+    mapShaderType.insert(make_pair(
+                                   "Sabi1", 3
+                                   ));
+    mapShaderType.insert(make_pair(
+                                   "Sabi2", 4
+                                   ));
+    mapShaderType.insert(make_pair(
+                                   "Bmero", 5
+                                   ));
+    mapShaderType.insert(make_pair(
+                                   "End", 6
+                                   ));
+    
+    int type_id = mapShaderType[s];
+    
+    fragContentList.clear();
+    switch (type_id) {
+        case 1:
+            fragContentList.push_back(2);
+            fragContentList.push_back(15);
+            fragContentList.push_back(22);
+             break;
+        case 2:
+            fragContentList.push_back(4);
+            fragContentList.push_back(5); //bMero
+            break;
+        case 3:
+            fragContentList.push_back(9);
+            //fragContentList.push_back(16);  //質感が違いすぎる
+            //fragContentList.push_back(10); //弱いパーティクル
+            //fragContentList.push_back(1); //弱いパーティクル
+
+            fragContentList.push_back(14);
+
+            break;
+        case 4:
+            
+            //fragContentList.push_back(8);// wood. あわない
+            fragContentList.push_back(11);
+            //fragContentList.push_back(19);// あわない
+            fragContentList.push_back(20);
+            //fragContentList.push_back(27);  // 沢谷かすぎる
+            fragContentList.push_back(21); // sabi end
+
+
+            break;
+        case 5:
+            fragContentList.push_back(6);
+            fragContentList.push_back(7);
+            fragContentList.push_back(17);
+            fragContentList.push_back(23);
+            fragContentList.push_back(26);
+            fragContentList.push_back(25);
+            //fragContentList.push_back(13);
+            fragContentList.push_back(25);
+
+            break;
+        case 6:
+            fragContentList.push_back(3);
+            break;
+        default:
+            break;
+    }
 }
 
 //--------------------------------------------------------------

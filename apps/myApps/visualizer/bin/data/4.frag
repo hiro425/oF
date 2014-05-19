@@ -4,6 +4,7 @@ precision mediump float;
 
 uniform vec2  resolution;
 uniform float time;
+uniform float vol;
 
 const int num_x = 10;
 const int num_y = 10;
@@ -20,7 +21,8 @@ void main() {
             float size = 2.0 - 1.0 * sin(t);
             vec2 pos = vec2(x, y);
             float dist = length(gl_FragCoord.xy - pos);
-            color += pow(size/dist, 2.0);
+            //color += pow(size/dist, 2.0);
+            color += pow(size/dist*20.0*vol, 2.0);
         }
     }
     gl_FragColor = vec4(vec3(color), 1.0);
