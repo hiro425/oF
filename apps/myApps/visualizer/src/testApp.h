@@ -108,4 +108,6 @@ class testApp : public ofBaseApp{
     char *shaderMode;
     string prevMode;
     int listIndex;
+    ofxToggle bRandomStop;
+    
 };

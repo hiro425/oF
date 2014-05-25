@@ -27,11 +27,11 @@ void testApp::setup(){
     bShaderTog     = true;
     bPrims         = false;
     bPrimsTog      = false;
+    bRandomStop    = true;
     
     setupCam();
     setupPanel();
     setupShader();
-    
 }
 
 void testApp::setupPanel() {
@@ -85,7 +85,7 @@ void testApp::update(){
 }
 
 void testApp::updateWhenOverThreshold() {
-    if(bang == false && smoothedVol > thresh){
+    if(bang == false && smoothedVol > thresh && !bRandomStop){
         bang = true; //音量がthreshold超えたらthreshold以下になるまでは処理しないよ！
         
         if (bPrimsTog && !bShaderTog) {
@@ -340,8 +340,7 @@ void testApp::camRotationXYZ() {
 }
 
 void testApp::loadShader() {
-    
-    
+
     if (prevMode != shaderMode) {
         shaderContents(shaderMode);
         listIndex = 0;
@@ -562,6 +561,10 @@ void testApp::keyPressed(int key){
         bShaderTog = !bShaderTog;
 	}
 
+    if( key == 'f') {
+        bRandomStop = !bRandomStop;
+    }
+    
     if( key == '1' ) shaderMode  = "Intro";
 	if( key == '2' ) shaderMode  = "Amero";
     if( key == '3' ) shaderMode  = "Sabi1";
@@ -611,7 +614,10 @@ void testApp::shaderContents(char *s) {
             fragContentList.push_back(2);
             fragContentList.push_back(15);
             fragContentList.push_back(22);
-             break;
+            fragContentList.push_back(10); //弱いパーティクル
+            fragContentList.push_back(1); //弱いパーティクル
+
+            break;
         case 2:
             fragContentList.push_back(4);
             fragContentList.push_back(5); //bMero
