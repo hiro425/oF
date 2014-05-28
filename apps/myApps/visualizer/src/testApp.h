@@ -76,6 +76,7 @@ class testApp : public ofBaseApp{
     
     //update method
     void updateWhenOverThreshold();
+    void updatePrimsWhenOverThreshold();
     void updateValue();
     void updateCamera();
     void camRotationXZ();
@@ -108,6 +109,7 @@ class testApp : public ofBaseApp{
     char *shaderMode;
     string prevMode;
     int listIndex;
-    ofxToggle bRandomStop;
+    ofxToggle bTransitionStop;
+    ofxToggle bForceUpdate;
     
 };

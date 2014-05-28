@@ -1,4 +1,7 @@
 #include "testApp.h"
+#include <sys/types.h>
+#include <dirent.h>
+
 bool isRand = false;
 //--------------------------------------------------------------
 void testApp::setup(){
@@ -17,7 +20,7 @@ void testApp::setup(){
     
     ofSetSphereResolution(2);
     
-    thresh = 0.2; //ランダマイズのための音量の閾値
+    thresh = 0.35; //ランダマイズのための音量の閾値
     bang           = false;
     bHide          = true;
     bOrbits        = false;
@@ -27,7 +30,7 @@ void testApp::setup(){
     bShaderTog     = true;
     bPrims         = false;
     bPrimsTog      = false;
-    bRandomStop    = true;
+    bTransitionStop    = true;
     
     setupCam();
     setupPanel();
@@ -40,7 +43,7 @@ void testApp::setupPanel() {
     panel.add(size.set("scale",ofVec3f(50,60,80),ofVec3f(0,0,0),ofVec3f(1000,1000,1000)));
     panel.add(rotate.set("rotate",ofVec3f(0,0,100),ofVec3f(0,0,0),ofVec3f(360.0,360.0,360.0)));
     panel.add(bGlobalRotate.setup("bGlobalRotate",false));
-    panel.add(thresh.set("thresh", 0.2, 0.0, 1.0));
+    panel.add(thresh.set("thresh", 0.35, 0.0, 1.0));
     panel.add(color.set("color",ofColor(255,255,255,255),ofColor(0,0,0,0),ofColor(255,255,255,255)));
     panel.add(bFillTog.setup("bFIll",false));
     panel.add(bReverseTog.setup("bReverseTog",false));
@@ -85,34 +88,12 @@ void testApp::update(){
 }
 
 void testApp::updateWhenOverThreshold() {
-    if(bang == false && smoothedVol > thresh && !bRandomStop){
+    if((bang == false && smoothedVol > thresh && !bTransitionStop) || bForceUpdate){
         bang = true; //音量がthreshold超えたらthreshold以下になるまでは処理しないよ！
+        bForceUpdate = false;
         
         if (bPrimsTog && !bShaderTog) {
-            if (!prims.size()) {
-                for(int i = 0; i < objectNum; i++){
-                    Primitive drawObject;
-                    drawObject.drawMode = i % 2;
-                    prims.push_back(drawObject);
-                }
-            }
-            bShader = false;
-            bPrims = true;
-            
-            
-            if(isRand)randomiseAll();
-            
-            if((int)ofRandom(0,1))rotAxisMode = !rotAxisMode;
-            
-            if(bFillTog) bFill.x = !bFill.x;
-            
-            if(bReverseTog) bReverse = !bReverse;
-            
-            if(bGlobalRotate){
-                globalRotate.set(ofRandom(0,360),
-                                 ofRandom(0,360),
-                                 ofRandom(0,360));
-            }
+            updatePrimsWhenOverThreshold();
         }
         else if (!bPrimsTog && bShaderTog) {
             if (prims.size()) {
@@ -125,6 +106,34 @@ void testApp::updateWhenOverThreshold() {
         }
         
     }
+}
+
+void testApp::updatePrimsWhenOverThreshold() {
+    if (!prims.size()) {
+        for(int i = 0; i < objectNum; i++){
+            Primitive drawObject;
+            drawObject.drawMode = i % 2;
+            prims.push_back(drawObject);
+        }
+    }
+    bShader = false;
+    bPrims = true;
+    
+    
+    if(isRand)randomiseAll();
+    
+    if((int)ofRandom(0,1))rotAxisMode = !rotAxisMode;
+    
+    if(bFillTog) bFill.x = !bFill.x;
+    
+    if(bReverseTog) bReverse = !bReverse;
+    
+    if(bGlobalRotate){
+        globalRotate.set(ofRandom(0,360),
+                         ofRandom(0,360),
+                         ofRandom(0,360));
+    }
+    
 }
 
 void testApp::updateValue() {
@@ -530,7 +539,7 @@ void testApp::keyPressed(int key){
 	}
 
     if( key == 'i' ){
-        loadShader();
+        bForceUpdate = true;
 	}
     
     if( key == 'z' ){
@@ -562,7 +571,7 @@ void testApp::keyPressed(int key){
 	}
 
     if( key == 'f') {
-        bRandomStop = !bRandomStop;
+        bTransitionStop = !bTransitionStop;
     }
     
     if( key == '1' ) shaderMode  = "Intro";
@@ -582,6 +591,16 @@ void testApp::keyPressed(int key){
         if (makeMode > 1) makeMode = 0;
 	}
     
+    
+    if( key == '/' ){
+        thresh += 0.1;
+        cout << "thresh : " << thresh << "\n";
+	}
+    
+    if( key == '-' ){
+        thresh -= 0.1;
+        cout << "thresh : " << thresh << "\n";
+ 	}
 }
 
 void testApp::shaderContents(char *s) {
@@ -608,25 +627,37 @@ void testApp::shaderContents(char *s) {
     
     int type_id = mapShaderType[s];
     
+    DIR* dp=opendir("/Users/kawaguchihiroshi/Developer/git/oF/apps/myApps/visualizer/bin/data");
+    struct dirent* dent;
+    if (dp!=NULL)
+    {
+        do{
+            dent = readdir(dp);
+            if (dent!=NULL)cout << dent->d_name <<endl;
+        }while(dent!=NULL);
+        closedir(dp);
+    }
+    
     fragContentList.clear();
     switch (type_id) {
         case 1:
+            preFragName = "";
             fragContentList.push_back(2);
             fragContentList.push_back(15);
             fragContentList.push_back(22);
             fragContentList.push_back(10); //弱いパーティクル
             fragContentList.push_back(1); //弱いパーティクル
-
             break;
         case 2:
-            fragContentList.push_back(4);
-            fragContentList.push_back(5); //bMero
+
+            preFragName = "particles/";
+            fragContentList.push_back(30);
+            //fragContentList.push_back(5); //bMero
             break;
         case 3:
             fragContentList.push_back(9);
             //fragContentList.push_back(16);  //質感が違いすぎる
-            //fragContentList.push_back(10); //弱いパーティクル
-            //fragContentList.push_back(1); //弱いパーティクル
+
 
             fragContentList.push_back(14);
 
@@ -654,7 +685,7 @@ void testApp::shaderContents(char *s) {
 
             break;
         case 6:
-            fragContentList.push_back(3);
+            fragContentList.push_back(35);
             break;
         default:
             break;
