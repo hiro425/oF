@@ -4,6 +4,7 @@
 #include "Primitive.h"
 #include "ofxGui.h"
 #include "time.h"
+#include "cstring"
 
 #define kNumCameras 2
 using namespace std;
@@ -93,20 +94,19 @@ class testApp : public ofBaseApp{
     
     // shader
     ofShader shader1;
-    string preFragName;
-    string postFragName;
-    int fragIndex;
-    char charIndex[20];
+
     string fragFile;
     void setupShader();
     void loadShader();
     void drawShader();
     ofxToggle bShaderTog;
     ofxToggle bShader;
-    void shaderContents(char *s);
+    void shaderContents(string s);
     
-    vector<int> fragContentList;
-    char *shaderMode;
+    vector<string> fragContentsList;
+    string presetDir;
+    string datadir;
+    string shaderMode;
     string prevMode;
     int listIndex;
     ofxToggle bTransitionStop;

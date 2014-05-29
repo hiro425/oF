@@ -32,6 +32,8 @@ void testApp::setup(){
     bPrimsTog      = false;
     bTransitionStop    = true;
     
+    datadir = "/Users/kawaguchihiroshi/Developer/git/oF/apps/myApps/visualizer/bin/data/";
+    
     setupCam();
     setupPanel();
     setupShader();
@@ -66,16 +68,9 @@ void testApp::setupCam() {
 }
 
 void testApp::setupShader() {
-    preFragName = "";
+    presetDir = "particle/";
     shaderMode  = "Intro";
     prevMode    = "";
-    //listIndex   = 0;
-    
-    //shaderContents(shaderMode);
-    //int rand = int(ofRandom(0, fragContentList.size()));
-    //fragIndex = fragContentList[rand];
-    //fragIndex = 2;
-    postFragName = ".frag";
     loadShader();
 }
 
@@ -101,7 +96,6 @@ void testApp::updateWhenOverThreshold() {
             }
             bShader = true;
             bPrims = false;
-            //fragIndex++;
             loadShader();
         }
         
@@ -356,21 +350,15 @@ void testApp::loadShader() {
     }
     else {
         listIndex++;
-        if (listIndex > fragContentList.size()-1) listIndex = 0;
+        if (listIndex > fragContentsList.size()-1) listIndex = 0;
     }
     prevMode = shaderMode;
-    
-    fragIndex = fragContentList[listIndex];
-    
-    sprintf(charIndex, "%d", fragIndex);
-    fragFile = preFragName + charIndex + postFragName;
+    fragFile = presetDir + fragContentsList[listIndex];
     
     ofFile file(fragFile);
     if(!file.exists()){
         ofLogError("The file " + fragFile + " is missing");
-        fragIndex = 1;
-        sprintf(charIndex, "%d", fragIndex);
-        fragFile = preFragName + charIndex + postFragName;
+        setupShader();
     }
     cout << "frag index :" << fragFile << "\n";
     shader1.load("test.vert", fragFile);
@@ -580,6 +568,7 @@ void testApp::keyPressed(int key){
     if( key == '4' ) shaderMode  = "Sabi2";
     if( key == '5' ) shaderMode  = "Bmero";
     if( key == '6' ) shaderMode  = "End";
+    if( key == '9' ) shaderMode  = "Test";
     
     if( key == 't' ){
         
@@ -603,7 +592,7 @@ void testApp::keyPressed(int key){
  	}
 }
 
-void testApp::shaderContents(char *s) {
+void testApp::shaderContents(string s) {
     
     map<string, int> mapShaderType;
     mapShaderType.insert(make_pair(
@@ -624,72 +613,59 @@ void testApp::shaderContents(char *s) {
     mapShaderType.insert(make_pair(
                                    "End", 6
                                    ));
+    mapShaderType.insert(make_pair(
+                                   "Test", 9
+                                   ));
     
     int type_id = mapShaderType[s];
     
-    DIR* dp=opendir("/Users/kawaguchihiroshi/Developer/git/oF/apps/myApps/visualizer/bin/data");
-    struct dirent* dent;
-    if (dp!=NULL)
-    {
-        do{
-            dent = readdir(dp);
-            if (dent!=NULL)cout << dent->d_name <<endl;
-        }while(dent!=NULL);
-        closedir(dp);
-    }
+    fragContentsList.clear();
     
-    fragContentList.clear();
+    string loaddir;
+    char c[256];
     switch (type_id) {
         case 1:
-            preFragName = "";
-            fragContentList.push_back(2);
-            fragContentList.push_back(15);
-            fragContentList.push_back(22);
-            fragContentList.push_back(10); //弱いパーティクル
-            fragContentList.push_back(1); //弱いパーティクル
+            presetDir = "particle/";
             break;
         case 2:
-
-            preFragName = "particles/";
-            fragContentList.push_back(30);
-            //fragContentList.push_back(5); //bMero
+            presetDir = "move/";
             break;
         case 3:
-            fragContentList.push_back(9);
-            //fragContentList.push_back(16);  //質感が違いすぎる
-
-
-            fragContentList.push_back(14);
-
+            presetDir = "particles/";
             break;
         case 4:
-            
-            //fragContentList.push_back(8);// wood. あわない
-            fragContentList.push_back(11);
-            //fragContentList.push_back(19);// あわない
-            fragContentList.push_back(20);
-            //fragContentList.push_back(27);  // 沢谷かすぎる
-            fragContentList.push_back(21); // sabi end
-
-
+            presetDir = "weird/";
             break;
         case 5:
-            fragContentList.push_back(6);
-            fragContentList.push_back(7);
-            fragContentList.push_back(17);
-            fragContentList.push_back(23);
-            fragContentList.push_back(26);
-            fragContentList.push_back(25);
-            //fragContentList.push_back(13);
-            fragContentList.push_back(25);
-
+            presetDir = "cells/";
             break;
         case 6:
-            fragContentList.push_back(35);
+            presetDir = "nature/";
+            break;
+        case 9:
+            presetDir = "test/";
             break;
         default:
             break;
+            
     }
+    
+    DIR* dp;
+    struct dirent* dent;
+
+    loaddir = datadir + presetDir;
+    strcpy(c, loaddir.c_str());
+    dp = opendir(c);
+    if (dp!=NULL) {
+        do{
+            dent = readdir(dp);
+            if (dent!=NULL && strstr(dent->d_name, ".frag")) {
+                fragContentsList.push_back(dent->d_name);
+            }
+        } while (dent!=NULL);
+        closedir(dp);
+    }
+
 }
 
 //--------------------------------------------------------------
