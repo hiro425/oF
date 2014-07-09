@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D4DEFD89-2DDE-4353-B166-F73F34C57DED</string>
+	<key>IDESourceControlProjectName</key>
+	<string>testKinect</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>56412F74-4307-48F1-9C21-B597F8EE5D84</key>
+		<string>https://github.com/hikwgc/oF</string>
+		<key>9DCFA8D4-B47A-4E64-AFAA-340DED180E4A</key>
+		<string>https://github.com/satoruhiga/ofxSPK</string>
+		<key>E57B3738-1262-41C2-BABC-3A326A96E9EC</key>
+		<string>https://github.com/kylemcdonald/ofxFft</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>apps/myApps/testKinect/testKinect.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>56412F74-4307-48F1-9C21-B597F8EE5D84</key>
+		<string>../../../../..</string>
+		<key>9DCFA8D4-B47A-4E64-AFAA-340DED180E4A</key>
+		<string>../../../../../addons/ofxSPK</string>
+		<key>E57B3738-1262-41C2-BABC-3A326A96E9EC</key>
+		<string>../../../../../addons/ofxFft</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/hikwgc/oF</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>56412F74-4307-48F1-9C21-B597F8EE5D84</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>56412F74-4307-48F1-9C21-B597F8EE5D84</string>
+			<key>IDESourceControlWCCName</key>
+			<string>oF</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E57B3738-1262-41C2-BABC-3A326A96E9EC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxFft</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9DCFA8D4-B47A-4E64-AFAA-340DED180E4A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxSPK</string>
+		</dict>
+	</array>
+</dict>
+</plist>

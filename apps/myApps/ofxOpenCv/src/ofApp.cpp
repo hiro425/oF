@@ -4,8 +4,8 @@
 void ofApp::setup(){
     ofBackground(0, 0, 0);
     
-    vidGrabber.initGrabber(320, 240);
-    colorImg.allocate(320, 240);
+    vidGrabber.initGrabber(640, 480);
+    colorImg.allocate(640, 480);
     grayImage.allocate(320, 240);
     grayBg.allocate(320, 240);
     grayDiff.allocate(320, 240);
@@ -22,8 +22,10 @@ void ofApp::update(){
     bNewFrame = vidGrabber.isFrameNew();
     
     if (bNewFrame) {
-        colorImg.setFromPixels(vidGrabber.getPixels(), 320, 240);
+        grayImage.resize(640, 480);
+        colorImg.setFromPixels(vidGrabber.getPixels(), 640, 480);
         grayImage = colorImg;
+        grayImage.resize(320, 240);
         
         if (bLearnBackground) {
             grayBg = grayImage;
@@ -41,9 +43,9 @@ void ofApp::draw(){
     ofNoFill();
     ofSetColor(255, 255, 255);
     colorImg.draw(10, 10);
-    grayImage.draw(340, 10);
-    grayBg.draw(10, 260);
-    grayDiff.draw(340, 260);
+    grayImage.draw(680, 10);
+    grayBg.draw(10, 520);
+    grayDiff.draw(680, 520);
     
     for (int i = 0; i <contourFinder.nBlobs; i++) {
         contourFinder.blobs[i].draw(340, 500);

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>06D1DCFA-925C-48D4-9F27-1F44710DB462</string>
+	<key>IDESourceControlProjectName</key>
+	<string>testOpenNI</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>56412F74-4307-48F1-9C21-B597F8EE5D84</key>
+		<string>https://github.com/hikwgc/oF</string>
+		<key>65F765A5-3D0C-4E2F-A0D7-0901B0F50E69</key>
+		<string>https://github.com/gameoverhack/ofxOpenNI</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>apps/myApps/testOpenNI/testOpenNI.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>56412F74-4307-48F1-9C21-B597F8EE5D84</key>
+		<string>../../../../..</string>
+		<key>65F765A5-3D0C-4E2F-A0D7-0901B0F50E69</key>
+		<string>../../../../../addons/ofxOpenNI</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/hikwgc/oF</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>56412F74-4307-48F1-9C21-B597F8EE5D84</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>56412F74-4307-48F1-9C21-B597F8EE5D84</string>
+			<key>IDESourceControlWCCName</key>
+			<string>oF</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>65F765A5-3D0C-4E2F-A0D7-0901B0F50E69</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxOpenNI</string>
+		</dict>
+	</array>
+</dict>
+</plist>

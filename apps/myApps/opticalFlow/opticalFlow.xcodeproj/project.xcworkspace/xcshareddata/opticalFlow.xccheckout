@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E2443433-A277-48B8-9FC5-66EA735E78F5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>opticalFlow</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CF9BEDAF-BA19-41F4-9494-1D5360004E0B</key>
+		<string>https://github.com/hikwgc/oF</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>apps/myApps/opticalFlow/opticalFlow.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CF9BEDAF-BA19-41F4-9494-1D5360004E0B</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/hikwgc/oF</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CF9BEDAF-BA19-41F4-9494-1D5360004E0B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CF9BEDAF-BA19-41F4-9494-1D5360004E0B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>oF</string>
+		</dict>
+	</array>
+</dict>
+</plist>

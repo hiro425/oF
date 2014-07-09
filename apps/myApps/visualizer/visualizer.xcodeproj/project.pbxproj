@@ -704,8 +704,11 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
+					"/Users/kawaguchihiroshi/Developer/git/oF/addons/ofxKinect/libs/libusb-1.0/lib/osx",
+					/Users/kawaguchihiroshi/Developer/git/oF/addons/ofxOpenCv/libs/opencv/lib/osx,
 				);
 				PRODUCT_NAME = visualizerDebug;
+				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxKinect/libs/libusb-1.0/include/ ../../../addons/ofxOpenCv/libs/opencv/include/ ../../../addons/ofxKinect/libs/libfreenect/include/ ../../../addons/ofxKinect/libs/libusb-win32/include/";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -789,8 +792,11 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_49)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
+					"/Users/kawaguchihiroshi/Developer/git/oF/addons/ofxKinect/libs/libusb-1.0/lib/osx",
+					/Users/kawaguchihiroshi/Developer/git/oF/addons/ofxOpenCv/libs/opencv/lib/osx,
 				);
 				PRODUCT_NAME = visualizer;
+				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxKinect/libs/libusb-1.0/include/ ../../../addons/ofxOpenCv/libs/opencv/include/ ../../../addons/ofxKinect/libs/libfreenect/include/ ../../../addons/ofxKinect/libs/libusb-win32/include/";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
