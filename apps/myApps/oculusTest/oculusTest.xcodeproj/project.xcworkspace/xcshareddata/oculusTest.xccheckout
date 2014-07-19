@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3C1A2114-D45A-49E9-B0B7-2041BFD38D7F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>oculusTest</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BA971D6F-0640-4E0E-A0CF-6E7B1339D1BB</key>
+		<string>https://github.com/andreasmuller/ofxOculusRift</string>
+		<key>C8437DF1-3932-436B-9AF9-CCD2EAEE82AB</key>
+		<string>https://github.com/satoruhiga/ofxSPK</string>
+		<key>CF9BEDAF-BA19-41F4-9494-1D5360004E0B</key>
+		<string>https://github.com/hikwgc/oF</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>apps/myApps/oculusTest/oculusTest.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BA971D6F-0640-4E0E-A0CF-6E7B1339D1BB</key>
+		<string>../../../../../addons/ofxOculusRift</string>
+		<key>C8437DF1-3932-436B-9AF9-CCD2EAEE82AB</key>
+		<string>../../../../../addons/ofxSPK</string>
+		<key>CF9BEDAF-BA19-41F4-9494-1D5360004E0B</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/hikwgc/oF</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CF9BEDAF-BA19-41F4-9494-1D5360004E0B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CF9BEDAF-BA19-41F4-9494-1D5360004E0B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>oF</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BA971D6F-0640-4E0E-A0CF-6E7B1339D1BB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxOculusRift</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C8437DF1-3932-436B-9AF9-CCD2EAEE82AB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxSPK</string>
+		</dict>
+	</array>
+</dict>
+</plist>

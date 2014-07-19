@@ -1,0 +1,37 @@
+//THE PATH TO THE ROOT OF OUR OF PATH RELATIVE TO THIS PROJECT.
+//THIS NEEDS TO BE DEFINED BEFORE CoreOF.xcconfig IS INCLUDED
+OF_PATH = ../../..
+
+//THIS HAS ALL THE HEADER AND LIBS FOR OF CORE
+#include "../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig"
+
+//ICONS - NEW IN 0072 
+ICON_NAME_DEBUG = icon-debug.icns
+ICON_NAME_RELEASE = icon.icns
+ICON_FILE_PATH = $(OF_PATH)/libs/openFrameworksCompiled/project/osx/
+
+//IF YOU WANT AN APP TO HAVE A CUSTOM ICON - PUT THEM IN YOUR DATA FOLDER AND CHANGE ICON_FILE_PATH to:
+//ICON_FILE_PATH = bin/data/
+
+
+///////////////////////////////////////////
+// ADDONS
+
+// path to the addons dir
+ADDONS_PATH = $(OF_PATH)/addons
+
+// ofxOculusRift
+OFX_OCULUSRIFT_HEADERS = $(ADDONS_PATH)/ofxOculusRift/src $(ADDONS_PATH)/ofxOculusRift/libs/LibOVR/Include
+
+OFX_OCULUSRIFT_LIBS = "$(ADDONS_PATH)/ofxOculusRift/libs/LibOVR/Lib/MacOS/Release/libovr.a"
+
+// all addons
+OF_ADDON_HEADERS = $(OFX_OCULUSRIFT_HEADERS)
+OF_ADDON_LIBS = $(OFX_OCULUSRIFT_LIBS)
+
+///////////////////////////////////////////
+// MAIN
+
+OTHER_CFLAGS = $(OFX_PD_CFLAGS)
+HEADER_SEARCH_PATHS = $(OF_CORE_HEADERS) $(OF_ADDON_HEADERS)
+OTHER_LDFLAGS = $(OF_CORE_LIBS) $(OF_ADDON_LIBS)
