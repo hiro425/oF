@@ -53,12 +53,19 @@ void ofApp::setup() {
     }
     
     openNIDevice.start();
+    debugFlg = -1;
     
     //verdana.loadFont(ofToDataPath("verdana.ttf"), 24);
     
-    shader1.load("test.vert", "flowerFountain.frag");
+    //shader1.load("test.vert", "flowerFountain.frag");
     
-    setupSPK();
+    //setupSPK();
+    //setupDrops();
+    sprites.setup("snow/decoration_ca_038.png", 80);
+    
+    int bufferSize = 256;
+    soundStream.setup(this, 0, 1, 44100, bufferSize, 4);
+    left.assign(bufferSize, 0.0);
 }
 
 
@@ -74,8 +81,8 @@ void ofApp::setupSPK() {
 	sys.setup();
 	
 	group.setup(sys);
-	group.setColor(ofxSPK::RangeC(ofColor(255, 255), ofColor(255, 255)),
-				   ofxSPK::RangeC(ofColor(0, 0), ofColor(255, 0)));
+	group.setColor(ofxSPK::RangeC(ofColor(196, 150, 3), ofColor(196, 150, 3)),
+				   ofxSPK::RangeC(ofColor(255, 255, 200), ofColor(255, 255, 200)));
 	
 	group.setLifeTime(0.5, 2);
 	group.setFriction(0.1);
@@ -84,13 +91,23 @@ void ofApp::setupSPK() {
 	group.setGravity(ofVec3f(0, -10, 0));
 	group.setMass(0.1, 1);
 	
-	rot.setup(SPK::Vortex::create(SPK::Vector3D(ofGetWidth()/2, ofGetHeight()/2),
-								  SPK::Vector3D(0, 1, 0),
+	rot.setup(SPK::Vortex::create(SPK::Vector3D(ofGetWidth()/2, ofGetHeight()),
+								  SPK::Vector3D(1, 0, 0),
 								  200,
 								  10), group);
 	
 	group.reserve(10000);
+    
+    
 }
+
+void ofApp::setupDrops() {
+    for (int i = 0; i < 20; i++) {
+        shapeObject s("Drops");
+        shapes.push_back(s);
+    }
+}
+
 
 //--------------------------------------------------------------
 void ofApp::update(){
@@ -125,8 +142,14 @@ void ofApp::update(){
         ofxOpenNIROI roi = ofxOpenNIROI(leftBottomNearWorld, rightTopFarWorld);
         depthThreshold.setROI(roi);
         */
+        ofPoint & handPosition = hand.getPosition();
+        sprites._touchEvent(ofPoint(handPosition.x * ofGetWidth() / 640, handPosition.y * ofGetHeight() / 480));
     }
-    updateSPK();
+    //updateSPK();
+    sprites._update(smoothedVol);
+    
+    //updateShapes();
+    //updateDrops();
 }
 
 void ofApp::updateSPK() {
@@ -134,13 +157,106 @@ void ofApp::updateSPK() {
 	
     for (int i = 0; i < particlePos.size(); i++) {
         group.emitRandom(2, ofVec3f(particlePos[i].x * ofGetWidth() / 640, particlePos[i].y * ofGetHeight() / 480));
-        cout << "particlePos : " << particlePos[i] << endl;
+        //cout << "particlePos : " << particlePos[i] << endl;
     }
     
 	sys.update();
     
 	ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }
+
+void ofApp::updateShapes() {
+    
+    int sSize = shapes.size();
+    
+    if (sSize < 1) {
+        shapeObject s;
+        s.setPos(ofPoint(ofGetWidth()/2, ofGetHeight()/2));
+        s.setDim(ofGetHeight()/3);
+        s.setSpeed(ofPoint(0,0));
+        shapes.push_back(s);
+    }
+    
+    //for (int i = 0; i < openNIDevice.getNumTrackedHands(); i++){
+    if (openNIDevice.getNumTrackedHands()) {
+        // get a reference to this user
+        ofxOpenNIHand & hand = openNIDevice.getTrackedHand(0);
+        
+        // get hand position
+        ofPoint & handPosition = hand.getPosition();
+    
+    
+
+    for (int i = 0; i<sSize; i++) {
+        ofPoint pos      = shapes[i].getPos();
+        ofPoint handPos = ofPoint(handPosition.x * ofGetWidth() / 640, handPosition.y * ofGetHeight() / 480);
+        float dim        = shapes[i].getDim();
+        float distDim    = ofDist(pos.x, pos.y, handPos.x, handPos.y);
+        
+        if (shapes[i].canSeparate && distDim - dim/3 < 0) {
+            shapes[i].canSeparate = false;
+            shapes[i].createTime = ofGetElapsedTimef();
+            shapes[i].setPos(ofPoint(pos.x - dim/10, pos.y));
+            shapes[i].setDim(dim/2);
+            shapes[i].setSpeed(ofPoint(ofRandom(-3, -1), ofRandom(-1, 1)));
+            
+            shapeObject s1;
+            s1.setPos(ofPoint(pos.x, pos.y - dim/10));
+            s1.setDim(dim/2);
+            s1.setSpeed(ofPoint(ofRandom(-1, 1), ofRandom(-3, -1)));
+            shapes.push_back(s1);
+            
+            shapeObject s2;
+            s2.setPos(ofPoint(pos.x + dim/10, pos.y));
+            s2.setDim(dim/2);
+            s2.setSpeed(ofPoint(ofRandom(1, 3), ofRandom(-1, 1)));
+            shapes.push_back(s2);
+            
+            shapeObject s3;
+            s3.setPos(ofPoint(pos.x, pos.y + dim/10));
+            s3.setDim(dim/2);
+            s3.setSpeed(ofPoint(ofRandom(-1, 1), ofRandom(1, 3)));
+            shapes.push_back(s3);
+        }
+
+        
+    }
+    }
+    for (int i = 0; i < shapes.size(); i++) {
+        shapes[i].update();
+    }
+}
+
+void ofApp::updateDrops() {
+    int sSize = shapes.size();
+    
+    //for (int i = 0; i < openNIDevice.getNumTrackedHands(); i++){
+    if (openNIDevice.getNumTrackedHands()) {
+        // get a reference to this user
+        ofxOpenNIHand & hand = openNIDevice.getTrackedHand(0);
+        
+        // get hand position
+        ofPoint & handPosition = hand.getPosition();
+        
+    for (int i = 0; i<sSize; i++) {
+        ofPoint pos      = shapes[i].getPos();
+        ofPoint handPos = ofPoint(handPosition.x * ofGetWidth() / 640, handPosition.y * ofGetHeight() / 480);
+        float dim        = shapes[i].getDim()/2;
+        float distDim    = ofDist(pos.x, pos.y, handPos.x, handPos.y);
+        
+        if (distDim - dim < 0) {
+            shapes[i].createTime = ofGetElapsedTimef();
+            shapes[i].setSpeed(ofPoint(0,0));
+            
+        }
+        
+    }
+    }
+    for (int i = 0; i < shapes.size(); i++) {
+        shapes[i].update("Drops");
+    }
+}
+
 //--------------------------------------------------------------
 void ofApp::draw(){
     
@@ -148,10 +264,15 @@ void ofApp::draw(){
     
 	//ofSetColor(0, 0, 0);
     
-    ofPushMatrix();
-    // draw debug (ie., image, depth, skeleton)
-    //openNIDevice.drawDebug(0, 0, ofGetWidth()*2, ofGetHeight()); //when decide pos?
-    ofPopMatrix();
+
+    
+    if (debugFlg > 0) {
+        ofPushMatrix();
+        // draw debug (ie., image, depth, skeleton)
+        openNIDevice.drawDebug(0, 0, ofGetWidth()*2, ofGetHeight()); //when decide pos?
+        ofPopMatrix();
+    }
+    
     
     ofPushMatrix();
     
@@ -166,16 +287,16 @@ void ofApp::draw(){
         // get hand position
         ofPoint & handPosition = hand.getPosition();
         
-        cout << "handPos : " << handPosition << endl;
+        //cout << "handPos : " << handPosition << endl;
         // draw a rect at the position
-        ofSetColor(255,255,255, 190);
-        ofCircle(handPosition.x * ofGetWidth() / 640, handPosition.y * ofGetHeight() / 480, 2);
+        ofSetColor(255, 150, 3, 190);
+        ofCircle(handPosition.x * ofGetWidth() / 640, handPosition.y * ofGetHeight() / 480, 3);
 
-        ofSetColor(255,255,255,127);
-        ofCircle(handPosition.x * ofGetWidth() / 640, handPosition.y * ofGetHeight() / 480, 2*sin(PI * 2 + 10*ofGetElapsedTimef())+2);
+        ofSetColor(255, 150, 3,127);
+        ofCircle(handPosition.x * ofGetWidth() / 640, handPosition.y * ofGetHeight() / 480, 4*sin(PI * 2 + 5*ofGetElapsedTimef())+2);
         
-        ofSetColor(255,255,255,63);
-        ofCircle(handPosition.x * ofGetWidth() / 640, handPosition.y * ofGetHeight() / 480, 3*sin(PI * 2 + 10*ofGetElapsedTimef())+3);
+        ofSetColor(255, 150, 3,63);
+        ofCircle(handPosition.x * ofGetWidth() / 640, handPosition.y * ofGetHeight() / 480, 5*sin(PI * 2 + 5*ofGetElapsedTimef())+3);
         
         /*
         // set depthThresholds based on handPosition
@@ -212,8 +333,9 @@ void ofApp::draw(){
 	verdana.drawString(msg, 20, 480 - 20);
      */
 
-    drawSPK();
-        drawShader();
+    //drawSPK();
+    //drawShapes();
+    sprites._draw(smoothedVol);
 }
 
 void ofApp::drawSPK() {
@@ -230,6 +352,12 @@ void ofApp::drawSPK() {
     particlePos.clear();
 }
 
+void ofApp::drawShapes() {
+    for (int i = 0; i < shapes.size(); i++) {
+        shapes[i].draw(smoothedVol);
+    }
+}
+
 void ofApp::drawShader() {
     float resolution[2];
     resolution[0] = ofGetWindowWidth();
@@ -237,30 +365,7 @@ void ofApp::drawShader() {
     
     float time = ofGetElapsedTimef();
     //float mousePoint[2];
-    // float handPoint[openNIDevice.getNumTrackedHands()][2];
-    // hardcoding
-    float handPoint1[2];
-    float handPoint2[2];
-    float handPoint3[2];
-    float handPoint4[2];
-    
-    for (int i = 0; i < openNIDevice.getNumTrackedHands(); i++){
-        
-        // get a reference to this user
-        ofxOpenNIHand & hand = openNIDevice.getTrackedHand(i);
-        
-        // get hand position
-        ofPoint & handPosition = hand.getPosition();
-        //handPoint[i][0] = handPosition.x;
-        //handPoint[i][1] = handPosition.y;
-        
-        // ah...
-        if (i == 1) handPoint1[0] = handPosition.x; handPoint1[1] = handPosition.y;
-        if (i == 2) handPoint2[0] = handPosition.x; handPoint1[1] = handPosition.y;
-        if (i == 3) handPoint3[0] = handPosition.x; handPoint1[1] = handPosition.y;
-        if (i == 4) handPoint4[0] = handPosition.x; handPoint1[1] = handPosition.y;
-        
-    }
+
     //mousePoint[0] = mouseX;
     //mousePoint[1] = mouseY;
     
@@ -268,11 +373,6 @@ void ofApp::drawShader() {
     shader1.setUniform1f("time", time);
     shader1.setUniform2fv("resolution", resolution);
     //shader1.setUniform1f("vol", smoothedVol);
-    
-    shader1.setUniform2fv("hand1", handPoint1);
-    shader1.setUniform2fv("hand2", handPoint2);
-    shader1.setUniform2fv("hand3", handPoint3);
-    shader1.setUniform2fv("hand4", handPoint4);
     
     //shader1.setUniform2fv("mouse", mousePoint);
     glEnable(GL_DEPTH_TEST);
@@ -308,8 +408,40 @@ void ofApp::exit(){
 }
 
 //--------------------------------------------------------------
+void ofApp::audioIn(float * input, int bufferSize, int nChannels){
+	
+	float curVol = 0.0;
+	
+	// samples are "interleaved"
+	int numCounted = 0;
+    
+	//lets go through each sample and calculate the root mean square which is a rough way to calculate volume
+	for (int i = 0; i < bufferSize; i++){
+		left[i]		= input[i] * 5;//*0.5;
+        
+		curVol += left[i] * left[i];
+		numCounted++;
+	}
+	
+	//this is how we get the mean of rms :)
+	curVol /= (float)numCounted;
+	
+	// this is how we get the root of rms :)
+	curVol = sqrt( curVol );
+	
+	smoothedVol *= 0.93;
+	smoothedVol += 0.07 * curVol;
+	
+	bufferCounter++;
+	
+}
+//--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+    if (key == ' ') {
+        debugFlg *= -1;
+    }
+    cout << "debug : " << debugFlg  << endl;
 }
 
 //--------------------------------------------------------------

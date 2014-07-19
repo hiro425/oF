@@ -4,6 +4,9 @@
 #include "ofxOpenNI.h"
 #include "ofMain.h"
 #include "ofxSPK.h"
+#include "shapeObject.h"
+
+
 
 #define MAX_DEVICES 2
 
@@ -30,6 +33,7 @@ private:
     void gestureEvent(ofxOpenNIGestureEvent & event);
     
 	ofxOpenNI openNIDevice;
+    int debugFlg;
     //ofTrueTypeFont verdana;
     
     // SPK
@@ -47,6 +51,27 @@ private:
     // Shader
     ofShader shader1;
     void drawShader();
+    
+    //shape
+    vector <shapeObject> shapes;
+    void updateShapes();
+    void drawShapes();
+
+    void setupDrops();
+    void updateDrops();
+    
+    shapeObject sprites;
+    
+    //sound
+    void audioIn(float * input, int bufferSize, int nChannels);
+    ofSoundStream soundStream;
+    vector <float> left;
+    int 	bufferCounter;
+    float smoothedVol;
+    float scaledVol;
+    
+    
+
     
 };
 

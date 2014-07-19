@@ -4,10 +4,6 @@ precision mediump float;
 
 uniform float time;
 uniform vec2 resolution;
-uniform vec2 hand1;
-uniform vec2 hand2;
-uniform vec2 hand3;
-uniform vec2 hand4;
 
 const vec2 gravity = vec2(0, -.3);
 
@@ -51,24 +47,6 @@ void main(void)
         vec2 speed = vec2(rand(-.5, .5, vec2(index*i, 3.)), rand(.5, 1., vec2(index*i, 4.)));
         vec2 pos = origin + particle_time*speed + gravity*particle_time*particle_time;
 
-        if (hand1.x > 0. && hand1.y > 0. && pos.x < hand1.x + 10. && pos.x > hand1.x -10. && pos.y < hand1.y + 10. && pos.y > hand1.y -10.) {
-            pos.x = hand1.x;
-            pos.y = hand1.y;
-        }
-        /*
-        if ( pos.x < hand2.x + 10. && pos.x > hand2.x -10. && pos.y < hand2.y + 10. && pos.y > hand2.y -10.) {
-            pos.x = hand2.x;
-            pos.y = hand2.y;
-        }
-        if ( pos.x < hand3.x + 10. && pos.x > hand3.x -10. && pos.y < hand3.y + 10. && pos.y > hand3.y -10.) {
-            pos.x = hand3.x;
-            pos.y = hand3.y;
-        }
-        if ( pos.x < hand4.x + 10. && pos.x > hand4.x -10. && pos.y < hand4.y + 10. && pos.y > hand4.y -10.) {
-            pos.x = hand4.x;
-            pos.y = hand4.y;
-        }
-        */
         float threshold = .7*period;
 
         float alpha;
