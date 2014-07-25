@@ -6,16 +6,17 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     ofSetVerticalSync(true);
     ofBackground(255);
+    ofSetSphereResolution(4);
 
     fft.setup();
-    fft.setNumFFTBins(256);
+    fft.setNumFFTBins(32);
     fftDebugMode = false;
     lowD.thresh = 0.4;
     midD.thresh = 0.3;
     highD.thresh = 0.3;
-    commonD.thresh = 3;
+    commonD.thresh = 5;
     
-    numWaves = (int)fft.getNumFFTbins()/12;
+    numWaves = (int)fft.getNumFFTbins();
     
     for (int i = 0; i < numWaves; i++) {
         vector<ofVec3f> point;
@@ -30,12 +31,12 @@ void ofApp::setup(){
     cam.setPosition(ofGetWidth()/2, ofGetHeight()/2, 750);
     
     //cam.enableOrtho();
-    camAngle = 0;
+    camAngle = 90;
 
     pointLight.setDiffuseColor( ofColor(255.f, 255.f, 255.f));
 	pointLight.setSpecularColor( ofColor(255.f, 255.f, 255.f));
 	pointLight.setPointLight();
-    pointLight.setPosition(ofGetWidth()/2, ofGetHeight()/4*3, -30);
+    pointLight.setPosition(ofGetWidth()/2, ofGetHeight()/4*3, -480);
     
     setupSPK();
 }
@@ -45,25 +46,50 @@ void ofApp::setupSPK() {
 	sprite.loadImage("image.jpg");
 	ofEnableArbTex();
 
-	sys.setup();
-	
-	group.setup(sys);
-	group.setColor(ofxSPK::RangeC(ofColor(255, 255), ofColor(255, 255)),
-				   ofxSPK::RangeC(ofColor(0, 0), ofColor(255, 0)));
-	
-	group.setLifeTime(0.5, 15);
-	group.setFriction(0.1);
-	group.setSize(0, ofxSPK::RangeF(10, 100));
-	
-	group.setGravity(ofVec3f(0, -10, 0));
-	group.setMass(0.1, 1);
-	
-	rot.setup(SPK::Vortex::create(SPK::Vector3D(0, ofGetHeight()),
-								  SPK::Vector3D(0, 1, 0),
-								  200,
-								  10), group);
-	
-	group.reserve(10000);
+	sys1.setup();
+	group1.setup(sys1);
+	group1.setColor(ofxSPK::RangeC(ofColor(255, 255, 255), ofColor(255, 255, 255)),
+                    ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+	group1.setLifeTime(0.5, 10);
+	group1.setFriction(0.1);
+	group1.setSize(0, ofxSPK::RangeF(10, 50));
+	group1.setGravity(ofVec3f(0, -10, 0));
+	group1.setMass(0.1, 1);
+	rot1.setup(SPK::Vortex::create(SPK::Vector3D(0, 0, 0),
+								  SPK::Vector3D(0, 0, 0.5),
+								  100,
+								  100), group1);
+	group1.reserve(10000);
+    
+    sys2.setup();
+	group2.setup(sys2);
+	group2.setColor(ofxSPK::RangeC(ofColor(255, 255, 160), ofColor(255, 255, 160)),
+                    ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+	group2.setLifeTime(0.5, 10);
+	group2.setFriction(0.1);
+	group2.setSize(0, ofxSPK::RangeF(10, 50));
+	group2.setGravity(ofVec3f(0, -10, 0));
+	group2.setMass(0.1, 1);
+	rot2.setup(SPK::Vortex::create(SPK::Vector3D(0, 0, 0),
+                                   SPK::Vector3D(0, 0, 0.5),
+                                   100,
+                                   100), group2);
+	group2.reserve(10000);
+    
+    sys3.setup();
+	group3.setup(sys3);
+	group3.setColor(ofxSPK::RangeC(ofColor(196, 150, 3), ofColor(196, 150, 3)),
+                    ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+	group3.setLifeTime(0.5, 10);
+	group3.setFriction(0.1);
+	group3.setSize(0, ofxSPK::RangeF(10, 50));
+	group3.setGravity(ofVec3f(0, -10, 0));
+	group3.setMass(0.1, 1);
+	rot3.setup(SPK::Vortex::create(SPK::Vector3D(0, 0, 0),
+                                   SPK::Vector3D(0, 0, 0.5),
+                                   100,
+                                   100), group3);
+	group3.reserve(10000);
 }
 
 //--------------------------------------------------------------
@@ -72,10 +98,10 @@ void ofApp::update(){
     updateFFT();
     ofVec3f sumOfAllPoints(0,0,0);
     
-    for (int i = 1; i < pointArray.size(); i++) {
+    for (int i = 0; i < pointArray.size(); i++) {
         ofVec3f point(
-                      ofGetWidth()*1.2,
-                      ofGetHeight()/10*9+ fft.getSpectrum()[i] + sin(i * 0.15 + ofGetElapsedTimef() ) * 30.0,
+                      ofGetWidth()*0.9,
+                      ofGetHeight()/6 + fft.getSpectrum()[i] + sin(i * 0.15 + ofGetElapsedTimef() ) * 30.0,
                       -30*i);
         pointArray[i].push_back(point);
         
@@ -90,16 +116,28 @@ void ofApp::update(){
             }
         }
    
-        for (int i = 25; i < fft.getNumFFTbins(); i++) {
-            if (/*i>3 && */fft.getSpectrum()[i] > commonD.thresh) {
-                particlePos.push_back(ofPoint(ofGetWidth()/8*7, ofGetHeight()/5*3-fft.getSpectrum()[i]*5, -30*i));
+        for (int i = 0; i < fft.getNumFFTbins(); i++) {
+            spherePos.push_back(ofPoint(ofGetWidth()/8*7, ofGetHeight()/9*2+fft.getSpectrum()[i]*2, -30*i));
+            
+            if (fft.getSpectrum()[i] > commonD.thresh) {
+                if (i < (int)fft.getNumFFTbins()/3) {
+                    particlePos1.push_back(ofPoint(ofGetWidth()/8*7, ofGetHeight()/9*2+fft.getSpectrum()[i]*2, -30*i));
+                }
+                else if (i < (int)fft.getNumFFTbins()/3*2) {
+                    particlePos2.push_back(ofPoint(ofGetWidth()/8*7, ofGetHeight()/9*2+fft.getSpectrum()[i]*2, -30*i));
+                }
+                else {
+                    particlePos3.push_back(ofPoint(ofGetWidth()/8*7, ofGetHeight()/9*2+fft.getSpectrum()[i]*2, -30*i));
+                }
+                    
+                
             }
         }
 
     }
     updateSPK();
     //cam.setPosition(ofVec3f(cam.getPosition().x, cam.getPosition().y, cam.getPosition().z));
-    //cam.lookAt(ofVec3f(cam.getPosition().x, cam.getPosition().y, -30),ofVec3f(0,-1,0));
+    cam.lookAt(ofVec3f(ofGetWidth()/2, ofGetHeight()/2, -510));
     
     //cam.lookAt(ofVec3f(0,-1,0),ofVec3f(0,0,1));
 
@@ -108,11 +146,19 @@ void ofApp::update(){
 void ofApp::updateSPK() {
     //group.emitRandom(10, ofVec3f(ofGetMouseX(), ofGetMouseY()));
 	
-    for (int i = 0; i < particlePos.size(); i++) {
-        group.emitRandom(2, ofVec3f(particlePos[i].x, particlePos[i].y, particlePos[i].z));
+    for (int i = 0; i < particlePos1.size(); i++) {
+        group1.emitRandom(1, ofVec3f(particlePos1[i].x, particlePos1[i].y, particlePos1[i].z));
+    }
+    for (int i = 0; i < particlePos2.size(); i++) {
+        group2.emitRandom(1, ofVec3f(particlePos2[i].x, particlePos2[i].y, particlePos2[i].z));
+    }
+    for (int i = 0; i < particlePos3.size(); i++) {
+        group3.emitRandom(1, ofVec3f(particlePos3[i].x, particlePos3[i].y, particlePos3[i].z));
     }
     
-	sys.update();
+	sys1.update();
+    sys2.update();
+    sys3.update();
     
 	ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }
@@ -142,16 +188,13 @@ void ofApp::checkBang(bandwidthData &d) {
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    //cam.begin();
+    cam.begin();
     
     ofEnableAlphaBlending();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     ofEnableLighting();
     pointLight.enable();
     
-    ofDrawAxis(100);
-    ofDrawSphere(ofGetWidth()/2, 200, 10);
-	ofSetColor(190, 255, 255, 127);
     for (int i = 0; i < pointArray.size(); i++) {
         for (int j = 1; j < pointArray[i].size(); j++) {
             //find this point and the next point
@@ -184,7 +227,7 @@ void ofApp::draw(){
             //ofVec3f rightPoint = thisPoint+toTheRight*thickness;
             int pointSize = pointArray[i].size();
             float x = pointArray[i][j].x;
-            ofSetColor(190, 255, 255, 255*(pointSize-j)/pointSize*2 * (x+100)/ofGetWidth());
+            ofSetColor(175, 223, 228, 255*(pointSize-j)/pointSize*2 * (x+100)/ofGetWidth());
             ofSetLineWidth(3);
             //add these points to the triangle strip
             //mesh.addVertex(ofVec3f(leftPoint.x, leftPoint.y, leftPoint.z));
@@ -218,7 +261,7 @@ void ofApp::draw(){
     pointLight.disable();
     ofDisableLighting();
     
-    //cam.end();
+    cam.end();
     
     if (fftDebugMode) {
         fft.drawBars();
@@ -234,21 +277,26 @@ void ofApp::drawSPK() {
 	// bind texture, enable point sprite while drawing particles
 	sprite.bind();
 	ofEnablePointSprites();
-	sys.draw();
+	sys1.draw();
+    sys2.draw();
+    sys3.draw();
 	ofDisablePointSprites();
 	sprite.unbind();
     
-    ofSetColor(255, 127);
-    for (int i = 0; i < particlePos.size(); i++) {
-        ofDrawSphere(particlePos[i].x, particlePos[i].y,particlePos[i].z,  10);
+    ofSetColor(10, 255);
+    for (int i = 0; i < spherePos.size(); i++) {
+        ofDrawBox(spherePos[i].x, spherePos[i].y,spherePos[i].z, 50,5,10);
     }
-
-    particlePos.clear();
+    spherePos.clear();
+    particlePos1.clear();
+    particlePos2.clear();
+    particlePos3.clear();
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    float radian;
     
     switch (key) {
         case 'd':
@@ -256,10 +304,11 @@ void ofApp::keyPressed(int key){
             break;
         case 'z':
             camAngle += 1;
+            radian = camAngle * PI / 180;
             cam.setPosition(
-                            cam.getPosition().x,
+                            ofGetWidth()/2 + 1260 * cos(radian),
                             cam.getPosition().y,
-                            cam.getPosition().z + 1//750 + sin(camAngle)
+                            -510 + 1260 * sin(radian)
                             );
         default:
             break;

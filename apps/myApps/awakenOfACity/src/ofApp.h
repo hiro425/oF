@@ -39,12 +39,23 @@ class ofApp : public ofBaseApp{
     ofFloatColor Color[NUM_PARTICLES];
     
     // SPK
-    vector <ofPoint> particlePos;
-    
-    ofxSPK::System sys;
-    ofxSPK::Group group;
+    vector <ofPoint> particlePos1;
+    ofxSPK::System sys1;
+    ofxSPK::Group group1;
+    ofxSPK::Modifier rot1;
+
+    vector <ofPoint> particlePos2;
+    ofxSPK::System sys2;
+    ofxSPK::Group group2;
+    ofxSPK::Modifier rot2;
+
+    vector <ofPoint> particlePos3;
+    ofxSPK::System sys3;
+    ofxSPK::Group group3;
+    ofxSPK::Modifier rot3;
+
     ofImage sprite;
-    ofxSPK::Modifier rot;
+    vector <ofPoint> spherePos;
     
     void setupSPK();
     void updateSPK();
