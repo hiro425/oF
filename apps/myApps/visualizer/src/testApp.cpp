@@ -254,7 +254,6 @@ void testApp::makePrimsDynamic() {
     float cVol = smoothedVol * 0.06;
     
     color.set(ofColor(color->r,color->g,color->b,255));
-    int repeat = 20;
     
     for(int i = 0; i < prims.size(); i++){
         

@@ -12,6 +12,8 @@
 	<dict>
 		<key>CF9BEDAF-BA19-41F4-9494-1D5360004E0B</key>
 		<string>https://github.com/hikwgc/oF</string>
+		<key>E57B3738-1262-41C2-BABC-3A326A96E9EC</key>
+		<string>https://github.com/kylemcdonald/ofxFft</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>apps/myApps/visualizer/visualizer.xcodeproj/project.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>CF9BEDAF-BA19-41F4-9494-1D5360004E0B</key>
 		<string>../../../../..</string>
+		<key>E57B3738-1262-41C2-BABC-3A326A96E9EC</key>
+		<string>../../../../../addons/ofxFft</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/hikwgc/oF</string>
@@ -35,6 +39,14 @@
 			<string>CF9BEDAF-BA19-41F4-9494-1D5360004E0B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>oF</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E57B3738-1262-41C2-BABC-3A326A96E9EC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxFft</string>
 		</dict>
 	</array>
 </dict>
