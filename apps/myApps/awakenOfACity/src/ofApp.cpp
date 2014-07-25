@@ -32,6 +32,7 @@ void ofApp::setup(){
     
     //cam.enableOrtho();
     camAngle = 90;
+    rotateMode = false;
 
     pointLight.setDiffuseColor( ofColor(255.f, 255.f, 255.f));
 	pointLight.setSpecularColor( ofColor(255.f, 255.f, 255.f));
@@ -138,6 +139,15 @@ void ofApp::update(){
     updateSPK();
     //cam.setPosition(ofVec3f(cam.getPosition().x, cam.getPosition().y, cam.getPosition().z));
     cam.lookAt(ofVec3f(ofGetWidth()/2, ofGetHeight()/2, -510));
+    if (rotateMode) {
+        camAngle += 0.5;
+        float radian = camAngle * PI / 180;
+        cam.setPosition(
+                        ofGetWidth()/2 + 1260 * cos(radian),
+                        cam.getPosition().y,
+                        -510 + 1260 * sin(radian)
+                        );
+    }
     
     //cam.lookAt(ofVec3f(0,-1,0),ofVec3f(0,0,1));
 
@@ -296,21 +306,111 @@ void ofApp::drawSPK() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    float radian;
+    int r;
+    int g;
+    int b;
     
     switch (key) {
         case 'd':
             fftDebugMode = !fftDebugMode;
             break;
         case 'z':
-            camAngle += 1;
-            radian = camAngle * PI / 180;
-            cam.setPosition(
-                            ofGetWidth()/2 + 1260 * cos(radian),
-                            cam.getPosition().y,
-                            -510 + 1260 * sin(radian)
-                            );
+            rotateMode = !rotateMode;
+            break;
+        case 'r':
+            r = 255 * pointLight.getDiffuseColor().r;
+            g = 255 * pointLight.getDiffuseColor().g;
+            b = 255 * pointLight.getDiffuseColor().b;
+    
+            if (r > 196) r--;
+            else if (r < 196) r++;
+            
+            if (g > 100) g--;
+            else if (g < 100) g++;
+
+            if (b > 3) b--;
+            else if (b < 3) b++;
+            
+            pointLight.setDiffuseColor( ofColor(r, g, b));
+            pointLight.setSpecularColor( ofColor(r, g, b));
+            group1.setColor(ofxSPK::RangeC(ofColor(r, g, b), ofColor(r, g, b)),
+                            ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+            group2.setColor(ofxSPK::RangeC(ofColor(r, g, b), ofColor(r, g, b)),
+                            ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+            group3.setColor(ofxSPK::RangeC(ofColor(r, g, b), ofColor(r, g, b)),
+                            ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+            break;
+        case 'b':
+            r = 255 * pointLight.getDiffuseColor().r;
+            g = 255 * pointLight.getDiffuseColor().g;
+            b = 255 * pointLight.getDiffuseColor().b;
+            
+            if (r > 100) r--;
+            else if (r < 100) r++;
+            
+            if (g > 3) g--;
+            else if (g < 3) g++;
+            
+            if (b > 100) b--;
+            else if (b < 100) b++;
+            
+            pointLight.setDiffuseColor( ofColor(r, g, b));
+            pointLight.setSpecularColor( ofColor(r, g, b));
+            group1.setColor(ofxSPK::RangeC(ofColor(r, g, b), ofColor(r, g, b)),
+                            ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+            group2.setColor(ofxSPK::RangeC(ofColor(r, g, b), ofColor(r, g, b)),
+                            ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+            group3.setColor(ofxSPK::RangeC(ofColor(r, g, b), ofColor(r, g, b)),
+                            ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+            break;
+        case 'w':
+            r = 255 * pointLight.getDiffuseColor().r;
+            g = 255 * pointLight.getDiffuseColor().g;
+            b = 255 * pointLight.getDiffuseColor().b;
+            
+            if (r > 255) r--;
+            else if (r < 255) r++;
+            
+            if (g > 255) g--;
+            else if (g < 255) g++;
+            
+            if (b > 160) b--;
+            else if (b < 160) b++;
+            
+            pointLight.setDiffuseColor( ofColor(r, g, b));
+            pointLight.setSpecularColor( ofColor(r, g, b));
+            group1.setColor(ofxSPK::RangeC(ofColor(r, g, b), ofColor(r, g, b)),
+                            ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+            group2.setColor(ofxSPK::RangeC(ofColor(r, g, b), ofColor(r, g, b)),
+                            ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+            group3.setColor(ofxSPK::RangeC(ofColor(r, g, b), ofColor(r, g, b)),
+                            ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+            break;
+            
+        case 'a':
+            r = 255 * pointLight.getDiffuseColor().r;
+            g = 255 * pointLight.getDiffuseColor().g;
+            b = 255 * pointLight.getDiffuseColor().b;
+            
+            if (r > 255) r--;
+            else if (r < 255) r++;
+            
+            if (g > 255) g--;
+            else if (g < 255) g++;
+            
+            if (b > 255) b--;
+            else if (b < 255) b++;
+            pointLight.setDiffuseColor( ofColor(r, g, b));
+            pointLight.setSpecularColor( ofColor(r, g, b));
+            group1.setColor(ofxSPK::RangeC(ofColor(255, 255, 255), ofColor(255, 255, 255)),
+                            ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+            group2.setColor(ofxSPK::RangeC(ofColor(255, 255, 160), ofColor(255, 255, 160)),
+                            ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+            group3.setColor(ofxSPK::RangeC(ofColor(196, 150, 3), ofColor(196, 150, 3)),
+                            ofxSPK::RangeC(ofColor(0, 0), ofColor(0, 0)));
+
         default:
+            
             break;
     }
 }

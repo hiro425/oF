@@ -33,7 +33,10 @@ class ofApp : public ofBaseApp{
     
     // vbo wave
     ofCamera cam;
-    int camAngle;
+    float camAngle;
+    bool rotateMode;
+    
+    
     ofVbo Vbo;
     ofVec3f Verts[NUM_PARTICLES];
     ofFloatColor Color[NUM_PARTICLES];
