@@ -9,7 +9,7 @@ void ofApp::setup(){
     ofSetSphereResolution(4);
 
     fft.setup();
-    fft.setNumFFTBins(32);
+    fft.setNumFFTBins(32); //adjustment bulve
     fftDebugMode = false;
     lowD.thresh = 0.4;
     midD.thresh = 0.3;
@@ -60,7 +60,7 @@ void ofApp::setupSPK() {
 								  SPK::Vector3D(0, 0, 0.5),
 								  100,
 								  100), group1);
-	group1.reserve(10000);
+	group1.reserve(4000);
     
     sys2.setup();
 	group2.setup(sys2);
@@ -75,7 +75,7 @@ void ofApp::setupSPK() {
                                    SPK::Vector3D(0, 0, 0.5),
                                    100,
                                    100), group2);
-	group2.reserve(10000);
+	group2.reserve(4000);
     
     sys3.setup();
 	group3.setup(sys3);
@@ -90,7 +90,7 @@ void ofApp::setupSPK() {
                                    SPK::Vector3D(0, 0, 0.5),
                                    100,
                                    100), group3);
-	group3.reserve(10000);
+	group3.reserve(4000);
 }
 
 //--------------------------------------------------------------
@@ -109,10 +109,6 @@ void ofApp::update(){
         for (int j=0; j < pointArray[i].size(); j++) {
             pointArray[i][j].x -= 5;
             if (pointArray[i][j].x < 0) {
-                //pointArray[i][j].y +=1;
-                //pointArray[i].erase(pointArray[i].begin());
-            }
-            if (pointArray[i][j].x < -ofGetWidth()*0.2) {
                 pointArray[i].erase(pointArray[i].begin());
             }
         }
@@ -178,7 +174,7 @@ void ofApp::updateFFT() {
     
     lowD.vol  = fft.getLowVal() * 0.03;
     midD.vol  = fft.getMidVal() * 0.045;
-    highD.vol = fft.getHighVal() * 0.03;
+    highD.vol = fft.getHighVal() * 0.045;
     
     checkBang(lowD);
     checkBang(midD);
@@ -206,45 +202,47 @@ void ofApp::draw(){
     pointLight.enable();
     
     for (int i = 0; i < pointArray.size(); i++) {
+        
+        ofVbo v;
+        int pointSize = pointArray[i].size();
+        
+        v.setVertexData(&pointArray[i][0], pointArray[i].size(), GL_DYNAMIC_DRAW);
+        
+        vector<ofIndexType> faces;
+        for (int j=0; j < pointSize; j++) {
+            faces.push_back(j);
+        }
+        v.setIndexData(&faces[0], pointSize, GL_DYNAMIC_DRAW);
+        
+        vector<ofFloatColor> vcolors;
+        for (int j=0; j < pointSize; j++) {
+            float r = 175. / 255.;
+            float g = 223. / 255.;
+            float b = 228. / 255.;
+            float a = 255. * (pointSize-j)/pointSize*2. * (pointArray[i][j].x+100)/ofGetWidth() / 255.;
+            vcolors.push_back(ofFloatColor(r, g, b, a));
+        }
+        v.setColorData(&vcolors[0], pointSize, GL_DYNAMIC_DRAW);
+        ofSetLineWidth(3);
+        v.drawElements(GL_LINE_STRIP, pointSize);
+    /*
         for (int j = 1; j < pointArray[i].size(); j++) {
-            //find this point and the next point
+
             ofVec3f thisPoint = pointArray[i][j-1];
             ofVec3f nextPoint = pointArray[i][j];
             
-            //get the direction from one to the next.
-            //the ribbon should fan out from this direction
+            
             ofVec3f direction = (nextPoint - thisPoint);
-            
-            //get the distance from one point to the next
             float distance = direction.length();
-            
-            //get the normalized direction. normalized vectors always have a length of one
-            //and are really useful for representing directions as opposed to something with length
             ofVec3f unitDirection = direction.normalized();
             
-            //find both directions to the left and to the right
-           // ofVec3f toTheLeft = unitDirection.getRotated(-90, ofVec3f(0,0,1));
-            //ofVec3f toTheRight = unitDirection.getRotated(90, ofVec3f(0,0,1));
-            
-            //use the map function to determine the distance.
-            //the longer the distance, the narrower the line.
-            //this makes it look a bit like brush strokes
-            //float thickness = ofMap(distance, 0, 6, 2, 2, true);
-            
-            //calculate the points to the left and to the right
-            //by extending the current point in the direction of left/right by the length
-            //ofVec3f leftPoint = thisPoint+toTheLeft*thickness;
-            //ofVec3f rightPoint = thisPoint+toTheRight*thickness;
             int pointSize = pointArray[i].size();
             float x = pointArray[i][j].x;
             ofSetColor(175, 223, 228, 255*(pointSize-j)/pointSize*2 * (x+100)/ofGetWidth());
             ofSetLineWidth(3);
-            //add these points to the triangle strip
-            //mesh.addVertex(ofVec3f(leftPoint.x, leftPoint.y, leftPoint.z));
-            //mesh.addVertex(ofVec3f(rightPoint.x, rightPoint.y, rightPoint.z));
             ofLine(thisPoint, nextPoint);
         }
-
+*/
     }
     /*
     vector<float> spectrum = fft.getSpectrum();

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4AB14B16-C389-4E21-B6A2-A6E7095B40BE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>testMPMFluid</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5818A954-C057-40F7-9BC5-4D66C9AF187D</key>
+		<string>https://github.com/ofTheo/ofxControlPanel</string>
+		<key>9B1D4903-CBEA-45B8-891F-0894953BE051</key>
+		<string>https://github.com/obviousjim/ofxMPMFluid</string>
+		<key>B0B43312-08CB-4078-B791-E4AFF039D58C</key>
+		<string>https://github.com/hikwgc/oF</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>apps/myApps/testMPMFluid/testMPMFluid.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5818A954-C057-40F7-9BC5-4D66C9AF187D</key>
+		<string>../../../../../addons/ofxControlPanel</string>
+		<key>9B1D4903-CBEA-45B8-891F-0894953BE051</key>
+		<string>../../../../../addons/ofxMPMFluid</string>
+		<key>B0B43312-08CB-4078-B791-E4AFF039D58C</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/hikwgc/oF</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B0B43312-08CB-4078-B791-E4AFF039D58C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B0B43312-08CB-4078-B791-E4AFF039D58C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>oF</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5818A954-C057-40F7-9BC5-4D66C9AF187D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxControlPanel</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9B1D4903-CBEA-45B8-891F-0894953BE051</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxMPMFluid</string>
+		</dict>
+	</array>
+</dict>
+</plist>
