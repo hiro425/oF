@@ -1,0 +1,10 @@
+<fog_control>
+	<density>0.0035</density>
+	<fog_start>10</fog_start>
+	<fog_end>50</fog_end>
+	<redColor>0.1</redColor>
+	<greenColor>0.2</greenColor>
+	<blueColor>0.5</blueColor>
+	<switch_fog>1</switch_fog>
+<fog_control/>
+</fog_control>
