@@ -17,6 +17,19 @@ void createObject::add() {
          getIndex(), ofVec3f(ofRandom(5,30)));
 }
 
+void createObject::addRandom() {
+    _add(ofVec3f(
+                 ofRandom(screen.x,width),
+                 ofRandom(screen.y, height),
+                 ofRandom(-3000, 3000)
+                 ),
+         ofFloatColor(ofRandom(minColor.r, maxColor.r),
+                      ofRandom(minColor.g, maxColor.g),
+                      ofRandom(minColor.b, maxColor.b),
+                      ofRandom(minColor.a, maxColor.a)),
+         getIndex(), ofVec3f(ofRandom(5,30)));
+}
+
 void createObject::_add(const ofVec3f &v, const ofFloatColor &c, const ofIndexType &f, const ofVec3f &mag) {
     points.push_back(v);
     distPoints.push_back(v);
@@ -227,7 +240,7 @@ void createObject::update() {
                                         points[i].z + 200);
             }
             if (addFlg) {
-                for (int j = 0; j < 10; j++) {
+                for (int j = 0; j < 3; j++) {
                     _add(
                          ofVec3f(
                                  ofRandom(screen.x, screen.x + width),

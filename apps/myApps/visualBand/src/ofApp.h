@@ -72,6 +72,9 @@ class ofApp : public ofBaseApp{
     
     //light
     ofLight pointLight;
+    ofColor diffuseColor;
+    ofColor specularColor;
+    bool darkFlg;
     
     ofxPostProcessing post;
     ofImage backImage;

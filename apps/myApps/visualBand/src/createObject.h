@@ -86,6 +86,7 @@ public:
     void update();
     void callback();
     void add();
+    void addRandom();
     void _add(const ofVec3f &v, const ofFloatColor &c, const ofIndexType &f, const ofVec3f &mag);
     
     

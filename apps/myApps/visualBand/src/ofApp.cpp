@@ -18,13 +18,20 @@ void ofApp::setup(){
     
     dMode = VB_PRIMITIVE;
     
-    createPrimitive prim1, prim2, prim3;
+    createPrimitive prim1, prim2, prim3, prim4;
     prim1.init(ofGetWidth()/2, ofGetHeight(), ofVec2f(ofGetWidth()/4,0), ofVec3f(ofGetWidth()/2, ofGetHeight()/2, 0),   CP_SPHERE, CP_GATHER);
     prim2.init(ofGetWidth()/2, ofGetHeight(), ofVec2f(0,0),              ofVec3f(ofGetWidth()/4, ofGetHeight()/2, 0),   CP_NO_DRAW, CP_GATHER);
     prim3.init(ofGetWidth()/2, ofGetHeight(), ofVec2f(ofGetWidth()/2,0), ofVec3f(ofGetWidth()/4*3, ofGetHeight()/2, 0), CP_NO_DRAW, CP_GATHER);
     primitives.push_back(prim1);
     primitives.push_back(prim2);
     primitives.push_back(prim3);
+    
+    prim4.init(ofGetWidth()*3, ofGetHeight()*3, ofVec2f(-ofGetWidth(),-ofGetHeight()), ofVec3f(ofGetWidth()/2, ofGetHeight()/2, 0),   CP_POINT, CP_NO_ACTION);
+    for (int i = 0; i < 200; i++) {
+        prim4.addRandom();
+    }
+    primitives.push_back(prim4);
+
     for (int i = 0; i < primitives.size(); i++) {
         primitives[i].add();
         bandwidthData primD;
@@ -62,10 +69,14 @@ void ofApp::setup(){
     camDistPos = camPos;
     cam.setPosition(camPos);
     
-    pointLight.setDiffuseColor( ofColor(255.f, 255.f, 255.f));
-	pointLight.setSpecularColor( ofColor(255.f, 255.f, 255.f));
+    diffuseColor = ofColor(255.f, 255.f, 255.f);
+    specularColor = ofColor(255.f, 255.f, 255.f);
+    
+    pointLight.setDiffuseColor( diffuseColor );
+	pointLight.setSpecularColor( specularColor );
 	pointLight.setPointLight();
     pointLight.setPosition(ofGetWidth(), ofGetHeight(), 1080);
+    darkFlg = false;
     
     post.init(ofGetWidth(), ofGetHeight());
     post.createPass<DofAltPass>()->setEnabled(true);           //0
@@ -93,6 +104,8 @@ void ofApp::update(){
         checkBang(primsD[i]);
         primitives[i].update();
     }
+    primitives[3].updateMags(1);
+    primitives[3].update();
     
     for (int i = 0; i < models.size(); i++) {
         models[i].updateMags(10 * modelsD[i].vol);
@@ -101,10 +114,12 @@ void ofApp::update(){
     }
 
     if (rotateMode) {
-        if (primsD[0].bang) {
+        
+        float dist = ofDist(camDistPos.x, camDistPos.y, camPos.x,camPos.y);
+        if (primsD[0].bang && dist < 50) {
             float posx, posy, posz;
-            camAngle = ofRandom(0, 180);
-            decay = ofRandom(0, 0.3);
+            camAngle = ofRandom(0, 360);
+            decay = ofRandom(0.05, 0.3);
             posx = ofGetWidth()/2 + camRadius*cos(camAngle * PI /180);
             posy = ofGetHeight()/2 + camRadius*cos(camAngle * PI /180);
             posz = camRadius*sin(camAngle * PI /180);
@@ -116,6 +131,23 @@ void ofApp::update(){
     }
     cam.setPosition(camPos);
     cam.lookAt(ofVec3f(ofGetWidth()/2, ofGetHeight()/2, 0));
+    
+    
+    if (darkFlg) {
+        if (primsD[0].bang) {
+            darkFlg = true;
+            diffuseColor = ofColor(255,255,255);
+            specularColor = ofColor(255,255,255);
+            pointLight.setDiffuseColor(diffuseColor);
+            pointLight.setSpecularColor(specularColor);
+        }
+        else {
+            diffuseColor = ofColor(175,175,175);
+            specularColor = ofColor(175,175,175);
+            pointLight.setDiffuseColor(diffuseColor);
+            pointLight.setSpecularColor(specularColor);
+        }
+    }
     
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }
@@ -241,8 +273,6 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
         modelsD[i].vol += 0.07 * curVolCh2;
         
     }
-    dogD.vol *= 0.93;
-    dogD.vol += 0.07 * curVolCh2;
 
 	
 }
@@ -271,9 +301,10 @@ void ofApp::keyPressed(int key){
                 break;
             case 'T':
                 primitives[i].setDrawType(CP_TRIANGLE);
+                primitives[3].setDrawType(CP_POINT);
                 break;
             case 'l':
-                primitives[i].setDrawType(CP_LINE);
+                //primitives[i].setDrawType(CP_LINE);
                 break;
             case 's':
                 primitives[i].setDrawType(CP_SPHERE);
@@ -286,9 +317,11 @@ void ofApp::keyPressed(int key){
                 primitives[i].setActionType(CP_ROTATE);
                 break;
             case 'S':
+                forceBang = true;
                 primitives[i].setActionType(CP_SLIDE);
                 break;
             case 'G':
+                forceBang = true;
                 primitives[i].setActionType(CP_GATHER);
                 break;
             case 'H':
@@ -311,7 +344,9 @@ void ofApp::keyPressed(int key){
                 break;
         }
     }
-
+    primitives[3].noiseFlg = false;
+    primitives[3].setActionType(CP_NO_ACTION);
+    float r,g,b;
     switch (key) {
         case ' ':
             rotateMode = !rotateMode;
@@ -333,6 +368,8 @@ void ofApp::keyPressed(int key){
             camPos = ofVec3f(ofGetWidth()/2, ofGetHeight()/2, camRadius);
             break;
         case '2':
+            primitives[1].setDrawType(CP_LINE);
+            primitives[2].setDrawType(CP_LINE);
             primitives[0].particleFlg = false;
             primitives[1].particleFlg = false;
             primitives[2].particleFlg = false;
@@ -346,6 +383,7 @@ void ofApp::keyPressed(int key){
             primitives[2].setDrawType(CP_TRIANGLE);
             break;
         case '4':
+            dMode = VB_PRIMITIVE;
             primitives[0].setDrawType(CP_SPHERE);
             primitives[1].setDrawType(CP_SPHERE);
             primitives[2].setDrawType(CP_SPHERE);
@@ -365,11 +403,15 @@ void ofApp::keyPressed(int key){
         case 'F':
             flashFlg = true;
             break;
+        case 'L':
+            darkFlg = !darkFlg;
+            break;
         case 'M':
             dMode = VB_MODEL;
             flashFlg = true;
             break;
         case 'N':
+            flashFlg = true;
             dMode = VB_PRIMITIVE;
             break;
         case 'P':
