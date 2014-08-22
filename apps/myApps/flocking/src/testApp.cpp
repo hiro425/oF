@@ -14,7 +14,7 @@ void testApp::setup(){
 	ofLoadImage(texture, "dot.png");
     //ofLoadImage(texture, "image.jpg");
 	
-	for (int i = 0; i < 400; i++){
+	for (int i = 0; i < 600; i++){
 		particle myParticle;
         myParticle.setInitialCondition(
                                        ofRandom(ofGetWidth()/10*4,ofGetWidth()/10*6),
@@ -24,8 +24,8 @@ void testApp::setup(){
         float origSize = ofRandom(5, 100);
         origSizes.push_back(origSize);
         
-        if        (i < 400/3) colors.push_back(ofFloatColor(0.1, 0.5,1));
-        else if (i < 400/3*2) colors.push_back(ofFloatColor(0.1,0.5,0.1));
+        if        (i < 600/3) colors.push_back(ofFloatColor(0.1, 0.5,1));
+        else if (i < 600/3*2) colors.push_back(ofFloatColor(0.1,0.5,0.1));
         else                  colors.push_back(ofFloatColor(1,1,1));
         
         vector<ofVec3f> point;
@@ -47,9 +47,9 @@ void testApp::setup(){
     // ---------------------------------------------------------
     fft.setup();
     fft.setNumFFTBins(32);
-    lowD.thresh = 0.25;
-    midD.thresh = 0.25;
-    highD.thresh = 0.25;
+    lowD.thresh = 0.15;
+    midD.thresh = 0.15;
+    highD.thresh = 0.15;
     commonD.thresh = 5;
     
     // ---------------------------------------------------------
@@ -70,6 +70,7 @@ void testApp::update(){
         float coheSt = particles[i].cohesion.strength;
         float sepeSt = particles[i].seperation.strength;
         
+        /*
         if (
             (i < particles.size()/3 && lowD.bang)
             || (i >= particles.size()/3 && i < particles.size()/3*2 && midD.bang)
@@ -82,13 +83,53 @@ void testApp::update(){
 
         }
         else {
+            coheDist = 100/lowD.vol;
+            coheSt   = 0.5;
             sepeDist = 10;
-            sepeSt = 0.1;
-            coheDist = 100;
-            coheSt = 0.5;
+            sepeSt   = 0.1;
+        }
+        */
+        
+       if (i < particles.size()/3) {
+       //if (i == 0) {
+           coheDist = 200 / (lowD.vol* 10);
+            coheSt   = 0.1 / (lowD.vol* 10);
+            sepeDist = 10 * (lowD.vol* 10);
+            sepeSt   = 0.1 * (lowD.vol* 10);
+       /*
+        cout << "lowD: " <<lowD.vol << endl;
+        cout << "coheDist: " << coheDist << endl;
+        cout << "coheSt: "   << coheSt << endl;
+        cout << "sepeDist: " << sepeDist << endl;
+        cout << "sepeSt: "   << sepeSt << endl;
+       */
+       }
+        else if (i < particles.size()/3) {
+            coheDist = 200 / (midD.vol* 10);
+            coheSt   = 0.1 / (midD.vol* 10);
+            sepeDist = 10  * (midD.vol* 10);
+            sepeSt   = 0.1 * (midD.vol* 10);
+        }
+        else {
+            coheDist = 200 / (highD.vol* 10);
+            coheSt   = 0.1 / (highD.vol* 10);
+            sepeDist = 10  * (highD.vol* 10);
+            sepeSt   = 0.1 * (highD.vol* 10);
         }
         
-        if (coheDist > 1000) coheDist = 1000;
+        
+        if (coheDist > sepeDist) {
+            coheDist = 500, coheSt = 0.7, sepeDist = 1,  sepeSt = 0.1;
+            cout << "COHE" << endl;
+        }
+        else {
+            coheDist = 1,   coheSt = 0.1, sepeDist = 200, sepeSt = 0.7;
+            cout << "SEPE" << endl;
+        }
+        
+       
+    
+        if (coheDist > 100) coheDist = 100;
         else if (coheDist < 1) coheDist = 1;
         if (sepeDist > 200) sepeDist = 200;
         else if (sepeDist < 1) sepeDist = 1;

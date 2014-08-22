@@ -276,7 +276,7 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
     }
     for (int i = 0; i < modelsD.size(); i++) {
         modelsD[i].vol *= 0.93;
-        modelsD[i].vol += 0.07 * curVolCh2;
+        modelsD[i].vol += 0.07 * curVolCh1;
         
     }
 
