@@ -3,8 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     int bufferSize = 256;
-    //soundStream.setDeviceID(4);
-    soundStream.setup(this, 0, 2, 44100, bufferSize, 4);
+    //soundStream.setDeviceID(6);
+    soundStream.setup(this, 0, 1, 44100, bufferSize, 4);
     //left.assign(bufferSize, 0.0);
     //soundStream.listDevices();
     ch1.assign(bufferSize/2, 0.0);
@@ -265,7 +265,13 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
     */
     for (int i = 0; i < primsD.size(); i++) {
         primsD[i].vol *= 0.93;
-        primsD[i].vol += 0.07 * curVolCh2;
+        if (i==0) {
+            primsD[i].vol += 0.07 * curVolCh1;
+        }
+        else {
+            primsD[i].vol += 0.07 * curVolCh2;
+
+        }
 
     }
     for (int i = 0; i < modelsD.size(); i++) {
@@ -422,7 +428,7 @@ void ofApp::keyPressed(int key){
             post[1]->setEnabled(!post[1]->getEnabled());
             break;
         case 'Z':
-            post[5]->setEnabled(!post[5]->getEnabled());
+            post[4]->setEnabled(!post[5]->getEnabled());
             break;
         case '0':
             post[6]->setEnabled(!post[6]->getEnabled());
