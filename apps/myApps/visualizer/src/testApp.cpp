@@ -418,7 +418,7 @@ void testApp::drawShader() {
     float mousePoint[2];
     mousePoint[0] = mouseX;
     mousePoint[1] = mouseY;
-    
+
     shader1.begin();
     shader1.setUniform1f("time", time);
     shader1.setUniform2fv("resolution", resolution);
@@ -567,6 +567,7 @@ void testApp::keyPressed(int key){
     if( key == '4' ) shaderMode  = "Sabi2";
     if( key == '5' ) shaderMode  = "Bmero";
     if( key == '6' ) shaderMode  = "End";
+    if( key == '7' ) shaderMode  = "Edit";
     if( key == '9' ) shaderMode  = "Test";
     
     if( key == 't' ){
@@ -613,6 +614,9 @@ void testApp::shaderContents(string s) {
                                    "End", 6
                                    ));
     mapShaderType.insert(make_pair(
+                                   "Edit", 7
+                                   ));
+    mapShaderType.insert(make_pair(
                                    "Test", 9
                                    ));
     
@@ -640,6 +644,9 @@ void testApp::shaderContents(string s) {
             break;
         case 6:
             presetDir = "nature/";
+            break;
+        case 7:
+            presetDir = "edit/";
             break;
         case 9:
             presetDir = "test/";
