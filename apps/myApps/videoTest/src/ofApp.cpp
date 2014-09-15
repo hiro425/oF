@@ -9,7 +9,7 @@ void ofApp::setup(){
     
     fingerMovie.setPixelFormat(OF_PIXELS_RGBA);
     ofQTKitDecodeMode decodeMode = OF_QTKIT_DECODE_PIXELS_AND_TEXTURE;
-	fingerMovie.loadMovie("movies/fingers.mov", decodeMode);
+	fingerMovie.loadMovie("movies/sunset3.mov", decodeMode);
 	fingerMovie.play();
     
     diffuseColor = ofColor(255.f, 255.f, 255.f);
@@ -18,7 +18,7 @@ void ofApp::setup(){
     pointLight.setDiffuseColor( diffuseColor );
 	pointLight.setSpecularColor( specularColor );
 	pointLight.setPointLight();
-    pointLight.setPosition(ofGetWidth(), ofGetHeight(), 1080);
+    pointLight.setPosition(ofGetWidth()/2, ofGetHeight()/4,500);
 
     int bufferSize = 256;
     soundStream.setup(this, 0, 1, 44100, bufferSize, 4);
@@ -27,12 +27,18 @@ void ofApp::setup(){
     thresh = 0.2;
     bang = false;
     
+    post.init(ofGetWidth(), ofGetHeight());
+    //post.createPass<DofAltPass>()->setEnabled(true);           //0
+    //post.createPass<NoiseWarpPass>()->setEnabled(false);
+    post.createPass<EdgePass>()->setEnabled(true);
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     fingerMovie.update();
     //fingerMovie.setPaused(frameByframe);
+    /*
     if (bang == true) {
         fingerMovie.setSpeed(2);
     }
@@ -42,7 +48,7 @@ void ofApp::update(){
 
     if (fingerMovie.getCurrentFrame() > 170 ) {
         fingerMovie.setFrame(0);
-    }
+    }*/
     
     checkBang();
 }
@@ -60,20 +66,23 @@ void ofApp::checkBang() {
 void ofApp::draw(){
     ofSetHexColor(0xFFFFFF);
     
+    post.begin();
     ofEnableLighting();
     ofEnableAlphaBlending();
     //ofEnableBlendMode(OF_BLENDMODE_ADD);
     pointLight.enable();
     
     if (fingerMovie.isLoaded()) {
-        fingerMovie.draw(0, 0, ofGetWidth(), ofGetHeight());
+        fingerMovie.draw(0, ofGetHeight(), ofGetWidth(), -ofGetHeight());
     }
     
     ofSetColor(255, 255, 255, 127);
-    ofDrawSphere(ofGetWidth()/5*4 + 500 * smoothedVol, ofGetHeight()/2, 10 + 100*smoothedVol);
-
+    ofDrawSphere(ofGetWidth()/5*4 + 500 * smoothedVol, ofGetHeight()/2, 100, 10 + 100*smoothedVol);
+    ofDrawSphere(ofGetWidth()/5*4 + 500 * smoothedVol, ofGetHeight()/2, 100,  10 + 100*smoothedVol);
+    ofRect(ofGetWidth()/2 + 500 * smoothedVol, ofGetHeight()/4*3 - 300 * smoothedVol, 100, 10, 10);
     pointLight.disable();
     ofDisableLighting();
+    post.end();
 }
 
 //--------------------------------------------------------------
@@ -94,7 +103,7 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
     smoothedVol *= 0.93;
     smoothedVol += 0.07 * curVol;
     
-    cout << smoothedVol << endl;
+    //cout << smoothedVol << endl;
     
 }
 
@@ -139,6 +148,6 @@ void ofApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo){
 
 }

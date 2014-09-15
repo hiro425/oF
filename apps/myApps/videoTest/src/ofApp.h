@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofQTKitPlayer.h"
+#include "ofxPostProcessing.h"
 
 class ofApp : public ofBaseApp{
 
@@ -36,6 +37,8 @@ class ofApp : public ofBaseApp{
     void audioIn(float * input, int bufferSize, int nChannels);
     void checkBang();
     bool eventFlg;
+    
+    ofxPostProcessing post;
     
     
 };
