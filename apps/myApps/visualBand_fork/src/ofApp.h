@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxProcessFFT.h"
-#include "createPrimitive.h"
+#include "ofxFft.h"
+#include "createObject.h"
 #include "ofxPostProcessing.h"
 #include "create3dModel.h"
 
@@ -36,7 +36,7 @@ class ofApp : public ofBaseApp{
     bool rotateMode;
     float decay;
     
-    vector<createPrimitive> primitives;
+    vector<createObject> cObjects;
     
     bool warpFlg;
     bool flashFlg;
@@ -71,11 +71,17 @@ class ofApp : public ofBaseApp{
     void audioIn(float * input, int bufferSize, int nChannels);
     void checkBang(bandwidthData &d);
 
+    int plotHeight;
+	ofxFft* fft;
+	ofMutex soundMutex;
+	vector<float> drawBins, middleBins, audioBins;
+   
     
     //light
     ofLight pointLight;
     ofColor diffuseColor;
     ofColor specularColor;
+    bool lightMode;
     bool darkFlg;
     
     ofxPostProcessing post;

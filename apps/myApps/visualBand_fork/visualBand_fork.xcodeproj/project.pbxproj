@@ -44,6 +44,7 @@
 		8F22A650775BAB1819F1E833 /* SPK_Cylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3A178BCD8B92D801EC4C6E3 /* SPK_Cylinder.cpp */; };
 		9A5F288260539DAB3C2D034E /* SPK_Collision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6815DEAE246F32FDA5D9BF35 /* SPK_Collision.cpp */; };
 		A5A230F0511A3A5AAF3410B2 /* SPK_System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC901AA6205039E10C721A5 /* SPK_System.cpp */; };
+		A778D6F019C19DEF00D066C9 /* createAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A778D6ED19C19BF000D066C9 /* createAction.cpp */; };
 		A7AE3B75198DDFF800E180BB /* createPrimitive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7AE3B73198DDFF800E180BB /* createPrimitive.cpp */; };
 		A7BB30D6199328AC003735D1 /* createObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7BB30D4199328AC003735D1 /* createObject.cpp */; };
 		A7BF42E6198FD1F60068A827 /* BleachBypassPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7BF42B5198FD1F60068A827 /* BleachBypassPass.cpp */; };
@@ -240,6 +241,9 @@
 		A3A178BCD8B92D801EC4C6E3 /* SPK_Cylinder.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Cylinder.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Zones/SPK_Cylinder.cpp; sourceTree = SOURCE_ROOT; };
 		A54EBCDD1B4E0C75B9355154 /* SPK_DEF.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_DEF.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_DEF.h; sourceTree = SOURCE_ROOT; };
 		A6F65D3430FD7E893FFF58F3 /* kiss_fft.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = kiss_fft.h; path = ../../../addons/ofxFft/libs/kiss/kiss_fft.h; sourceTree = SOURCE_ROOT; };
+		A778D6ED19C19BF000D066C9 /* createAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = createAction.cpp; sourceTree = "<group>"; };
+		A778D6EE19C19BF000D066C9 /* createAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = createAction.h; sourceTree = "<group>"; };
+		A778D6F419C1A46300D066C9 /* defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
 		A7AE3B73198DDFF800E180BB /* createPrimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = createPrimitive.cpp; sourceTree = "<group>"; };
 		A7AE3B74198DDFF800E180BB /* createPrimitive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = createPrimitive.h; sourceTree = "<group>"; };
 		A7B4C1AE5EEC032DD9010B2A /* SPK_ZoneIntersection.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_ZoneIntersection.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Zones/SPK_ZoneIntersection.cpp; sourceTree = SOURCE_ROOT; };
@@ -999,8 +1003,11 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				A778D6F419C1A46300D066C9 /* defines.h */,
 				A7BB30D4199328AC003735D1 /* createObject.cpp */,
 				A7BB30D5199328AC003735D1 /* createObject.h */,
+				A778D6ED19C19BF000D066C9 /* createAction.cpp */,
+				A778D6EE19C19BF000D066C9 /* createAction.h */,
 				A7BF436119931EED0068A827 /* create3dModel.cpp */,
 				A7BF436219931EED0068A827 /* create3dModel.h */,
 				A7AE3B73198DDFF800E180BB /* createPrimitive.cpp */,
@@ -1158,6 +1165,7 @@
 				0686C38EE993C67B96002FA1 /* kiss_fft.c in Sources */,
 				6DB9E3911BA6216FE1F0E91C /* kiss_fftr.c in Sources */,
 				AD94280E2C13ACB2C068B554 /* ofxSPK.cpp in Sources */,
+				A778D6F019C19DEF00D066C9 /* createAction.cpp in Sources */,
 				AD410EF8CB998284B4EF08BA /* ofxSPKEmitter.cpp in Sources */,
 				87C3B22D219B57026DB6A841 /* ofxSPKGroup.cpp in Sources */,
 				BFE427335D428655FDA917FA /* ofxSPKModifier.cpp in Sources */,

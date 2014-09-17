@@ -9,16 +9,7 @@
 #include "create3dModel.h"
 
 void create3dModel::init(int w, int h, const ofVec2f &sc, const ofVec3f &v, ActionType a) {
-    width   = w;
-    height  = h;
-    aType   = a;
-    screen  = sc;
-    initPos = v;
-    addFlg  = true;
-    noiseFlg = false;
-    
-    setColorType(CP_MONO);
-    mags.clear();
+
     ofDisableArbTex();
 	//model.loadModel("dog/dog.3ds");
     //models.push_back(model);
@@ -39,7 +30,7 @@ void create3dModel::drawWithMesh(){
     for (int i = 0; i < models.size() && i < 10; i++) {
 
         ofVec3f scale = models[i]->getScale()/2;
-        ofVec3f position = points[i]; //model.getPosition();
+        ofVec3f position = prop.points[i]; //model.getPosition();
         models[i]->setPosition(position.x, position.y, position.z);
         float normalizedScale = models[i]->getNormalizedScale();
         ofVboMesh mesh = models[i]->getMesh(0);

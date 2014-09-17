@@ -10,18 +10,21 @@
 #define __visualBand__createPrimitive__
 
 #include "ofMain.h"
-#include "createObject.h"
+#include "defines.h"
 
 
-class createPrimitive: public createObject {
+class createPrimitive {
 public:
     createPrimitive() {}
-    void init(int w, int h, const ofVec2f &sc, const ofVec3f &v, DrawType t = CP_POINT, ActionType a = CP_SLIDE);
-    void draw();
+    void setup(property &p);
+    void draw(property &p);
+    
+    property prop;
     
     float noiseSeed;
     float noiseMulti;
     bool particleFlg;
+    
     
     ofTexture texture;
     ofShader shader;

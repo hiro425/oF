@@ -11,62 +11,13 @@
 
 #include "ofMain.h"
 #include "ofxAssimpModelLoader.h"
-
-enum ActionType {
-    CP_NO_ACTION,
-    CP_SLIDE,
-    CP_ROTATE,
-    CP_ROTATE_HORIZONTAL,
-    CP_WAVE,
-    CP_GATHER,
-    CP_COME,
-    CP_COME_CONSTANT,
-    CP_CHANGE_COLOR,
-    CP_SPREAD,
-    CP_SPREAD_BY_ONE,
-    CP_BIT_NOISE,
-    CP_FLOW_X,
-    CP_FLOW_X_SIN,
-    CP_FLOW_X_ROTATE,
-};
-
-enum TransformType {
-    CP_NO_TRANS,
-    CP_DIFFUSE
-};
-
-enum ColorType {
-    CP_MONO,
-    CP_RANDOM,
-    CP_FIRE,
-    CP_SEA,
-    CP_FOREST
-};
-
-enum DrawType {
-    CP_NO_DRAW,
-    CP_POINT,
-    CP_SPHERE,
-    CP_LINE,
-    CP_LINE_SIN,
-    CP_LINE_IND,
-    CP_RECT,
-    CP_RECT_ROUNDED,
-    CP_TRIANGLE,
-    CP_TRIANGLE_IND,
-    CP_CIRCLE,
-    CP_ELLIPPSE,
-    
-};
-
+#include "defines.h"
+#include "createAction.h"
+#include "createPrimitive.h"
 
 class createObject {
 public:
-    int width;
-    int height;
-    ofVec2f screen;
-    ofVec3f initPos;
-    ofVec3f mainPos;
+
     
     DrawType   dType;
     ActionType aType;
@@ -79,30 +30,24 @@ public:
     
     ofFloatColor minColor;
     ofFloatColor maxColor;
-    
-    ofVbo vbo;
-    vector<ofVec3f> points;
-    vector<ofVec3f> distPoints;
-    vector<ofFloatColor> colors;
-    vector<ofIndexType> faces;
-    vector<ofVec3f> mags;
-    vector<bool> animated;
-    vector<float> origMags;
-    
+
+    property prop;
     float angle;
+    
+    createAction cAction;
+    createPrimitive cPrimitive;
     
     vector<ofxAssimpModelLoader*> models;
     
     // ------------------------------- function
     createObject();
     
-    virtual void init(){}
-    virtual void draw(){}
+    void setup(ofVec2f d, ofVec2f s, ofVec3f minp, ofVec3f maxp, ofVec2f size, DrawType t, ActionType a, ColorType c);
     void update();
     void callback();
-    void add();
-    void addRandom();
-    void _add(const ofVec3f &v, const ofFloatColor &c, const ofIndexType &f, const ofVec3f &mag);
+    void draw();
+    void _add();
+    void _add(const ofVec3f &mag);
     
     
     void clear();
@@ -117,6 +62,7 @@ public:
     
     void updatePos(int index, const ofVec3f &v);
     void updateMags(float mag);
+    void updateDrawBins(vector <float> &d);
 };
 
 

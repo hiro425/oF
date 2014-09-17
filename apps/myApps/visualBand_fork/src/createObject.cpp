@@ -14,77 +14,125 @@ createObject::createObject() {
     animationFlg = false;
 }
 
-void createObject::add() {
-    _add(initPos,
-         ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                      ofRandom(minColor.g, maxColor.g),
-                      ofRandom(minColor.b, maxColor.b),
-                      ofRandom(minColor.a, maxColor.a)),
-         getIndex(), ofVec3f(ofRandom(5,30)));
+void createObject::setup(
+                         ofVec2f d,
+                         ofVec2f s,
+                         ofVec3f minp,
+                         ofVec3f maxp,
+                         ofVec2f size,
+                         DrawType t,
+                         ActionType a,
+                         ColorType c ){
+    prop.div = d;
+    prop.screen = s;
+    prop.minAddPos = minp;
+    prop.maxAddPos = maxp;
+    prop.minMaxSize = size;
+    prop.dType = t;
+    prop.aType = a;
+    setColorType(c);
+    prop.angle = 0.0;
+    
+    updateAddFlg = false;
+    addFlg  = true;
+    noiseFlg = false;
+    prop.mags.clear();
+    
+    cAction.setup(prop);
+    cPrimitive.setup(prop);
 }
 
-void createObject::addRandom() {
-    _add(ofVec3f(
-                 ofRandom(screen.x,width),
-                 ofRandom(screen.y, height),
-                 ofRandom(-3000, 3000)
-                 ),
-         ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                      ofRandom(minColor.g, maxColor.g),
-                      ofRandom(minColor.b, maxColor.b),
-                      ofRandom(minColor.a, maxColor.a)),
-         getIndex(), ofVec3f(ofRandom(5,30)));
-}
-
-void createObject::_add(const ofVec3f &v, const ofFloatColor &c, const ofIndexType &f, const ofVec3f &mag) {
+void createObject::_add() {
     if (!addFlg) {
         return;
     }
-    points.push_back(v);
-    distPoints.push_back(v);
-    colors.push_back(c);
-    faces.push_back(f);
-    mags.push_back(mag);
-    origMags.push_back(mag.x);
-    animated.push_back(false);
+    prop.points.push_back(ofVec3f(
+                                  ofRandom(prop.minAddPos.x, prop.maxAddPos.x),
+                                  ofRandom(prop.minAddPos.y, prop.maxAddPos.y),
+                                  ofRandom(prop.minAddPos.z, prop.maxAddPos.z)
+                                  ));
+    prop.distPoints.push_back(ofVec3f(
+                                      ofRandom(prop.minAddPos.x, prop.maxAddPos.x),
+                                      ofRandom(prop.minAddPos.y, prop.maxAddPos.y),
+                                      ofRandom(prop.minAddPos.z, prop.maxAddPos.z)
+                                      ));
+    prop.colors.push_back(ofFloatColor(ofRandom(minColor.r, maxColor.r),
+                                       ofRandom(minColor.g, maxColor.g),
+                                       ofRandom(minColor.b, maxColor.b),
+                                       ofRandom(minColor.a, maxColor.a)));
+    prop.faces.push_back(getIndex());
     
-    vbo.setVertexData(&points[0], points.size(), GL_DYNAMIC_DRAW);
-    vbo.setNormalData(&mags[0], mags.size(), GL_DYNAMIC_DRAW);
-    vbo.setColorData(&colors[0], colors.size(), GL_DYNAMIC_DRAW);
-    vbo.setIndexData(&faces[0], faces.size(), GL_DYNAMIC_DRAW);
+    ofVec3f mag = ofVec3f(ofRandom(prop.minMaxSize.x, prop.minMaxSize.y));
+    prop.mags.push_back(mag);
+    prop.origMags.push_back(mag.x);
+    prop.animated.push_back(false);
+    
+    prop.vbo.setVertexData(&prop.points[0], prop.points.size(), GL_DYNAMIC_DRAW);
+    prop.vbo.setNormalData(&prop.mags[0], prop.mags.size(), GL_DYNAMIC_DRAW);
+    prop.vbo.setColorData(&prop.colors[0], prop.colors.size(), GL_DYNAMIC_DRAW);
+    prop.vbo.setIndexData(&prop.faces[0], prop.faces.size(), GL_DYNAMIC_DRAW);
+}
+
+void createObject::_add(const ofVec3f &mag) {
+    if (!addFlg) {
+        return;
+    }
+    prop.points.push_back(ofVec3f(
+                                  ofRandom(prop.minAddPos.x, prop.maxAddPos.x),
+                                  ofRandom(prop.minAddPos.y, prop.maxAddPos.y),
+                                  ofRandom(prop.minAddPos.z, prop.maxAddPos.z)
+                                  ));
+    prop.distPoints.push_back(ofVec3f(
+                                      ofRandom(prop.minAddPos.x, prop.maxAddPos.x),
+                                      ofRandom(prop.minAddPos.y, prop.maxAddPos.y),
+                                      ofRandom(prop.minAddPos.z, prop.maxAddPos.z)
+                                      ));
+    prop.colors.push_back(ofFloatColor(ofRandom(minColor.r, maxColor.r),
+                                       ofRandom(minColor.g, maxColor.g),
+                                       ofRandom(minColor.b, maxColor.b),
+                                       ofRandom(minColor.a, maxColor.a)));
+    prop.faces.push_back(getIndex());
+    
+    prop.mags.push_back(mag);
+    prop.origMags.push_back(mag.x);
+    prop.animated.push_back(false);
+    
+    prop.vbo.setVertexData(&prop.points[0], prop.points.size(), GL_DYNAMIC_DRAW);
+    prop.vbo.setNormalData(&prop.mags[0], prop.mags.size(), GL_DYNAMIC_DRAW);
+    prop.vbo.setColorData(&prop.colors[0], prop.colors.size(), GL_DYNAMIC_DRAW);
+    prop.vbo.setIndexData(&prop.faces[0], prop.faces.size(), GL_DYNAMIC_DRAW);
 }
 
 void createObject::clear() {
-    points.clear();
-    distPoints.clear();
-    colors.clear();
-    faces.clear();
-    mags.clear();
-    origMags.clear();
-    animated.clear();
+    prop.points.clear();
+    prop.distPoints.clear();
+    prop.colors.clear();
+    prop.faces.clear();
+    prop.mags.clear();
+    prop.origMags.clear();
+    prop.animated.clear();
 }
 
 void createObject::eraseOld() {
-    points.erase(points.begin());
-    distPoints.erase(distPoints.begin());
-    colors.erase(colors.begin());
+    prop.points.erase(prop.points.begin());
+    prop.distPoints.erase(prop.distPoints.begin());
+    prop.colors.erase(prop.colors.begin());
     //faces.erase(faces.begin());
-    faces.pop_back();
-    mags.erase(mags.begin());
-    origMags.erase(origMags.begin());
+    prop.faces.pop_back();
+    prop.mags.erase(prop.mags.begin());
+    prop.origMags.erase(prop.origMags.begin());
 }
 
-
 int createObject::getIndex() {
-    return faces.size();
+    return prop.faces.size();
 }
 
 void createObject::setDrawType(DrawType d) {
-    dType = d;
+    prop.dType = d;
 }
 
 void createObject::setActionType(ActionType a) {
-    aType = a;
+    prop.aType = a;
 }
 
 void createObject::setColorType(ColorType c) {
@@ -101,15 +149,44 @@ void createObject::setColorType(ColorType c) {
     
     switch (cType) {
         case CP_MONO:
-            minColor = ofFloatColor(1.0, 1.0, 1.0, 0.1);
+            minColor = ofFloatColor(1.0, 1.0, 1.0, 1.0);
             maxColor = ofFloatColor(1.0, 1.0, 1.0, 1.0);
             
-            for (int i = 0; i < colors.size(); i++) {
+            for (int i = 0; i < prop.colors.size(); i++) {
                 float rand = ofRandom(1);
-                colors[i] = ofFloatColor(rand,
+                prop.colors[i] = ofFloatColor(rand,
                                          rand,
                                          rand,
                                          rand);
+            }
+            break;
+        case CP_GRAY:
+            minColor = ofFloatColor(1.0, 1.0, 1.0, 0.3);
+            maxColor = ofFloatColor(1.0, 1.0, 1.0, 0.3);
+            
+            for (int i = 0; i < prop.colors.size(); i++) {
+                prop.colors[i] = ofFloatColor(ofRandom(minColor.r, maxColor.r),
+                                              ofRandom(minColor.g, maxColor.g),
+                                              ofRandom(minColor.b, maxColor.b),
+                                              ofRandom(minColor.a, maxColor.a));
+            }
+            break;
+        case CP_HIGHLIGHT:
+            minR = 255. / 255.;
+            maxR = 255. / 255.;
+            minG = 251. / 255.;
+            maxG = 251. / 255.;
+            minB = 204. / 255.;
+            maxB = 204. / 255.;
+            minA = 127. /255.;
+            maxA = 255. / 255.;
+            minColor = ofFloatColor(minR, minG, minB, minA);
+            maxColor = ofFloatColor(maxR, maxG, maxB, maxA);
+            for (int i = 0; i < prop.colors.size(); i++) {
+                prop.colors[i] = ofFloatColor(ofRandom(minColor.r, maxColor.r),
+                                              ofRandom(minColor.g, maxColor.g),
+                                              ofRandom(minColor.b, maxColor.b),
+                                              ofRandom(minColor.a, maxColor.a));
             }
             break;
         case CP_FIRE:
@@ -123,8 +200,8 @@ void createObject::setColorType(ColorType c) {
             maxA = 255. / 255.;
             minColor = ofFloatColor(minR, minG, minB, minA);
             maxColor = ofFloatColor(maxR, maxG, maxB, maxA);
-            for (int i = 0; i < colors.size(); i++) {
-                colors[i] = ofFloatColor(ofRandom(minColor.r, maxColor.r),
+            for (int i = 0; i < prop.colors.size(); i++) {
+                prop.colors[i] = ofFloatColor(ofRandom(minColor.r, maxColor.r),
                                          ofRandom(minColor.g, maxColor.g),
                                          ofRandom(minColor.b, maxColor.b),
                                          ofRandom(minColor.a, maxColor.a));
@@ -141,8 +218,8 @@ void createObject::setColorType(ColorType c) {
             maxA = 255. / 255.;
             minColor = ofFloatColor(minR, minG, minB, minA);
             maxColor = ofFloatColor(maxR, maxG, maxB, maxA);
-            for (int i = 0; i < colors.size(); i++) {
-                colors[i] = ofFloatColor(ofRandom(minColor.r, maxColor.r),
+            for (int i = 0; i < prop.colors.size(); i++) {
+                prop.colors[i] = ofFloatColor(ofRandom(minColor.r, maxColor.r),
                                          ofRandom(minColor.g, maxColor.g),
                                          ofRandom(minColor.b, maxColor.b),
                                          ofRandom(minColor.a, maxColor.a));
@@ -159,8 +236,8 @@ void createObject::setColorType(ColorType c) {
             maxA = 255. / 255.;
             minColor = ofFloatColor(minR, minG, minB, minA);
             maxColor = ofFloatColor(maxR, maxG, maxB, maxA);
-            for (int i = 0; i < colors.size(); i++) {
-                colors[i] = ofFloatColor(ofRandom(minColor.r, maxColor.r),
+            for (int i = 0; i < prop.colors.size(); i++) {
+                prop.colors[i] = ofFloatColor(ofRandom(minColor.r, maxColor.r),
                                          ofRandom(minColor.g, maxColor.g),
                                          ofRandom(minColor.b, maxColor.b),
                                          ofRandom(minColor.a, maxColor.a));
@@ -169,8 +246,8 @@ void createObject::setColorType(ColorType c) {
         case CP_RANDOM:
             minColor = ofFloatColor(ofRandom(1),ofRandom(1), ofRandom(1), ofRandom(1));
             maxColor = ofFloatColor(ofRandom(1), ofRandom(1), ofRandom(1), ofRandom(1));
-            for (int i = 0; i < colors.size(); i++) {
-                colors[i] = ofFloatColor(ofRandom(minColor.r, maxColor.r),
+            for (int i = 0; i < prop.colors.size(); i++) {
+                prop.colors[i] = ofFloatColor(ofRandom(minColor.r, maxColor.r),
                                          ofRandom(minColor.g, maxColor.g),
                                          ofRandom(minColor.b, maxColor.b),
                                          ofRandom(minColor.a, maxColor.a));
@@ -180,11 +257,10 @@ void createObject::setColorType(ColorType c) {
             break;
     }
     
-    vbo.setColorData(&colors[0], colors.size(), GL_DYNAMIC_DRAW);
+    prop.vbo.setColorData(&prop.colors[0], prop.colors.size(), GL_DYNAMIC_DRAW);
 }
 
 ofColor createObject::getColor() {
-    
     int r =maxColor.r*255;
     int g =maxColor.g*255;
     int b =maxColor.b*255;  
@@ -194,432 +270,128 @@ ofColor createObject::getColor() {
 }
 
 void createObject::updatePos(int index, const ofVec3f &v) {
-    points[index] = v;
-    vbo.setVertexData(&points[0], points.size(), GL_DYNAMIC_DRAW);
+    prop.points[index] = v;
+    prop.vbo.setVertexData(&prop.points[0], prop.points.size(), GL_DYNAMIC_DRAW);
 }
 
 void createObject::updateMags(float mag) {
-    for (int i = 0; i < mags.size(); i++) {
-        mags[i] = ofVec3f(origMags[i] * mag);
+    for (int i = 0; i < prop.mags.size(); i++) {
+        prop.mags[i] = ofVec3f(prop.origMags[i] * mag);
     }
+}
+
+void createObject::updateDrawBins(vector <float> &d) {
+    prop.drawBins = d;
+    //cout << prop.drawBins.size() << endl;
 }
 
 
 void createObject::update() {
-    if (!points.size()) return;
-    while (points.size() > 800) eraseOld();
+    if (!prop.points.size()) return;
+    while (prop.points.size() > 800) eraseOld();
+    if (prop.points[0].x < prop.screen.x - 1000
+        || prop.points[0].x > (prop.screen.x + prop.div.x + 1000)
+        || prop.points[0].y < prop.screen.y - 1000
+        || prop.points[0].y > (prop.screen.y + prop.div.y + 1000))
+    {
+        eraseOld();
+    }
    
-    
     float seed = ofRandom(-1, 1);
     float multiply = 5.0;
     
-    for (int i = 0; i < points.size(); i++) {
-        ofVec3f speed = (distPoints[i] - points[i]) * 0.3;
-        points[i] += speed;
+    for (int i = 0; i < prop.points.size(); i++) {
+        ofVec3f speed = (prop.distPoints[i] - prop.points[i]) * 0.3;
+        prop.points[i] += speed;
         
         if (noiseFlg) {
             seed += 0.1;
             float noise = ofNoise(seed) - 0.51;
             
             if (i%3==0) {
-                points[i].z = points[i].z + noise * multiply * mags[i].x/2;
-                points[i].x = points[i].x + noise * multiply * mags[i].x/2;
+                prop.points[i].z = prop.points[i].z + noise * multiply * prop.mags[i].x/2;
+                prop.points[i].x = prop.points[i].x + noise * multiply * prop.mags[i].x/2;
             }
             else if(i%3==1) {
-                points[i].x = points[i].x + noise * multiply * mags[i].x/2;
-                points[i].y = points[i].y + noise * multiply * mags[i].x/2;
+                prop.points[i].x = prop.points[i].x + noise * multiply * prop.mags[i].x/2;
+                prop.points[i].y = prop.points[i].y + noise * multiply * prop.mags[i].x/2;
             }
             else {
-                points[i].y = points[i].y + noise * multiply * mags[i].x/2;
-                points[i].z = points[i].z + noise * multiply * mags[i].x/2;
+                prop.points[i].y = prop.points[i].y + noise * multiply * prop.mags[i].x/2;
+                prop.points[i].z = prop.points[i].z + noise * multiply * prop.mags[i].x/2;
             }
-            
         }
     }
-    switch (aType) {
-        case CP_COME_CONSTANT:
-            for (int i = 0; i < points.size(); i++) {
-                float dist = ofDist(screen.x + width/2, screen.y + height/2, points[i].x, points[i].y);
-                distPoints[i] = ofVec3f(
-                                        (screen.x + width/2) + dist*cos(ofGetElapsedTimef()+i),
-                                        (screen.y + height/2) + dist*sin(ofGetElapsedTimef()+i),
-                                        points[i].z + 200);
-            }
-            for (int j = 0; j < 3; j++) {
-                _add(
-                     ofVec3f(
-                             ofRandom(screen.x, screen.x + width),
-                             ofRandom(screen.y, screen.y + height),
-                             -700
-                             ),
-                     ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                  ofRandom(minColor.g, maxColor.g),
-                                  ofRandom(minColor.b, maxColor.b),
-                                  ofRandom(minColor.a, maxColor.a)),
-                     getIndex(),
-                     ofVec3f(ofRandom(5,30)));
-            }
-
-            break;
+    
+    cAction.update(prop);
+    
+    switch (prop.aType) {
         case CP_FLOW_X:
-            for (int i = 0; i < points.size(); i++) {
-                distPoints[i] = ofVec3f(
-                                        points[i].x - 10,
-                                        points[i].y,
-                                        points[i].z);
-            }
-            
-            if (updateAddFlg) {
-                if ((int)(ofGetElapsedTimef()*10)%2==0) {
-                    
-                for (int j = 0; j < 1; j++) {
-                    _add(
-                         ofVec3f(
-                                 ofGetWidth()+300,
-                                 ofRandom(screen.y, screen.y + height),
-                                 0
-                                 ),
-                         ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                      ofRandom(minColor.g, maxColor.g),
-                                      ofRandom(minColor.b, maxColor.b),
-                                      ofRandom(minColor.a, maxColor.a)),
-                         getIndex(),
-                         ofVec3f(ofRandom(5,30)));
-                }
-                }
-            }
-            break;
-        case CP_FLOW_X_ROTATE:
-            for (int i = 0; i < points.size(); i++) {
-                distPoints[i] = ofVec3f(
-                                        points[i].x - 10,
-                                        points[i].y,
-                                        points[i].z);
-            }
-            if (updateAddFlg) {
-                //if ((int)(ofGetElapsedTimef()*10)%2==0) {
-                    
-                    for (int j = 0; j < 1; j++) {
-                        _add(
-                             ofVec3f(
-                                     ofGetWidth()+300,
-                                     ofRandom(screen.y, screen.y + height),
-                                     ofRandom(-700,700)
-                                     ),
-                             ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                          ofRandom(minColor.g, maxColor.g),
-                                          ofRandom(minColor.b, maxColor.b),
-                                          ofRandom(minColor.a, maxColor.a)),
-                             getIndex(),
-                             ofVec3f(ofRandom(5,30)));
-                    }
-                //}
-            }
-            angle = angle + 0.2*mags[0].x;
-            break;
-        case CP_FLOW_X_SIN:
-            for (int i = 0; i < points.size(); i++) {
-                distPoints[i] = ofVec3f(
-                                        points[i].x - 10,
-                                        points[i].y,
-                                        points[i].z);
-            }
-            if (updateAddFlg) {
-                
-                    for (int j = 0; j < 1; j++) {
-                        _add(
-                             ofVec3f(
-                                     ofGetWidth()+300,
-                                     screen.y + mags[0].x +(height/4*(sin(ofGetElapsedTimef())+1)),
-                                     0
-                                     ),
-                             ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                          ofRandom(minColor.g, maxColor.g),
-                                          ofRandom(minColor.b, maxColor.b),
-                                          ofRandom(minColor.a, maxColor.a)),
-                             getIndex(),
-                             ofVec3f(ofRandom(5,30)));
-                    }
-            }
-            angle += 5;
-            break;
-        case CP_ROTATE:
-            for (int i = 0; i < points.size(); i++) {
-                float radius = width/4 * mags[i].x/30;
-                distPoints[i] = ofVec3f(
-                                        screen.x + width/2 + radius*cos(ofGetElapsedTimef()+i),
-                                        screen.y + height/4,
-                                        radius*sin(ofGetElapsedTimef()+i));
-            }
-            break;
-        case CP_ROTATE_HORIZONTAL:
-            for (int i = 0; i < points.size(); i++) {
-                //float dist = ofDist(screen.x + width/2, screen.y + height/2, points[i].x, points[i].y);
-                float radius = width/4 * mags[i].x/30;
-                distPoints[i] = ofVec3f(
-                                        (screen.x + width/2) + radius*cos(ofGetElapsedTimef()+i),
-                                        (screen.y + height/2) + radius*sin(ofGetElapsedTimef()+i),
-                                        points[i].z);
-            }
-            break;
-        case CP_SPREAD:
-            for (int i = 0; i < points.size(); i++) {
-                float dist = ofDist(screen.x + width/2, 0, points[i].x, points[i].z);
-                distPoints[i] = ofVec3f(
-                                        (screen.x + width/2) + (dist + 700)*cos(ofGetElapsedTimef()+i),
-                                        points[i].y,
-                                        (dist + 700)*sin(ofGetElapsedTimef()+i));
-            }
-            break;
-        case CP_SPREAD_BY_ONE:
-            /*
-            for (int i = 0; i < points.size(); i++) {
-                float dist = ofDist(screen.x + width/2, 0, points[i].x, points[i].z);
-                distPoints[i] = ofVec3f(
-                                        (screen.x + width/2) + (dist + 700)*cos(ofGetElapsedTimef()+i),
-                                        points[i].y,
-                                        (dist + 700)*sin(ofGetElapsedTimef()+i));
-            }
-             */
+            if ( (prop.mags[0].x > 10) && (ofGetElapsedTimeMillis()%10 == 0) ) _add();
+            //cout << prop.mags[0].x << endl;
             break;
         default:
             break;
     }
-    vbo.setVertexData(&points[0], points.size(), GL_DYNAMIC_DRAW);
-    vbo.setNormalData(&mags[0], mags.size(), GL_DYNAMIC_DRAW);
-    vbo.setColorData(&colors[0], colors.size(), GL_DYNAMIC_DRAW);
-    vbo.setIndexData(&faces[0], faces.size(), GL_DYNAMIC_DRAW);
+    
+    switch (prop.dType) {
+        case CP_CYLINDER_SPECTRUM:
+            cout << prop.vol << endl;
+            if (prop.vol > 0.5 && (ofGetElapsedTimeMillis()%10 == 0) ) {
+                for (int i = 0; i < 10/*prop.drawBins.size()*/; i++) {
+                    prop.minAddPos.z = prop.maxAddPos.z = -700 + i * 140;
+                    prop.minAddPos.y = prop.maxAddPos.y;
+                    
+                    //_add(ofVec3f(prop.drawBins[i]));
+                    /*
+                    if (prop.drawBins[i] == 1) {
+                        _add(ofVec3f(1,1,1));
+                    }
+                    else {
+                        _add(ofVec3f(0,0,0));
+                    }
+                    */
+                    
+                }
+            }
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 void createObject::callback() {
-    float seed = ofRandom(-1, 1);
-    float multiply = 5.0;
+    cAction.callback(prop);
+    //_add();
     
-    switch (aType) {
-        case CP_SLIDE:
-            for (int i = 0; i < points.size(); i++) {
-                distPoints[i] = ofVec3f(
-                                        ofRandom(screen.x, screen.x + width),
-                                        ofRandom(screen.y, screen.y + height),
-                                        ofRandom(-700, 700));
-            }
-            _add(initPos,
-                 ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                              ofRandom(minColor.g, maxColor.g),
-                              ofRandom(minColor.b, maxColor.b),
-                              ofRandom(minColor.a, maxColor.a)),
-                 getIndex(),
-                 ofVec3f(ofRandom(5,30)));
-            break;
-        case CP_ROTATE:
-            for (int i = 0; i < points.size(); i++) {
-                float radius = width/4 * mags[i].x/ 100;
-                distPoints[i] = ofVec3f(
-                                        screen.x + width/2 + radius*cos(ofGetElapsedTimef()+i),
-                                        screen.y + height/4,
-                                        radius*sin(ofGetElapsedTimef()+i));
-            }
-            _add(initPos,
-                 ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                              ofRandom(minColor.g, maxColor.g),
-                              ofRandom(minColor.b, maxColor.b),
-                              ofRandom(minColor.a, maxColor.a)),
-                 getIndex(),
-                 ofVec3f(ofRandom(5,30)));
-            break;
-        case CP_ROTATE_HORIZONTAL:
-            for (int i = 0; i < points.size(); i++) {
-                //float dist = ofDist(screen.x + width/2, screen.y + height/2, points[i].x, points[i].y);
-                float radius = width/4 * mags[i].x/100;
-                distPoints[i] = ofVec3f(
-                                        (screen.x + width/2) + radius*cos(ofGetElapsedTimef()+i),
-                                        (screen.y + height/2) + radius*sin(ofGetElapsedTimef()+i),
-                                        points[i].z);
+    switch (prop.dType) {
+        case CP_CYLINDER_SPECTRUM:
+            for (int i = 0; i < 10/*prop.drawBins.size()*/; i++) {
+                prop.minAddPos.z = prop.maxAddPos.z = -700 + i * 140;
+                prop.minAddPos.y = prop.maxAddPos.y;
                 
-            }
-            _add(initPos, ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                       ofRandom(minColor.g, maxColor.g),
-                                       ofRandom(minColor.b, maxColor.b),
-                                       ofRandom(minColor.a, maxColor.a)), getIndex(), ofVec3f(ofRandom(5,30)));
-            
-            break;
-        case CP_GATHER:
-            for (int i = 0; i < points.size(); i++) {
-                float distX = ofRandom(initPos.x-10, initPos.x+10);
-                float distY = ofRandom(initPos.y-10, initPos.y+10);
-                float distZ = ofRandom(initPos.z-10, initPos.z+10);;
-                distPoints[i] = ofVec3f(distX, distY, distZ);
+                //_add(ofVec3f(prop.drawBins[i]));
                 
-            }
-            for (int j = 0; j < 10; j++) {
-                _add(initPos, ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                           ofRandom(minColor.g, maxColor.g),
-                                           ofRandom(minColor.b, maxColor.b),
-                                           ofRandom(minColor.a, maxColor.a)), getIndex(), ofVec3f(ofRandom(5,30)));
-            }
-            
-            break;
-        case CP_COME:
-            for (int i = 0; i < points.size(); i++) {
-                float dist = ofDist(screen.x + width/2, screen.y + height/2, points[i].x, points[i].y);
-                distPoints[i] = ofVec3f(
-                                        (screen.x + width/2) + dist*cos(ofGetElapsedTimef()+i),
-                                        (screen.y + height/2) + dist*sin(ofGetElapsedTimef()+i),
-                                        points[i].z + 300);
-                
-            }
-            for (int j = 0; j < 3; j++) {
-                _add(
-                     ofVec3f(
-                             ofRandom(screen.x, screen.x + width),
-                             ofRandom(screen.y, screen.y + height),
-                             -700
-                             ),
-                     ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                  ofRandom(minColor.g, maxColor.g),
-                                  ofRandom(minColor.b, maxColor.b),
-                                  ofRandom(minColor.a, maxColor.a)),
-                     getIndex(),
-                     ofVec3f(ofRandom(5,30)));
-            }
-            break;
-        case CP_COME_CONSTANT:
-            for (int j = 0; j < 10; j++) {
-                _add(
-                     ofVec3f(
-                             ofRandom(screen.x, screen.x + width),
-                             ofRandom(screen.y, screen.y + height),
-                             -700
-                             ),
-                     ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                  ofRandom(minColor.g, maxColor.g),
-                                  ofRandom(minColor.b, maxColor.b),
-                                  ofRandom(minColor.a, maxColor.a)),
-                     getIndex(),
-                     ofVec3f(ofRandom(5,30)));
-            }
-            break;
-        case CP_FLOW_X:
-            for (int j = 0; j < 1; j++) {
-                _add(
-                     ofVec3f(
-                             ofGetWidth()+300,
-                             ofRandom(screen.y, screen.y + height),
-                             0
-                             ),
-                     ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                  ofRandom(minColor.g, maxColor.g),
-                                  ofRandom(minColor.b, maxColor.b),
-                                  ofRandom(minColor.a, maxColor.a)),
-                     getIndex(),
-                     ofVec3f(ofRandom(5,30)));
-            }
-            break;
-        case CP_FLOW_X_ROTATE:
-            for (int j = 0; j < 1; j++) {
-                _add(
-                     ofVec3f(
-                             ofGetWidth()+300,
-                             ofRandom(screen.y, screen.y + height),
-                             ofRandom(-700,700)
-                             ),
-                     ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                  ofRandom(minColor.g, maxColor.g),
-                                  ofRandom(minColor.b, maxColor.b),
-                                  ofRandom(minColor.a, maxColor.a)),
-                     getIndex(),
-                     ofVec3f(ofRandom(5,30)));
-            }
-            //angle += 5.;
-            break;
-        case CP_FLOW_X_SIN:
-            for (int j = 0; j < 1; j++) {
-                _add(
-                     ofVec3f(
-                             ofGetWidth()+300,
-                             ofRandom(screen.y, screen.y + height),
-                             0
-                             ),
-                     ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                  ofRandom(minColor.g, maxColor.g),
-                                  ofRandom(minColor.b, maxColor.b),
-                                  ofRandom(minColor.a, maxColor.a)),
-                     getIndex(),
-                     ofVec3f(ofRandom(5,30)));
-            }
-            
-            break;
-        case CP_SPREAD:
-            for (int j = 0; j < 10; j++) {
-                    _add(
-                         ofVec3f(
-                                 ofRandom(screen.x, screen.x + width),
-                                 ofRandom(screen.y, screen.y + height),
-                                 -700
-                                 ),
-                         ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                      ofRandom(minColor.g, maxColor.g),
-                                      ofRandom(minColor.b, maxColor.b),
-                                      ofRandom(minColor.a, maxColor.a)),
-                         getIndex(),
-                         ofVec3f(ofRandom(5,30)));
-            }
-            break;
-        case CP_SPREAD_BY_ONE:
-            if (points.size()>20) {
-                animationFlg = true;
-                addFlg = false;
-            }
-            else if (points.size() == 0) {
-                animationFlg = false;
-                addFlg = true;
-            }
-            if (addFlg) {
-                _add(
-                     ofVec3f(
-                             ofRandom(screen.x, screen.x + width),
-                             ofRandom(screen.y, screen.y + height),
-                             -700
-                             ),
-                     ofFloatColor(ofRandom(minColor.r, maxColor.r),
-                                  ofRandom(minColor.g, maxColor.g),
-                                  ofRandom(minColor.b, maxColor.b),
-                                  ofRandom(minColor.a, maxColor.a)),
-                     getIndex(),
-                     ofVec3f(ofRandom(5,30)));
-            }
-            else if (animationFlg) {
-                bool finishAnimation = true;
-                for (int i = 0; i < points.size(); i++) {
-                    if (animated[i] == false) {
-                        animated[i] = true;
-                        finishAnimation = false;
-                        float dist = ofDist(screen.x + width/2, 0, points[i].x, points[i].z)*2;
-                        distPoints[i] = ofVec3f(
-                                                (screen.x + width/2) + (dist + 700)*cos(ofGetElapsedTimef()+i),
-                                                (screen.y + height/2) + (dist + 700)*sin(ofGetElapsedTimef()+i),//points[i].y,
-                                                points[i].z);//(dist + 700)*sin(ofGetElapsedTimef()+i));
-                        break;
-                    }
+                if (prop.drawBins[i] == 1) {
+                    _add(ofVec3f(1,1,1));
                 }
-                if (finishAnimation) {
-                    clear();
-                    animationFlg = false;
-                    addFlg = true;
+                else {
+                    _add(ofVec3f(0,0,0));
                 }
+                
             }
-
-            break;
-        case CP_BIT_NOISE:
-            if (noiseFlg) bitNoiseFlg = !bitNoiseFlg;
             break;
         default:
+            _add();
             break;
     }
-
-    vbo.setVertexData(&points[0], points.size(), GL_DYNAMIC_DRAW);
-    vbo.setNormalData(&mags[0], mags.size(), GL_DYNAMIC_DRAW);
-    vbo.setColorData(&colors[0], colors.size(), GL_DYNAMIC_DRAW);
-    vbo.setIndexData(&faces[0], faces.size(), GL_DYNAMIC_DRAW);
-    
 }
+
+void createObject::draw() {
+    cPrimitive.draw(prop);
+}
+
+
+
