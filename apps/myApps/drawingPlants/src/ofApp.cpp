@@ -44,7 +44,6 @@ void ofApp::update(){
 void ofApp::draw(){
     cam.begin();
     
-    ofSetColor(0, 0, 0);
     b->drawMe();
     
     cam.end();

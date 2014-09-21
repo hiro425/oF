@@ -31,4 +31,5 @@ class ofApp : public ofBaseApp{
     float camRadius;
     bool rotateMode;
     
+    
 };

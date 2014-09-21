@@ -18,7 +18,7 @@ branch::branch(float lev, float ind, float ex, float why, float zi) {
     strokeW = (1/level) * 10;
     alph = 255/level;
     len = 1;//(1/level) * ofRandom(100, 300);
-    rot = ofRandom(30, 150);
+    rot = ofRandom(45, 135);
     rot2 = ofRandom(0, 360);
     lenChange = ofRandom(0.5,1);
     rotChange = ofRandom(20) -10;
@@ -100,7 +100,7 @@ void branch::updateMe(float ex, float why, float zi) {
             int rand = ofRandom(3);
             float r,g,b;
             
-            if      (rand == 0) r = 251., g = 154., b = 133.;
+            if      (rand == 0) r = 250., g = 141., b = 148.;
             else if (rand == 1) r = 246., g = 191., b = 188.;
             else if (rand == 2) r = 253., g = 217., b = 217.;
             else                r = 250., g = 141., b = 148.;
@@ -149,7 +149,7 @@ void branch::drawMe() {
     if (level == 1) {
         drawHelper &dH = drawHelper::getInstance();
         
-        //glDepthMask(GL_FALSE);
+        glDepthMask(GL_FALSE);
         //ofEnableAlphaBlending();
         //ofEnableBlendMode(OF_BLENDMODE_ALPHA);
         ofEnablePointSprites();
@@ -160,7 +160,7 @@ void branch::drawMe() {
         texture.unbind();
         shader.end();
         ofDisablePointSprites();
-        //glDepthMask(GL_TRUE);
+        glDepthMask(GL_TRUE);
     }
 
 }
