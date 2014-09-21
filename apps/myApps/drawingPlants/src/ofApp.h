@@ -30,4 +30,5 @@ class ofApp : public ofBaseApp{
     ofVec3f camDistPos;
     float camRadius;
     bool rotateMode;
+    
 };

@@ -10,6 +10,7 @@
 #define __drawingPlants__branch__
 
 #include "ofMain.h"
+#include "drawHelper.h"
 
 class branch {
     float level;
@@ -24,18 +25,25 @@ class branch {
     int   maxLevels;
     vector <branch> children;
     vector <ofVec3f> flowers;
-    vector <ofColor> colors;
+    vector <ofVec3f> scales;
+    vector <ofFloatColor> colors;
     
     float strokeW;
     float alph;
-    float len, lenChange;
-    float rot, rotChange;
+    float len, lenChange, lenMax;
+    float rot, rotChange, rot2;
+    float flowerNum;
     
     bool witherFlg;
     
+    ofVbo vbo;
+    
+    ofTexture texture;
+    ofShader shader;
+    
 public:
-    branch(float lev, float ind, float ex, float why);
-    void updateMe(float ex, float why);
+    branch(float lev, float ind, float ex, float why, float zi);
+    void updateMe(float ex, float why, float zi);
     void drawMe();
     void witherMe();
     

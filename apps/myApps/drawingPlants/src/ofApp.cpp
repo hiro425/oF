@@ -4,11 +4,13 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofBackground(255);
+    ofSetFrameRate(60);
+    
     ofNoFill();
-    b = new branch(1,0,ofGetWidth()/2, 0);
+    b = new branch(1,1,ofGetWidth()/2, 0, 0);
     
     camAngle   = 90.0;
-    rotateMode = false;
+    rotateMode = true;
     camRadius = ofGetWidth()/4*3;
     cam.resetTransform();
 	cam.setFov(60);
@@ -21,7 +23,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    b->updateMe(ofGetWidth()/2, 0);
+    b->updateMe(ofGetWidth()/2, 0, 0);
     
     if (rotateMode) {
         float posx, posy, posz;
@@ -34,6 +36,8 @@ void ofApp::update(){
     }
     cam.setPosition(camPos);
     cam.lookAt(ofVec3f(ofGetWidth()/2, ofGetHeight()/2, 0));
+
+    ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }
 
 //--------------------------------------------------------------

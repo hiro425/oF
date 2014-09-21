@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/branch.cpp"
-            timestampString = "432897497.766291"
+            timestampString = "432985230.977221"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "branch::updateMe(float ex, float why)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/branch.cpp"
-            timestampString = "432897497.766291"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "branch::updateMe(float ex, float why)"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "branch::updateMe(float ex, float why, float zi)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
