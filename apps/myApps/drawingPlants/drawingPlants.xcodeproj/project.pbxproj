@@ -31,6 +31,7 @@
 		A714C57719CED87D0040D9EA /* ToonPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A714C55C19CED87D0040D9EA /* ToonPass.cpp */; };
 		A714C57819CED87D0040D9EA /* VerticalTiltShifPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A714C55E19CED87D0040D9EA /* VerticalTiltShifPass.cpp */; };
 		A714C57919CED87D0040D9EA /* ZoomBlurPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A714C56019CED87D0040D9EA /* ZoomBlurPass.cpp */; };
+		A73CE2F719CFEC7F00A536ED /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73CE2F619CFEC7F00A536ED /* AppKit.framework */; };
 		A7DA54CC19CC1C77009A5D94 /* fern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7DA54CA19CC1C77009A5D94 /* fern.cpp */; };
 		A7DA54D019CC1F31009A5D94 /* branch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7DA54CD19CC1E1A009A5D94 /* branch.cpp */; };
 		A7DA54DF19CEA91B009A5D94 /* drawHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7DA54DB19CEA816009A5D94 /* drawHelper.cpp */; };
@@ -135,6 +136,7 @@
 		A714C55F19CED87D0040D9EA /* VerticalTiltShifPass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerticalTiltShifPass.h; sourceTree = "<group>"; };
 		A714C56019CED87D0040D9EA /* ZoomBlurPass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ZoomBlurPass.cpp; sourceTree = "<group>"; };
 		A714C56119CED87D0040D9EA /* ZoomBlurPass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZoomBlurPass.h; sourceTree = "<group>"; };
+		A73CE2F619CFEC7F00A536ED /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		A7DA54CA19CC1C77009A5D94 /* fern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fern.cpp; sourceTree = "<group>"; };
 		A7DA54CB19CC1C77009A5D94 /* fern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fern.h; sourceTree = "<group>"; };
 		A7DA54CD19CC1E1A009A5D94 /* branch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = branch.cpp; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A73CE2F719CFEC7F00A536ED /* AppKit.framework in Frameworks */,
 				E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */,
 				E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */,
 				E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */,
@@ -315,6 +318,7 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				A73CE2F619CFEC7F00A536ED /* AppKit.framework */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,

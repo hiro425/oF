@@ -31,6 +31,9 @@ branch::branch(float lev, float ind, float ex, float why, float zi) {
         rot = 90;
         rot2 = 90;
     }
+    if (level == 3) {
+        rot = ofRandom(0, 180);
+    }
 
     updateMe(ex, why, zi);
 
@@ -87,11 +90,10 @@ void branch::updateMe(float ex, float why, float zi) {
             }
         }
         if (lenChange > 0)    lenChange =  0;
-        if (!children.size()) lenChange = -3;
+        if (!children.size()) lenChange = -5;
     }
     else {
         if (lenChange<0) lenChange = 1;
-        
 
         //if (level == maxLevels && flowers.size() < 200) {
         if (level == maxLevels && flowerNum < 100) {
@@ -140,6 +142,7 @@ void branch::updateMe(float ex, float why, float zi) {
 void branch::drawMe() {
     ofSetLineWidth(strokeW);
     ofFill();
+    ofEnableDepthTest();
     ofSetColor(89, 69, 57);
     ofLine(x, y, z, endx, endy, endz);
     for (int i = 0; i < children.size(); i++) {
