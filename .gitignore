@@ -34,3 +34,33 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+
+#########################
+# openFrameworks patterns
+#########################
+
+# build files
+openFrameworks.a
+openFrameworksDebug.a
+openFrameworksUniversal.a
+libs/openFrameworksCompiled/lib/*/*
+!libs/openFrameworksCompiled/lib/*/.gitkeep
+
+#########################
+# general
+#########################
+
+[Bb]uild/
+[Oo]bj/
+*.o
+[Dd]ebug*/
+[Rr]elease*/
+*.mode*
+*.app/
+*.pyc
+.svn/
+*.log
+*.cpp.eep
+*.cpp.elf
+*.cpp.hex
+
