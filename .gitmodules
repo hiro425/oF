@@ -1,0 +1,12 @@
+[submodule "addons/ofxFft"]
+	path = addons/ofxFft
+	url = https://github.com/kylemcdonald/ofxFft.git
+[submodule "addons/ofxHttpUtils"]
+	path = addons/ofxHttpUtils
+	url = https://github.com/arturoc/ofxHttpUtils.git
+[submodule "addons/ofxLibwebsockets"]
+	path = addons/ofxLibwebsockets
+	url = https://github.com/labatrockwell/ofxLibwebsockets.git
+[submodule "addons/ofxPostProcessing"]
+	path = addons/ofxPostProcessing
+	url = https://github.com/neilmendoza/ofxPostProcessing.git
