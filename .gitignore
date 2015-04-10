@@ -1,12 +1,12 @@
 .DS_Store
 changes.txt
-examples/
-libs/
+examples
+libs
 license.md
-other/
+others
 projectGenerator/
 readme.txt
-scripts/
+scripts
 apps/ma2_101018
 CHANGELOG.md
 INSTALL.md
