@@ -10,3 +10,45 @@
 [submodule "addons/ofxPostProcessing"]
 	path = addons/ofxPostProcessing
 	url = https://github.com/neilmendoza/ofxPostProcessing.git
+[submodule "addons/ofxBt"]
+	path = addons/ofxBt
+	url = https://github.com/satoruhiga/ofxBt.git
+[submodule "addons/ofxControlPanel"]
+	path = addons/ofxControlPanel
+	url = https://github.com/ofTheo/ofxControlPanel.git
+[submodule "addons/ofxFX"]
+	path = addons/ofxFX
+	url = https://github.com/patriciogonzalezvivo/ofxFX.git
+[submodule "addons/ofxJSON"]
+	path = addons/ofxJSON
+	url = https://github.com/jefftimesten/ofxJSON.git
+[submodule "addons/ofxMPMFluid"]
+	path = addons/ofxMPMFluid
+	url = https://github.com/obviousjim/ofxMPMFluid.git
+[submodule "addons/ofxMSACore"]
+	path = addons/ofxMSACore
+	url = https://github.com/memo/ofxMSACore.git
+[submodule "addons/ofxMSAFluid"]
+	path = addons/ofxMSAFluid
+	url = https://github.com/memo/ofxMSAFluid.git
+[submodule "addons/ofxMSAInteractiveObject"]
+	path = addons/ofxMSAInteractiveObject
+	url = https://github.com/memo/ofxMSAInteractiveObject.git
+[submodule "addons/ofxOpenNI"]
+	path = addons/ofxOpenNI
+	url = https://github.com/gameoverhack/ofxOpenNI.git
+[submodule "addons/ofxSPK"]
+	path = addons/ofxSPK
+	url = https://github.com/satoruhiga/ofxSPK.git
+[submodule "addons/ofxSimpleGuiToo"]
+	path = addons/ofxSimpleGuiToo
+	url = https://github.com/memo/ofxSimpleGuiToo.git
+[submodule "addons/ofxStateMachine"]
+	path = addons/ofxStateMachine
+	url = https://github.com/neilmendoza/ofxStateMachine.git
+[submodule "addons/ofxTuio"]
+	path = addons/ofxTuio
+	url = https://github.com/patriciogonzalezvivo/ofxTuio.git
+[submodule "addons/ofxUI"]
+	path = addons/ofxUI
+	url = https://github.com/rezaali/ofxUI.git
