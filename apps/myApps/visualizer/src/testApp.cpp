@@ -21,8 +21,8 @@ void testApp::setup(){
     ofSetSphereResolution(2);
     
     thresh = 0.35; //ランダマイズのための音量の閾値
-    bang           = false;
-    bHide          = true;
+    bang           = false;  //visualizerの仕組み. visualizerインスタンスがもつ
+    bHide          = true; //
     bOrbits        = false;
     orientPosRatio = 0.5;
     makeMode       = 0;
@@ -32,7 +32,7 @@ void testApp::setup(){
     bPrimsTog      = false;
     bTransitionStop    = true;
     
-    datadir = "/Users/kawaguchihiroshi/Developer/git/oF/apps/myApps/visualizer/bin/data/";
+    datadir = "/Users/kawaguchi.hiroshi/Developer/git/oF/apps/myApps/visualizer/bin/data/";
     
     setupCam();
     setupPanel();

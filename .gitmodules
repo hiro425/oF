@@ -52,3 +52,6 @@
 [submodule "addons/ofxUI"]
 	path = addons/ofxUI
 	url = https://github.com/rezaali/ofxUI.git
+[submodule "usr/lib/Catch"]
+	path = usr/lib/Catch
+	url = https://github.com/philsquared/Catch.git

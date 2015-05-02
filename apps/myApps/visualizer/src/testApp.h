@@ -27,7 +27,6 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    //------------ここまでテンプレ
     void setupPanel();
         void randomiseAll();  //モード別の初期値？を設定
     
