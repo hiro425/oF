@@ -10,8 +10,8 @@ void ofApp::setup(){
 	middleBins.resize(fft->getBinSize());
 	audioBins.resize(fft->getBinSize());
     
-    soundStream.setDeviceID(3);
-    soundStream.setup(this, 0, 4, 44100, bufferSize, 4);
+//    soundStream.setDeviceID(3);
+    soundStream.setup(this, 0, 1, 44100, bufferSize, 4);
     //left.assign(bufferSize, 0.0);
     //soundStream.listDevices();
     ch1.assign(bufferSize/4, 0.0);

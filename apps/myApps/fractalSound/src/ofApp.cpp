@@ -4,11 +4,8 @@
 void ofApp::setup(){
     ofBackground(255);
     ofEnableSmoothing();
-<<<<<<< Updated upstream
     
-    brnch.init(3, 3);
-=======
->>>>>>> Stashed changes
+//    brnch.init(3, 3);
 }
 
 //--------------------------------------------------------------

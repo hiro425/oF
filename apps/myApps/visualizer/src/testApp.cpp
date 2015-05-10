@@ -9,6 +9,8 @@ void testApp::setup(){
     soundStream.setup(this, 0, 1, 44100, bufferSize, 4);
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
+    // ^ このへんも、「新規プロジェクトつくるときは設定しておかなきゃいけない変数群」として、設定されないとアラート出すようなクラスつくりたい。とりあえず呼んどくUtilクラス。
+    // Generatorの中にいれたいくらい
     
     left.assign(bufferSize, 0.0);
     
@@ -20,23 +22,27 @@ void testApp::setup(){
     
     ofSetSphereResolution(2);
     
-    thresh = 0.35; //ランダマイズのための音量の閾値
-    bang           = false;  //visualizerの仕組み. visualizerインスタンスがもつ
-    bHide          = true; //
-    bOrbits        = false;
-    orientPosRatio = 0.5;
-    makeMode       = 0;
-    bShader        = true;
-    bShaderTog     = true;
-    bPrims         = false;
-    bPrimsTog      = false;
-    bTransitionStop    = true;
+    thresh = 0.35; //update時に発火する条件。ランダマイズのための音量の閾値. visualizerObserver？インスタンスの状態を買えるもの？
+    bang           = false; // visualizerの仕組み. visualizerインスタンスがもつ. update時に発火したかどうかの状態
+    bHide          = true;  // axisを描画するもの。デバッグ用。utilsとかに追いやる
+    bOrbits        = false; // 描画オブジェクトのオプション。primitiveインスタンスのmodeにおいやる
+    orientPosRatio = 0.5;   // Primitiveインスタンスのpropertyであるのと、値をアサインするクラスがいる。インディケータ的な。コマンダー？インターフェースを通じて、オブジェクトに命令を出す役割
+    makeMode       = 0;     // インディケータが持つ、どのタイプのprimitiveを描画するかのモード。モードによって、適切なインスタンスを生成する。ファクトリーなのかな？
+    bShader        = true;  // 下と同じはずの役割なのに、両方定義されている・・・いらない説
+    bShaderTog     = true;  // visualizeObjectFactory的なものがもつ。Shaderモードのon/off
+    bPrims         = false; // 下と同じはずの役割なのに、両方定義されている・・・いらない説
+    bPrimsTog      = false; // visualizeObjectFactory的なものがもつ。Primitiveモードのon/off
+    bTransitionStop = true; // visualizeObserver? しきい値こえたときのイベント制御に使う。trueの場合は、自動で別描画をしない
     
+    // shaderインスタンス。データの格納場所を示す。早退パスでできない問題。ってか環境変数から動的に引っ張って来れるのでは？直接的な使用場所は、Shaderのロード。
     datadir = "/Users/kawaguchi.hiroshi/Developer/git/oF/apps/myApps/visualizer/bin/data/";
     
-    setupCam();
-    setupPanel();
+    setupCam(); //
+    setupPanel(); // こいつは一旦見送り。各Visualize Object別に、panelをもつイメージかな。panelManegerあたりが、各Panelを並べて一列にするとか、そんな感じか。
     setupShader();
+    
+    
+    // アプリ記述する側が、変更を容易にするような口も考えなきゃな・・・
 }
 
 void testApp::setupPanel() {

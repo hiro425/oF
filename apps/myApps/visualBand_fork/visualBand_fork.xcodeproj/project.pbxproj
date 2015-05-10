@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		007F713E619B81D821BEA319 /* ofxFftBasic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE67198F2891A8FFEA3686E6 /* ofxFftBasic.cpp */; };
 		00EE876C01065AF20FEAD399 /* SPK_Zone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29E1241C0DE0356AC33C9506 /* SPK_Zone.cpp */; };
-		0686C38EE993C67B96002FA1 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B053B6F1252BCFCFF0F59AC /* kiss_fft.c */; };
 		10BD63AC19A1E705274E7307 /* SPK_ModifierGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F18A6F6BF865E010983E38CE /* SPK_ModifierGroup.cpp */; };
 		125430FB09F6A5C58C3C4448 /* ofxSPKRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D4C416A31AB83CC38B5473 /* ofxSPKRenderer.cpp */; };
 		156BF2BA964BB44DB5111367 /* SPK_Obstacle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 980712C79565F97EA1A86AE9 /* SPK_Obstacle.cpp */; };
@@ -18,24 +16,20 @@
 		1A0E97D56FA49A5364C02A78 /* SPK_GLLineTrailRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F521F927EE72EE56FE36F8B /* SPK_GLLineTrailRenderer.cpp */; };
 		21A8C73B7342B17D73D70DD6 /* SPK_NormalEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3724C8D97875FB46435A6836 /* SPK_NormalEmitter.cpp */; };
 		292F7425FF8E811BDD0D5B70 /* SPK_Transformable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE0F7933C57B68C3F19C27 /* SPK_Transformable.cpp */; };
-		29938E05AF78B3DF7A591187 /* ofxFftw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F353204A917F4B2BCEEABE6 /* ofxFftw.cpp */; };
 		2BF60FD8BCBF3B15683E9423 /* SPK_Vortex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5241B3ECF139BBB1944F0B07 /* SPK_Vortex.cpp */; };
 		3AB0B92673112D7F193CCCF7 /* ofxSPKZone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE3C5A3E399296E9E6BEB940 /* ofxSPKZone.cpp */; };
 		3C8FCC8A6BE4DD52DD1336E2 /* SPK_AABox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0BED6E71E1CA696E2484DEA /* SPK_AABox.cpp */; };
 		3DF049E92D532625F72F928F /* SPK_PointMass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33821C2BA890363228344313 /* SPK_PointMass.cpp */; };
 		42322D5D65C337F5CB8963CE /* SPK_Emitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4DC774AA67DDFA57A973B18 /* SPK_Emitter.cpp */; };
-		47741AD4D543009E4DF29CEA /* ofxProcessFFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971B530AB93ACC5065D9489E /* ofxProcessFFT.cpp */; };
 		47E8812792DEA28005D9F8FE /* SPK_Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F04DEA76EB80A9623AD329C5 /* SPK_Plane.cpp */; };
 		4D7B707DC8840BD919301F51 /* SPK_GLPointRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40469F0CE4C5B9B1423EE283 /* SPK_GLPointRenderer.cpp */; };
 		57039B92C55236DFA39CC9BC /* SPK_StraightEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDE6D5A0839CCB1C3D85DA4A /* SPK_StraightEmitter.cpp */; };
 		582FFEB12C71927452DDB9BD /* SPK_GLExtHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DF3213C778CD1C42D22B06 /* SPK_GLExtHandler.cpp */; };
 		5CCE1DA97A8774A5E2A178D2 /* SPK_Registerable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB99632B0022C8F23A9813CF /* SPK_Registerable.cpp */; };
-		6DB9E3911BA6216FE1F0E91C /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = DACFE8C08D7F4619176E65D7 /* kiss_fftr.c */; };
 		6E427735097DAD27992392F9 /* SPK_GLLineRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16BDFE471D155F4DDA3859D /* SPK_GLLineRenderer.cpp */; };
 		728A20D6106C1635D9A1413A /* SPK_ZoneIntersection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7B4C1AE5EEC032DD9010B2A /* SPK_ZoneIntersection.cpp */; };
 		733FD17D0732208006C5AABA /* SPK_BufferHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BBA9A97F7BA679970DC03C1 /* SPK_BufferHandler.cpp */; };
 		7393B8C00C98171EC26CF8B4 /* ofxSPKUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 463A067B2C4054AFDC73A369 /* ofxSPKUtils.cpp */; };
-		7A61C288AE942E5885881232 /* ofxEasyFft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67BFC7F21E824F5A7FAC65E0 /* ofxEasyFft.cpp */; };
 		7D931BC9787579A9A7B0A029 /* SPK_Group.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E20168DD17EFFD135513BDC /* SPK_Group.cpp */; };
 		87BDDC98D5E344965BEEC35A /* SPK_SphericEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 492A24AD86A037E6999CCF15 /* SPK_SphericEmitter.cpp */; };
 		87C3B22D219B57026DB6A841 /* ofxSPKGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77F70571E1BF10D6F98D9FA5 /* ofxSPKGroup.cpp */; };
@@ -87,7 +81,6 @@
 		C80BA2B8F601DE43A5E740A3 /* SPK_Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E0E91652AF45E49311CF32D /* SPK_Sphere.cpp */; };
 		C90A96A442FE2C021EBB1E8B /* SPK_Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 89DDF4AA861D8353C686EBDC /* SPK_Line.cpp */; };
 		CB8461E56CCFE38DE64FF767 /* SPK_DEF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D763B2EB703CA7856203E2C /* SPK_DEF.cpp */; };
-		D409288D137DB82107887FFD /* ofxFft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32CA89CD22339F4F9433CAF6 /* ofxFft.cpp */; };
 		D8468666CDA4D2A5455FBF2B /* SPK_Ring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03D6B5310F1AAA17B6C422C0 /* SPK_Ring.cpp */; };
 		DE49D2B29CED3FC168AD91F1 /* SPK_Destroyer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2047872B13C10FF73D852D71 /* SPK_Destroyer.cpp */; };
 		DFC4FF91BDF5532AB62B4F4E /* SPK_GLQuadRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF3B4904EFEEC94060F9935 /* SPK_GLQuadRenderer.cpp */; };
@@ -113,6 +106,13 @@
 		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
+		E83FB9301AF63DDA009DD4E1 /* ofxEasyFft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E83FB9181AF63DDA009DD4E1 /* ofxEasyFft.cpp */; };
+		E83FB9311AF63DDA009DD4E1 /* ofxFft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E83FB91A1AF63DDA009DD4E1 /* ofxFft.cpp */; };
+		E83FB9321AF63DDA009DD4E1 /* ofxFftBasic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E83FB91C1AF63DDA009DD4E1 /* ofxFftBasic.cpp */; };
+		E83FB9331AF63DDA009DD4E1 /* ofxFftw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E83FB91E1AF63DDA009DD4E1 /* ofxFftw.cpp */; };
+		E83FB9341AF63DDA009DD4E1 /* ofxProcessFFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E83FB9201AF63DDA009DD4E1 /* ofxProcessFFT.cpp */; };
+		E83FB9351AF63DDA009DD4E1 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = E83FB92C1AF63DDA009DD4E1 /* kiss_fft.c */; };
+		E83FB9361AF63DDA009DD4E1 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = E83FB92E1AF63DDA009DD4E1 /* kiss_fftr.c */; };
 		E9E05F9E5A989E6221911D47 /* SPK_GLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE22654908EB3B5EC6C74F3A /* SPK_GLRenderer.cpp */; };
 		F31192C3499E61DDABC9CA90 /* ofxSPKSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F385BDFFC29628ED205413B7 /* ofxSPKSystem.cpp */; };
 		F413C4E5D00391447F85AD10 /* SPK_Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C6E73BD6F00C6A9C956FAE9 /* SPK_Model.cpp */; };
@@ -163,7 +163,6 @@
 		169F5EE1F3EF930CEDBE6674 /* SPK_Point.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Point.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Zones/SPK_Point.cpp; sourceTree = SOURCE_ROOT; };
 		16D4C416A31AB83CC38B5473 /* ofxSPKRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxSPKRenderer.cpp; path = ../../../addons/ofxSPK/src/ofxSPKRenderer.cpp; sourceTree = SOURCE_ROOT; };
 		180517DE070521D99B6A53B2 /* SPK_Buffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Buffer.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_Buffer.h; sourceTree = SOURCE_ROOT; };
-		1CBD6F883000C78087DD5738 /* _kiss_fft_guts.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = _kiss_fft_guts.h; path = ../../../addons/ofxFft/libs/kiss/_kiss_fft_guts.h; sourceTree = SOURCE_ROOT; };
 		1D763B2EB703CA7856203E2C /* SPK_DEF.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_DEF.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Core/SPK_DEF.cpp; sourceTree = SOURCE_ROOT; };
 		1E20168DD17EFFD135513BDC /* SPK_Group.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Group.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Core/SPK_Group.cpp; sourceTree = SOURCE_ROOT; };
 		1F009100D2200CA109DC1659 /* SPK_Rotator.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Rotator.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Extensions/Modifiers/SPK_Rotator.h; sourceTree = SOURCE_ROOT; };
@@ -178,11 +177,9 @@
 		29E1241C0DE0356AC33C9506 /* SPK_Zone.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Zone.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Core/SPK_Zone.cpp; sourceTree = SOURCE_ROOT; };
 		2B1AB21B5B67A4E77FF29AED /* SPK_Registerable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Registerable.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_Registerable.h; sourceTree = SOURCE_ROOT; };
 		2CC59BD2E741357CB47EE087 /* SPK.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK.h; path = ../../../addons/ofxSPK/libs/SPARK/include/SPK.h; sourceTree = SOURCE_ROOT; };
-		2D0C0AA4436B2A16530BA991 /* fftw3.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = fftw3.h; path = ../../../addons/ofxFft/libs/fftw/include/fftw3.h; sourceTree = SOURCE_ROOT; };
 		2F76D106492327FCE1587120 /* ofxSPKUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSPKUtils.h; path = ../../../addons/ofxSPK/src/ofxSPKUtils.h; sourceTree = SOURCE_ROOT; };
 		30C8FF558C477E04B38BB55E /* SPK_GLLineRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_GLLineRenderer.h; path = ../../../addons/ofxSPK/libs/SPARK/include/RenderingAPIs/OpenGL/SPK_GLLineRenderer.h; sourceTree = SOURCE_ROOT; };
 		31ECE160D64600FFEB32568F /* SPK_GLQuadRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_GLQuadRenderer.h; path = ../../../addons/ofxSPK/libs/SPARK/include/RenderingAPIs/OpenGL/SPK_GLQuadRenderer.h; sourceTree = SOURCE_ROOT; };
-		32CA89CD22339F4F9433CAF6 /* ofxFft.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxFft.cpp; path = ../../../addons/ofxFft/src/ofxFft.cpp; sourceTree = SOURCE_ROOT; };
 		33821C2BA890363228344313 /* SPK_PointMass.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_PointMass.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Modifiers/SPK_PointMass.cpp; sourceTree = SOURCE_ROOT; };
 		36F34706C2D11C4451DF8BCA /* SPK_LinearForce.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_LinearForce.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Extensions/Modifiers/SPK_LinearForce.h; sourceTree = SOURCE_ROOT; };
 		3724C8D97875FB46435A6836 /* SPK_NormalEmitter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_NormalEmitter.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Emitters/SPK_NormalEmitter.cpp; sourceTree = SOURCE_ROOT; };
@@ -198,7 +195,6 @@
 		463A067B2C4054AFDC73A369 /* ofxSPKUtils.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxSPKUtils.cpp; path = ../../../addons/ofxSPK/src/ofxSPKUtils.cpp; sourceTree = SOURCE_ROOT; };
 		492A24AD86A037E6999CCF15 /* SPK_SphericEmitter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_SphericEmitter.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Emitters/SPK_SphericEmitter.cpp; sourceTree = SOURCE_ROOT; };
 		4AB7E28CD7373DA07DDB304E /* SPK_LineRendererInterface.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_LineRendererInterface.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Extensions/Renderers/SPK_LineRendererInterface.h; sourceTree = SOURCE_ROOT; };
-		4B053B6F1252BCFCFF0F59AC /* kiss_fft.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = kiss_fft.c; path = ../../../addons/ofxFft/libs/kiss/kiss_fft.c; sourceTree = SOURCE_ROOT; };
 		4B1A76204A2DE82645BF572D /* ofxSPKZone.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSPKZone.h; path = ../../../addons/ofxSPK/src/ofxSPKZone.h; sourceTree = SOURCE_ROOT; };
 		4F521F927EE72EE56FE36F8B /* SPK_GLLineTrailRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_GLLineTrailRenderer.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/RenderingAPIs/OpenGL/SPK_GLLineTrailRenderer.cpp; sourceTree = SOURCE_ROOT; };
 		51BBF0A51595EC5A7A23D960 /* SPK_LinearForce.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_LinearForce.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Modifiers/SPK_LinearForce.cpp; sourceTree = SOURCE_ROOT; };
@@ -207,16 +203,13 @@
 		54EB762438BE11A29D2759AD /* SPK_Pool.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Pool.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_Pool.h; sourceTree = SOURCE_ROOT; };
 		5C3C4C07109E7F68DB97E5EA /* SPK_Renderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Renderer.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_Renderer.h; sourceTree = SOURCE_ROOT; };
 		5C6E73BD6F00C6A9C956FAE9 /* SPK_Model.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Model.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Core/SPK_Model.cpp; sourceTree = SOURCE_ROOT; };
-		5F353204A917F4B2BCEEABE6 /* ofxFftw.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxFftw.cpp; path = ../../../addons/ofxFft/src/ofxFftw.cpp; sourceTree = SOURCE_ROOT; };
 		5FF3B4904EFEEC94060F9935 /* SPK_GLQuadRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_GLQuadRenderer.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/RenderingAPIs/OpenGL/SPK_GLQuadRenderer.cpp; sourceTree = SOURCE_ROOT; };
 		6012C2CE337FF05E2E664CA9 /* SPK_Zone.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Zone.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_Zone.h; sourceTree = SOURCE_ROOT; };
 		643064B0DD02A240DF2892AB /* SPK_GLPointRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_GLPointRenderer.h; path = ../../../addons/ofxSPK/libs/SPARK/include/RenderingAPIs/OpenGL/SPK_GLPointRenderer.h; sourceTree = SOURCE_ROOT; };
 		65C5D95FCCD3F2D68A45198A /* SPK_Interpolator.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Interpolator.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_Interpolator.h; sourceTree = SOURCE_ROOT; };
-		67BFC7F21E824F5A7FAC65E0 /* ofxEasyFft.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxEasyFft.cpp; path = ../../../addons/ofxFft/src/ofxEasyFft.cpp; sourceTree = SOURCE_ROOT; };
 		6815DEAE246F32FDA5D9BF35 /* SPK_Collision.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Collision.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Modifiers/SPK_Collision.cpp; sourceTree = SOURCE_ROOT; };
 		77F70571E1BF10D6F98D9FA5 /* ofxSPKGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxSPKGroup.cpp; path = ../../../addons/ofxSPK/src/ofxSPKGroup.cpp; sourceTree = SOURCE_ROOT; };
 		7CDE5412382AC0B3C2EEBEA6 /* SPK_Oriented2DRendererInterface.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Oriented2DRendererInterface.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Extensions/Renderers/SPK_Oriented2DRendererInterface.h; sourceTree = SOURCE_ROOT; };
-		7D3BE1A2ADAFC399E7B20A91 /* ofxFftBasic.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxFftBasic.h; path = ../../../addons/ofxFft/src/ofxFftBasic.h; sourceTree = SOURCE_ROOT; };
 		7F211F576041CFE9FEFFE028 /* SPK_ZoneUnion.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_ZoneUnion.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Zones/SPK_ZoneUnion.cpp; sourceTree = SOURCE_ROOT; };
 		806D2D45944F6D7FBB227948 /* SPK_Line.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Line.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Extensions/Zones/SPK_Line.h; sourceTree = SOURCE_ROOT; };
 		8108FD64C1090F55205B3B07 /* SPK_PointRendererInterface.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_PointRendererInterface.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Extensions/Renderers/SPK_PointRendererInterface.h; sourceTree = SOURCE_ROOT; };
@@ -229,18 +222,14 @@
 		95054D5859F0FFB99B8F7E6A /* SPK_Model.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Model.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_Model.h; sourceTree = SOURCE_ROOT; };
 		958ED854103D40A91A5443BD /* ofxSPKEmitter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSPKEmitter.h; path = ../../../addons/ofxSPK/src/ofxSPKEmitter.h; sourceTree = SOURCE_ROOT; };
 		970AB9CDEE6DD8F0F2ABF3AC /* ofxSPKModifier.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSPKModifier.h; path = ../../../addons/ofxSPK/src/ofxSPKModifier.h; sourceTree = SOURCE_ROOT; };
-		971B530AB93ACC5065D9489E /* ofxProcessFFT.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxProcessFFT.cpp; path = ../../../addons/ofxFft/src/ofxProcessFFT.cpp; sourceTree = SOURCE_ROOT; };
-		977E7DDA94E88633BE025A78 /* kiss_fftr.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = kiss_fftr.h; path = ../../../addons/ofxFft/libs/kiss/kiss_fftr.h; sourceTree = SOURCE_ROOT; };
 		97E8DE60D2DB4FBEDBAA2544 /* SPK_GLLineTrailRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_GLLineTrailRenderer.h; path = ../../../addons/ofxSPK/libs/SPARK/include/RenderingAPIs/OpenGL/SPK_GLLineTrailRenderer.h; sourceTree = SOURCE_ROOT; };
 		980712C79565F97EA1A86AE9 /* SPK_Obstacle.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Obstacle.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Modifiers/SPK_Obstacle.cpp; sourceTree = SOURCE_ROOT; };
 		98DE5489477C9435604C799D /* SPK_RegWrapper.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_RegWrapper.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_RegWrapper.h; sourceTree = SOURCE_ROOT; };
 		996D94387846CF139A07839E /* SPK_QuadRendererInterface.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_QuadRendererInterface.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Renderers/SPK_QuadRendererInterface.cpp; sourceTree = SOURCE_ROOT; };
-		9A2FCCF1ABF23081D2CD9D5F /* ofxProcessFFT.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxProcessFFT.h; path = ../../../addons/ofxFft/src/ofxProcessFFT.h; sourceTree = SOURCE_ROOT; };
 		9D348A2BB0F235DE072C2C3B /* SPK_System.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_System.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_System.h; sourceTree = SOURCE_ROOT; };
 		A362535658BE0081802ED07F /* SPK_Group.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Group.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_Group.h; sourceTree = SOURCE_ROOT; };
 		A3A178BCD8B92D801EC4C6E3 /* SPK_Cylinder.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Cylinder.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Zones/SPK_Cylinder.cpp; sourceTree = SOURCE_ROOT; };
 		A54EBCDD1B4E0C75B9355154 /* SPK_DEF.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_DEF.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_DEF.h; sourceTree = SOURCE_ROOT; };
-		A6F65D3430FD7E893FFF58F3 /* kiss_fft.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = kiss_fft.h; path = ../../../addons/ofxFft/libs/kiss/kiss_fft.h; sourceTree = SOURCE_ROOT; };
 		A778D6ED19C19BF000D066C9 /* createAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = createAction.cpp; sourceTree = "<group>"; };
 		A778D6EE19C19BF000D066C9 /* createAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = createAction.h; sourceTree = "<group>"; };
 		A778D6F419C1A46300D066C9 /* defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
@@ -351,7 +340,6 @@
 		B00DE13ACD94F34977A9308B /* SPK_StaticEmitter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_StaticEmitter.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Extensions/Emitters/SPK_StaticEmitter.h; sourceTree = SOURCE_ROOT; };
 		B1F0596BD095187F0CCFE367 /* SPK_Ring.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Ring.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Extensions/Zones/SPK_Ring.h; sourceTree = SOURCE_ROOT; };
 		B284227585E4AA17D433F0AE /* SPK_Interpolator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Interpolator.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Core/SPK_Interpolator.cpp; sourceTree = SOURCE_ROOT; };
-		B36431C04C788FEDB1ECD8FC /* ofxFft.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxFft.h; path = ../../../addons/ofxFft/src/ofxFft.h; sourceTree = SOURCE_ROOT; };
 		B692978E692A631D74091466 /* ofxSPKGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSPKGroup.h; path = ../../../addons/ofxSPK/src/ofxSPKGroup.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		BDE6D5A0839CCB1C3D85DA4A /* SPK_StraightEmitter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_StraightEmitter.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Emitters/SPK_StraightEmitter.cpp; sourceTree = SOURCE_ROOT; };
@@ -361,15 +349,11 @@
 		C868F2BB0DCEEE570D5F9C28 /* SPK_Modifier.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Modifier.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Core/SPK_Modifier.cpp; sourceTree = SOURCE_ROOT; };
 		CA29DBF63259C7F04C120BF6 /* SPK_QuadRendererInterface.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_QuadRendererInterface.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Extensions/Renderers/SPK_QuadRendererInterface.h; sourceTree = SOURCE_ROOT; };
 		CA9A79C45157A24BCA3D10BF /* SPK_GL_DEF.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_GL_DEF.h; path = ../../../addons/ofxSPK/libs/SPARK/include/RenderingAPIs/OpenGL/SPK_GL_DEF.h; sourceTree = SOURCE_ROOT; };
-		CAB67BC7A1CC020FDAC5381B /* ofxEasyFft.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxEasyFft.h; path = ../../../addons/ofxFft/src/ofxEasyFft.h; sourceTree = SOURCE_ROOT; };
-		CE67198F2891A8FFEA3686E6 /* ofxFftBasic.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxFftBasic.cpp; path = ../../../addons/ofxFft/src/ofxFftBasic.cpp; sourceTree = SOURCE_ROOT; };
 		CEF9D3FA0506E3A1E84E9FE2 /* SPK_Plane.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Plane.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Extensions/Zones/SPK_Plane.h; sourceTree = SOURCE_ROOT; };
 		D0BED6E71E1CA696E2484DEA /* SPK_AABox.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_AABox.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Zones/SPK_AABox.cpp; sourceTree = SOURCE_ROOT; };
 		D16BDFE471D155F4DDA3859D /* SPK_GLLineRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_GLLineRenderer.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/RenderingAPIs/OpenGL/SPK_GLLineRenderer.cpp; sourceTree = SOURCE_ROOT; };
 		D6E85E91425E9C8FBFD6AD17 /* SPK_Oriented3DRendererInterface.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Oriented3DRendererInterface.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Extensions/Renderers/SPK_Oriented3DRendererInterface.cpp; sourceTree = SOURCE_ROOT; };
-		D8952DEFF3CE56AC1009A996 /* ofxFftw.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxFftw.h; path = ../../../addons/ofxFft/src/ofxFftw.h; sourceTree = SOURCE_ROOT; };
 		DAC901AA6205039E10C721A5 /* SPK_System.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_System.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Core/SPK_System.cpp; sourceTree = SOURCE_ROOT; };
-		DACFE8C08D7F4619176E65D7 /* kiss_fftr.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = kiss_fftr.c; path = ../../../addons/ofxFft/libs/kiss/kiss_fftr.c; sourceTree = SOURCE_ROOT; };
 		DE3C5A3E399296E9E6BEB940 /* ofxSPKZone.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxSPKZone.cpp; path = ../../../addons/ofxSPK/src/ofxSPKZone.cpp; sourceTree = SOURCE_ROOT; };
 		E0A70F71EE36D73B670970FC /* SPK_Vector3D.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Vector3D.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Core/SPK_Vector3D.cpp; sourceTree = SOURCE_ROOT; };
 		E18D5979344CFA180C8C6BDB /* SPK_Renderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Renderer.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Core/SPK_Renderer.cpp; sourceTree = SOURCE_ROOT; };
@@ -396,6 +380,25 @@
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
+		E83FB9181AF63DDA009DD4E1 /* ofxEasyFft.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxEasyFft.cpp; sourceTree = "<group>"; };
+		E83FB9191AF63DDA009DD4E1 /* ofxEasyFft.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxEasyFft.h; sourceTree = "<group>"; };
+		E83FB91A1AF63DDA009DD4E1 /* ofxFft.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFft.cpp; sourceTree = "<group>"; };
+		E83FB91B1AF63DDA009DD4E1 /* ofxFft.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxFft.h; sourceTree = "<group>"; };
+		E83FB91C1AF63DDA009DD4E1 /* ofxFftBasic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFftBasic.cpp; sourceTree = "<group>"; };
+		E83FB91D1AF63DDA009DD4E1 /* ofxFftBasic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxFftBasic.h; sourceTree = "<group>"; };
+		E83FB91E1AF63DDA009DD4E1 /* ofxFftw.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFftw.cpp; sourceTree = "<group>"; };
+		E83FB91F1AF63DDA009DD4E1 /* ofxFftw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxFftw.h; sourceTree = "<group>"; };
+		E83FB9201AF63DDA009DD4E1 /* ofxProcessFFT.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxProcessFFT.cpp; sourceTree = "<group>"; };
+		E83FB9211AF63DDA009DD4E1 /* ofxProcessFFT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxProcessFFT.h; sourceTree = "<group>"; };
+		E83FB9241AF63DDA009DD4E1 /* .keep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
+		E83FB9261AF63DDA009DD4E1 /* fftw3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fftw3.h; sourceTree = "<group>"; };
+		E83FB9281AF63DDA009DD4E1 /* .keep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
+		E83FB92A1AF63DDA009DD4E1 /* .keep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
+		E83FB92B1AF63DDA009DD4E1 /* _kiss_fft_guts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _kiss_fft_guts.h; sourceTree = "<group>"; };
+		E83FB92C1AF63DDA009DD4E1 /* kiss_fft.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = kiss_fft.c; sourceTree = "<group>"; };
+		E83FB92D1AF63DDA009DD4E1 /* kiss_fft.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = kiss_fft.h; sourceTree = "<group>"; };
+		E83FB92E1AF63DDA009DD4E1 /* kiss_fftr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = kiss_fftr.c; sourceTree = "<group>"; };
+		E83FB92F1AF63DDA009DD4E1 /* kiss_fftr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
 		E9362DF8C6C1688362852ACB /* SPK_ArrayBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_ArrayBuffer.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Core/SPK_ArrayBuffer.h; sourceTree = SOURCE_ROOT; };
 		E9B78D20C7427787968C00E9 /* SPK_Vortex.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SPK_Vortex.h; path = ../../../addons/ofxSPK/libs/SPARK/include/Extensions/Modifiers/SPK_Vortex.h; sourceTree = SOURCE_ROOT; };
 		EB99632B0022C8F23A9813CF /* SPK_Registerable.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SPK_Registerable.cpp; path = ../../../addons/ofxSPK/libs/SPARK/src/Core/SPK_Registerable.cpp; sourceTree = SOURCE_ROOT; };
@@ -489,23 +492,6 @@
 				3D102F66FB423F26862D8924 /* OpenGL */,
 			);
 			name = RenderingAPIs;
-			sourceTree = "<group>";
-		};
-		14D2E3EE0233F84B1B324DD9 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				67BFC7F21E824F5A7FAC65E0 /* ofxEasyFft.cpp */,
-				CAB67BC7A1CC020FDAC5381B /* ofxEasyFft.h */,
-				32CA89CD22339F4F9433CAF6 /* ofxFft.cpp */,
-				B36431C04C788FEDB1ECD8FC /* ofxFft.h */,
-				CE67198F2891A8FFEA3686E6 /* ofxFftBasic.cpp */,
-				7D3BE1A2ADAFC399E7B20A91 /* ofxFftBasic.h */,
-				5F353204A917F4B2BCEEABE6 /* ofxFftw.cpp */,
-				D8952DEFF3CE56AC1009A996 /* ofxFftw.h */,
-				971B530AB93ACC5065D9489E /* ofxProcessFFT.cpp */,
-				9A2FCCF1ABF23081D2CD9D5F /* ofxProcessFFT.h */,
-			);
-			name = src;
 			sourceTree = "<group>";
 		};
 		1619A5C092D991846D0AF58A /* src */ = {
@@ -619,15 +605,6 @@
 			name = OpenGL;
 			sourceTree = "<group>";
 		};
-		72C89FAFAC11F96856792042 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				A0535D33570F65575182C18F /* fftw */,
-				A2C4D2900B6384FDE5E77208 /* kiss */,
-			);
-			name = libs;
-			sourceTree = "<group>";
-		};
 		838461E62789450E77632736 /* ofxSPK */ = {
 			isa = PBXGroup;
 			children = (
@@ -665,14 +642,6 @@
 			name = Emitters;
 			sourceTree = "<group>";
 		};
-		A0535D33570F65575182C18F /* fftw */ = {
-			isa = PBXGroup;
-			children = (
-				F2022DF37286FECB8B9BA5B2 /* include */,
-			);
-			name = fftw;
-			sourceTree = "<group>";
-		};
 		A27740AAC13A93F800E474F7 /* Renderers */ = {
 			isa = PBXGroup;
 			children = (
@@ -680,18 +649,6 @@
 				996D94387846CF139A07839E /* SPK_QuadRendererInterface.cpp */,
 			);
 			name = Renderers;
-			sourceTree = "<group>";
-		};
-		A2C4D2900B6384FDE5E77208 /* kiss */ = {
-			isa = PBXGroup;
-			children = (
-				1CBD6F883000C78087DD5738 /* _kiss_fft_guts.h */,
-				4B053B6F1252BCFCFF0F59AC /* kiss_fft.c */,
-				A6F65D3430FD7E893FFF58F3 /* kiss_fft.h */,
-				DACFE8C08D7F4619176E65D7 /* kiss_fftr.c */,
-				977E7DDA94E88633BE025A78 /* kiss_fftr.h */,
-			);
-			name = kiss;
 			sourceTree = "<group>";
 		};
 		A5AFC7D386B95AE0EDC3419F /* Core */ = {
@@ -913,9 +870,9 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				E83FB9161AF63DDA009DD4E1 /* ofxFft */,
 				A7BF4326199317170068A827 /* ofxAssimpModelLoader */,
 				A7BF42B3198FD1F60068A827 /* ofxPostProcessing */,
-				BBC2B4228932C2AACC6701CF /* ofxFft */,
 				838461E62789450E77632736 /* ofxSPK */,
 			);
 			name = addons;
@@ -948,15 +905,6 @@
 				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
 			);
 			name = "3rd party frameworks";
-			sourceTree = "<group>";
-		};
-		BBC2B4228932C2AACC6701CF /* ofxFft */ = {
-			isa = PBXGroup;
-			children = (
-				14D2E3EE0233F84B1B324DD9 /* src */,
-				72C89FAFAC11F96856792042 /* libs */,
-			);
-			name = ofxFft;
 			sourceTree = "<group>";
 		};
 		C5A38F4D77BD31040ECB6770 /* libs */ = {
@@ -1025,6 +973,82 @@
 			name = openFrameworks;
 			sourceTree = "<group>";
 		};
+		E83FB9161AF63DDA009DD4E1 /* ofxFft */ = {
+			isa = PBXGroup;
+			children = (
+				E83FB9171AF63DDA009DD4E1 /* src */,
+				E83FB9221AF63DDA009DD4E1 /* libs */,
+			);
+			name = ofxFft;
+			sourceTree = "<group>";
+		};
+		E83FB9171AF63DDA009DD4E1 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E83FB9181AF63DDA009DD4E1 /* ofxEasyFft.cpp */,
+				E83FB9191AF63DDA009DD4E1 /* ofxEasyFft.h */,
+				E83FB91A1AF63DDA009DD4E1 /* ofxFft.cpp */,
+				E83FB91B1AF63DDA009DD4E1 /* ofxFft.h */,
+				E83FB91C1AF63DDA009DD4E1 /* ofxFftBasic.cpp */,
+				E83FB91D1AF63DDA009DD4E1 /* ofxFftBasic.h */,
+				E83FB91E1AF63DDA009DD4E1 /* ofxFftw.cpp */,
+				E83FB91F1AF63DDA009DD4E1 /* ofxFftw.h */,
+				E83FB9201AF63DDA009DD4E1 /* ofxProcessFFT.cpp */,
+				E83FB9211AF63DDA009DD4E1 /* ofxProcessFFT.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxFft/src;
+			sourceTree = "<group>";
+		};
+		E83FB9221AF63DDA009DD4E1 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				E83FB9231AF63DDA009DD4E1 /* fftw */,
+				E83FB9291AF63DDA009DD4E1 /* kiss */,
+			);
+			name = libs;
+			path = ../../../addons/ofxFft/libs;
+			sourceTree = "<group>";
+		};
+		E83FB9231AF63DDA009DD4E1 /* fftw */ = {
+			isa = PBXGroup;
+			children = (
+				E83FB9241AF63DDA009DD4E1 /* .keep */,
+				E83FB9251AF63DDA009DD4E1 /* include */,
+				E83FB9271AF63DDA009DD4E1 /* lib */,
+			);
+			path = fftw;
+			sourceTree = "<group>";
+		};
+		E83FB9251AF63DDA009DD4E1 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				E83FB9261AF63DDA009DD4E1 /* fftw3.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		E83FB9271AF63DDA009DD4E1 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				E83FB9281AF63DDA009DD4E1 /* .keep */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		E83FB9291AF63DDA009DD4E1 /* kiss */ = {
+			isa = PBXGroup;
+			children = (
+				E83FB92A1AF63DDA009DD4E1 /* .keep */,
+				E83FB92B1AF63DDA009DD4E1 /* _kiss_fft_guts.h */,
+				E83FB92C1AF63DDA009DD4E1 /* kiss_fft.c */,
+				E83FB92D1AF63DDA009DD4E1 /* kiss_fft.h */,
+				E83FB92E1AF63DDA009DD4E1 /* kiss_fftr.c */,
+				E83FB92F1AF63DDA009DD4E1 /* kiss_fftr.h */,
+			);
+			path = kiss;
+			sourceTree = "<group>";
+		};
 		ED988344DD7833030CDD8E08 /* RenderingAPIs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1053,14 +1077,6 @@
 				29E1241C0DE0356AC33C9506 /* SPK_Zone.cpp */,
 			);
 			name = Core;
-			sourceTree = "<group>";
-		};
-		F2022DF37286FECB8B9BA5B2 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				2D0C0AA4436B2A16530BA991 /* fftw3.h */,
-			);
-			name = include;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1154,20 +1170,14 @@
 				A7BF42F8198FD1F60068A827 /* RGBShiftPass.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				A7BF42F7198FD1F60068A827 /* RenderPass.cpp in Sources */,
-				7A61C288AE942E5885881232 /* ofxEasyFft.cpp in Sources */,
-				D409288D137DB82107887FFD /* ofxFft.cpp in Sources */,
-				007F713E619B81D821BEA319 /* ofxFftBasic.cpp in Sources */,
 				A7BF435D199317170068A827 /* ofxAssimpMeshHelper.cpp in Sources */,
-				29938E05AF78B3DF7A591187 /* ofxFftw.cpp in Sources */,
 				A7BF42E7198FD1F60068A827 /* BloomPass.cpp in Sources */,
-				47741AD4D543009E4DF29CEA /* ofxProcessFFT.cpp in Sources */,
 				A7AE3B75198DDFF800E180BB /* createPrimitive.cpp in Sources */,
-				0686C38EE993C67B96002FA1 /* kiss_fft.c in Sources */,
-				6DB9E3911BA6216FE1F0E91C /* kiss_fftr.c in Sources */,
 				AD94280E2C13ACB2C068B554 /* ofxSPK.cpp in Sources */,
 				A778D6F019C19DEF00D066C9 /* createAction.cpp in Sources */,
 				AD410EF8CB998284B4EF08BA /* ofxSPKEmitter.cpp in Sources */,
 				87C3B22D219B57026DB6A841 /* ofxSPKGroup.cpp in Sources */,
+				E83FB9361AF63DDA009DD4E1 /* kiss_fftr.c in Sources */,
 				BFE427335D428655FDA917FA /* ofxSPKModifier.cpp in Sources */,
 				A7BB30D6199328AC003735D1 /* createObject.cpp in Sources */,
 				125430FB09F6A5C58C3C4448 /* ofxSPKRenderer.cpp in Sources */,
@@ -1185,6 +1195,7 @@
 				A7BF435F199317170068A827 /* ofxAssimpTexture.cpp in Sources */,
 				7D931BC9787579A9A7B0A029 /* SPK_Group.cpp in Sources */,
 				168AA64053FAC3798F74ED78 /* SPK_Interpolator.cpp in Sources */,
+				E83FB9301AF63DDA009DD4E1 /* ofxEasyFft.cpp in Sources */,
 				F413C4E5D00391447F85AD10 /* SPK_Model.cpp in Sources */,
 				A7BF42F0198FD1F60068A827 /* HorizontalTiltShifPass.cpp in Sources */,
 				BBA6FD1E1D77DD087DDA176D /* SPK_Modifier.cpp in Sources */,
@@ -1206,6 +1217,7 @@
 				A7BF42ED198FD1F60068A827 /* FakeSSSPass.cpp in Sources */,
 				1746BF1FAFE90C650C3C0D39 /* SPK_RandomEmitter.cpp in Sources */,
 				A7BF42FB198FD1F60068A827 /* ToonPass.cpp in Sources */,
+				E83FB9331AF63DDA009DD4E1 /* ofxFftw.cpp in Sources */,
 				A7BF42FA198FD1F60068A827 /* SSAOPass.cpp in Sources */,
 				87BDDC98D5E344965BEEC35A /* SPK_SphericEmitter.cpp in Sources */,
 				A7BF42E8198FD1F60068A827 /* ContrastPass.cpp in Sources */,
@@ -1219,13 +1231,17 @@
 				156BF2BA964BB44DB5111367 /* SPK_Obstacle.cpp in Sources */,
 				3DF049E92D532625F72F928F /* SPK_PointMass.cpp in Sources */,
 				2BF60FD8BCBF3B15683E9423 /* SPK_Vortex.cpp in Sources */,
+				E83FB9321AF63DDA009DD4E1 /* ofxFftBasic.cpp in Sources */,
 				8F199ACB7F72CC986BF5B7E6 /* SPK_Oriented3DRendererInterface.cpp in Sources */,
+				E83FB9341AF63DDA009DD4E1 /* ofxProcessFFT.cpp in Sources */,
 				A7BF42EC198FD1F60068A827 /* EdgePass.cpp in Sources */,
 				B96CF7E0AA638F4C13A1B87B /* SPK_QuadRendererInterface.cpp in Sources */,
 				3C8FCC8A6BE4DD52DD1336E2 /* SPK_AABox.cpp in Sources */,
 				8F22A650775BAB1819F1E833 /* SPK_Cylinder.cpp in Sources */,
+				E83FB9351AF63DDA009DD4E1 /* kiss_fft.c in Sources */,
 				C90A96A442FE2C021EBB1E8B /* SPK_Line.cpp in Sources */,
 				47E8812792DEA28005D9F8FE /* SPK_Plane.cpp in Sources */,
+				E83FB9311AF63DDA009DD4E1 /* ofxFft.cpp in Sources */,
 				C139B949D7F7116A6D617A99 /* SPK_Point.cpp in Sources */,
 				D8468666CDA4D2A5455FBF2B /* SPK_Ring.cpp in Sources */,
 				C80BA2B8F601DE43A5E740A3 /* SPK_Sphere.cpp in Sources */,
@@ -1472,7 +1488,7 @@
 					/Users/kawaguchihiroshi/Developer/git/oF/addons/ofxAssimpModelLoader/libs/assimp/lib/osx,
 				);
 				PRODUCT_NAME = visualBand_forkDebug;
-				USER_HEADER_SEARCH_PATHS = ../../../addons/ofxAssimpModelLoader/libs/assimp/include/;
+				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxAssimpModelLoader/libs/assimp/include/ ../../../addons/ofxFft/libs/fftw/include/";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1559,7 +1575,7 @@
 					/Users/kawaguchihiroshi/Developer/git/oF/addons/ofxAssimpModelLoader/libs/assimp/lib/osx,
 				);
 				PRODUCT_NAME = visualBand_fork;
-				USER_HEADER_SEARCH_PATHS = ../../../addons/ofxAssimpModelLoader/libs/assimp/include/;
+				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxAssimpModelLoader/libs/assimp/include/ ../../../addons/ofxFft/libs/fftw/include/";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
