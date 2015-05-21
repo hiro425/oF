@@ -55,3 +55,12 @@
 [submodule "usr/lib/Catch"]
 	path = usr/lib/Catch
 	url = https://github.com/philsquared/Catch.git
+[submodule "addons/ofxMyoWebSockets"]
+	path = addons/ofxMyoWebSockets
+	url = https://github.com/mattfelsen/ofxMyoWebSockets
+[submodule "addons/ofxMyo"]
+	path = addons/ofxMyo
+	url = https://github.com/satcy/ofxMyo
+[submodule "addons/ofxMyoBeta"]
+	path = addons/ofxMyoBeta
+	url = https://github.com/usm916/ofxMyoBeta
